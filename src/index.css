@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* instant custom font 'caslonPro' importing here */
+@font-face {
+  font-family: 'caslonPro';
+  src: url('./assets/fonts/ACaslonPro-Regular.otf') format('opentype'); /* Adjust path as needed */
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* instant custom font 'IrvinHeading' importing here */
+@font-face {
+  font-family: 'BebasNeue';
+  src: url('./assets/fonts/BebasNeue-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* instant custom font 'IrvinHeading' importing here */
+@font-face {
+  font-family: 'Sora';
+  src: url('./assets/fonts/Sora-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

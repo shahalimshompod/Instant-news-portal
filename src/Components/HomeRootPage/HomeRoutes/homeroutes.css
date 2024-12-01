@@ -1,0 +1,7 @@
+/* these designs will apply when the home routes are active */
+div > .active{
+    text-decoration: underline;
+    text-decoration-color: red;
+    text-decoration-thickness: 3px;
+    color: black;
+}
