@@ -1,6 +1,7 @@
 import React from 'react';
 import HomeFirstSection from '../HomeSections/homeFirstSec/HomeFirstSection';
 import HomeSecondSec from '../HomeSections/home2ndSec/HomeSecondSec';
+import NewsLetterSection from '../HomeSections/NewsLetterSec/NewsLetterSection';
 
 const HomeRoute = () => {
     return (
@@ -13,6 +14,11 @@ const HomeRoute = () => {
         {/* home section-2 here */}
         <section className='container mx-auto'>
             <HomeSecondSec></HomeSecondSec>
+        </section>
+
+        {/* newsletter section here (section-3) */}
+        <section>
+            <NewsLetterSection></NewsLetterSection>
         </section>
         </>
     );
