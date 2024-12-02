@@ -29,7 +29,7 @@ const HomeRoutes = () => {
                         {/* Dropdown Menu */}
                         {route.dropdown?.length > 0 && (
                             <div className="hidden lg:block">
-                                <div className="w-52 px-2 font-bold absolute z-50 hidden group-hover:block bg-white text-black shadow-xl">
+                                <div className="w-52 px-2 font-bold absolute z-50 hidden group-hover:block bg-white text-black rounded-md shadow-lg lg:block md:hidden sm:hidden transition-all duration-300 ease-in-out transform -translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
                                     <ul>
                                         {route.dropdown.map((item, idx) => (
                                             <li
