@@ -20,7 +20,7 @@ const HomeRoutes = () => {
                     <div key={index} className="relative group">
                         {/* Main NavLink */}
                         <NavLink
-                            className="hover:text-red-500 text-[#000]/60 hover:ease-in-out hover:duration-300 font-caslon text-xl font-semibold"
+                            className="hover:text-red-500 text-[#000]/60 hover:ease-in-out hover:duration-150 font-caslon text-xl font-semibold"
                             to={route.path}
                         >
                             {route.label}
@@ -28,9 +28,8 @@ const HomeRoutes = () => {
 
                         {/* Dropdown Menu */}
                         {route.dropdown?.length > 0 && (
-                            <div className="hidden lg:block">
-                                <div className="w-52 px-2 font-bold absolute z-50 hidden group-hover:block bg-white text-black rounded-md shadow-lg lg:block md:hidden sm:hidden transition-all duration-300 ease-in-out transform -translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
-                                    <ul>
+                                <div className="w-52 px-2 font-bold absolute z-50 hidden bg-white text-black rounded-md shadow-lg lg:block md:hidden sm:hidden transition-all duration-300 ease-in-out transform -translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                                    <ul className="hidden group-hover:block">
                                         {route.dropdown.map((item, idx) => (
                                             <li
                                                 key={idx}
@@ -41,7 +40,6 @@ const HomeRoutes = () => {
                                         ))}
                                     </ul>
                                 </div>
-                            </div>
                         )}
                     </div>
                 ))}
