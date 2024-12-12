@@ -16,6 +16,12 @@ import Leadership from './Components/Routes/Leadership';
 import Well from './Components/Routes/Well';
 import Recommend from './Components/Routes/Recommend';
 import Instant360 from './Components/Routes/Instant360';
+import RecommendsLayout from './Components/Routes/UnderTheRoutes/UnderRecommends/RecommendsLayout';
+import RecommendsHome from './Components/Routes/UnderTheRoutes/UnderRecommends/RecommendsRoutes/RecommendsHome';
+import RecommendsPersonalFinance from './Components/Routes/UnderTheRoutes/UnderRecommends/RecommendsRoutes/RecommendsPersonalFinance';
+import RecommendsEducation from './Components/Routes/UnderTheRoutes/UnderRecommends/RecommendsComponents/RecommendsEducation';
+import RecommendsBusinessSolutions from './Components/Routes/UnderTheRoutes/UnderRecommends/RecommendsComponents/RecommendsBusinessSolutions';
+import RecommendsShopping from './Components/Routes/UnderTheRoutes/UnderRecommends/RecommendsComponents/RecommendsShopping';
 
 const router = createBrowserRouter([
   // defining the path of the routes and the elements of the pages
@@ -53,14 +59,38 @@ const router = createBrowserRouter([
             element: <Well></Well>
           },
           {
-            path: '/recommend',
-            element: <Recommend></Recommend>
-          },
-          {
             path: '/section/instant-360',
             element: <Instant360></Instant360>
           }
         ]
+      },
+
+    ]
+  },
+  // recommend tab routes
+  {
+    path: '/recommend',
+    element: <RecommendsLayout></RecommendsLayout>,
+    children: [
+      {
+        path: '/recommend',
+        element: <RecommendsHome></RecommendsHome>
+      },
+      {
+        path: '/recommend/personal-finance',
+        element: <RecommendsPersonalFinance></RecommendsPersonalFinance>
+      },
+      {
+        path: '/recommend/education',
+        element: <RecommendsEducation></RecommendsEducation>
+      },
+      {
+        path: '/recommend/business-solutions',
+        element: <RecommendsBusinessSolutions></RecommendsBusinessSolutions>
+      },
+      {
+        path: '/recommend/shopping',
+        element: <RecommendsShopping></RecommendsShopping>
       },
     ]
   },
