@@ -7,31 +7,12 @@ import RoundupSection from './RecommendsComponents/RecommendsHomeLayoutsComponen
 const RecommendsHomeLayout = () => {
     return (
         <>
-            <div className='flex justify-between gap-10 container mx-auto'>
-                <LeftTopPicksSection></LeftTopPicksSection>
-                <MiddleSection></MiddleSection>
-                <RightLatestArticles></RightLatestArticles>
-            </div>
-            <div className='container mx-auto my-10'>
-                <RoundupSection></RoundupSection>
-            </div>
-            <div className='container mx-auto my-10'>
-                <RoundupSection></RoundupSection>
-            </div>
-            <div className='container mx-auto my-10'>
-                <RoundupSection></RoundupSection>
-            </div>
-            <div className='container mx-auto my-10'>
-                <RoundupSection></RoundupSection>
-            </div>
-            <div className='container mx-auto my-10'>
-                <RoundupSection></RoundupSection>
-            </div>
-            <div className='container mx-auto my-10'>
-                <RoundupSection></RoundupSection>
-            </div>
-            <div className='container mx-auto my-10'>
-                <RoundupSection></RoundupSection>
+            <div className='mx-3'>
+                <div className='flex flex-col justify-center lg:flex-row lg:justify-between lg:gap-10 container mx-auto'>
+                    <LeftTopPicksSection></LeftTopPicksSection>
+                    <MiddleSection></MiddleSection>
+                    <RightLatestArticles></RightLatestArticles>
+                </div>
             </div>
             <div className='container mx-auto my-10'>
                 <RoundupSection></RoundupSection>

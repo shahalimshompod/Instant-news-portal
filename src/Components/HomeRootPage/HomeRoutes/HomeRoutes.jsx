@@ -10,17 +10,25 @@ const HomeRoutes = () => {
         { path: "/section/leadership", label: "Leadership", dropdown: ["SUCCESS"] },
         { path: "/well", label: "Well", dropdown: ["LIFE", "HEALTH", "MIND", "FAMILY", "AGING WELL"] },
         { path: "/recommend", label: "Recommend", dropdown: ["CREDIT CARDS", "BANKING", "INSURANCE", "INVESTING", "EDUCATION", "BUSINESS SOLUTION"] },
-        { path: "/section/instant-360", label: "Instant 360" },
+        { path: "/section/instant-360", label: "Instant360" },
     ];
 
     return (
-        <section className="my-14 pl-3 lg:px-0">
-            <div className="grid grid-cols-3 lg:flex lg:items-center lg:justify-center gap-3 lg:gap-12 lg:container lg:mx-auto">
+        <section className="my-8 pl-3 lg:px-0">
+            <div className="flex lg:flex lg:items-center lg:justify-center gap-3 lg:gap-12 lg:container lg:mx-auto overflow-x-scroll md:overflow-x-visible scrollbar-hide">
                 {routes.map((route, index) => (
                     <div key={index} className="relative group">
                         {/* Main NavLink */}
                         <NavLink
-                            className="hover:text-red-500 text-[#000]/60 hover:ease-in-out hover:duration-150 font-caslon text-xl font-semibold"
+                            className="hidden md:block hover:text-red-500 text-[#000]/60 hover:ease-in-out hover:duration-150 font-caslon text-xl font-semibold"
+                            to={route.path}
+                        >
+                            {route.label}
+                        </NavLink>
+
+                        {/* this routes only for mobile device */}
+                        <NavLink
+                            className="md:hidden hover:text-red-500 text-[#000]/60 hover:ease-in-out hover:duration-150 font-caslon text-lg font-semibold mr-3"
                             to={route.path}
                         >
                             {route.label}

@@ -88,7 +88,7 @@ const RecommendsRoutesContainer = () => {
     const [activeRoute, setActiveRoute] = useState("");
 
     return (
-        <div className="relative mb-10">
+        <div className="relative mb-10 hidden lg:block">
             <nav>
                 <ul className="flex justify-center">
                     {/* Home Route */}
@@ -98,8 +98,8 @@ const RecommendsRoutesContainer = () => {
                             end
                             className={({ isActive }) =>
                                 isActive
-                                    ? "text-black text-lg font-caslon border-b-2 border-green-500 inline-block text-center w-48"
-                                    : "text-black text-lg font-caslon inline-block text-center w-48"
+                                    ? "text-black text-lg font-caslon border-b-2 border-green-500 inline-block text-center px-3 xl:px-6"
+                                    : "text-black text-lg font-caslon inline-block text-center px-3 xl:px-6"
                             }
                         >
                             HOME
@@ -117,8 +117,8 @@ const RecommendsRoutesContainer = () => {
                                 to={`/recommend/${key.replace(" ", "-").toLowerCase()}`}
                                 className={({ isActive }) =>
                                     isActive
-                                        ? "text-black text-lg font-caslon border-b-2 border-green-500 inline-block text-center px-10"
-                                        : "text-black text-lg font-caslon inline-block text-center px-10"
+                                        ? "text-black text-lg font-caslon border-b-2 border-green-500 inline-block text-center px-3 xl:px-6"
+                                        : "text-black text-lg font-caslon inline-block text-center px-3 xl:px-6"
                                 }
                             >
                                 {key.toUpperCase()}

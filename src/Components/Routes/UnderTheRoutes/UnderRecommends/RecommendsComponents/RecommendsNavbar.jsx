@@ -20,7 +20,7 @@ const RecommendsNavbar = () => {
 
     return (
         <div
-            className={`fixed top-0 left-0 w-full z-50 bg-white shadow-lg transform transition-transform duration-500 ${
+            className={`hidden lg:block fixed top-0 left-0 w-full z-50 bg-white shadow-lg transform transition-transform duration-500 ${
                 scroll < 300 ? "-translate-y-full" : "translate-y-0"
             }`}
         >

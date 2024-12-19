@@ -1,4 +1,12 @@
+import { useState } from "react";
+import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from "react-icons/md";
+
 const LeftTopPicksSection = () => {
+    const [arrow, setArrow] = useState(true)
+
+    const handleArrow = ()=>{
+        setArrow(!arrow)
+    }
     const articles = [
         {
             category: 'BANKING',
@@ -27,11 +35,14 @@ const LeftTopPicksSection = () => {
     ];
 
     return (
-        <div className="max-w-md mx-auto">
-            <h2 className="text-2xl font-bold border-b border-gray-300 pb-2 mb-4 font-caslon">Top Picks</h2>
+        <div className="max-w-md mx-auto order-3 lg:order-none">
+            <div className="flex items-center justify-between border-b border-gray-300 pb-3">
+                <h2 className="text-2xl font-bold font-caslon">Top Picks</h2>
+                <button className="md:hidden" onClick={handleArrow}>{arrow ? <MdOutlineKeyboardArrowDown size={30} /> : <MdOutlineKeyboardArrowUp size={30} />}</button>
+            </div>
             <div className="space-y-4 mr-4">
                 {articles.map((article, index) => (
-                    <div key={index} className="space-y-1">
+                    <div key={index} className={`md:block space-y-1 ${arrow ? 'hidden' : 'block'}`}>
                         <p className="text-green-600 text-lg font-bold font-bebas tracking-widest">{article.category}</p>
                         <h3 className="text-lg font-semibold text-gray-900 font-sora">{article.title}</h3>
                         <p className="text-sm text-gray-600 font-bebas tracking-widest">
@@ -41,6 +52,7 @@ const LeftTopPicksSection = () => {
                     </div>
                 ))}
             </div>
+            <div className={`md:hidden bg-white text-white w-[336px] ${arrow ? 'block' : 'hidden'} `}>a</div>
         </div>
     );
 };

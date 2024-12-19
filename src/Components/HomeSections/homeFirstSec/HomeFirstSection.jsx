@@ -2,7 +2,7 @@ import React from 'react';
 
 const HomeFirstSection = () => {
     return (
-        <div className='bg-[#EFF8FA] lg:h-80 2xl:h-96 lg:mb-56 mb-10 mt-20 lg:relative px-3 lg:px-0'>
+        <div className='bg-[#EFF8FA] lg:h-80 2xl:h-96 lg:mb-56 mb-10 mt-0 lg:mt-20 lg:relative px-3 lg:px-0'>
             <div>
                 <img className='lg:absolute lg:w-5/12 lg:top-3 2xl:-top-5 lg:left-20 2xl:left-28' src="https://i.ibb.co.com/12HZwPM/Getty-Images-2184329067-e1732106649612.jpg" alt="section-1 image" />
             </div>

@@ -29,7 +29,7 @@ const RightLatestArticles = () => {
     ];
 
     return (
-        <div className="max-w-md mx-auto p-4">
+        <div className="max-w-md mx-auto lg:p-4 order-2 lg:order-none mb-5 lg:mb-0">
             <h2 className="text-2xl font-bold border-b border-gray-300 pb-2 mb-4 font-caslon">Latest Articles</h2>
             <div className="space-y-4">
                 {articles.map((article) => (

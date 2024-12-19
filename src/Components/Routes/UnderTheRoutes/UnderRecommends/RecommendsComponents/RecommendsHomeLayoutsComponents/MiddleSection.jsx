@@ -1,6 +1,6 @@
 const MiddleSection = () => {
     return (
-        <div className="w-full mx-auto bg-white">
+        <div className="w-full mx-auto bg-white order-1 lg:order-none mt-10 mb-5 lg:mt-0 lg:mb-0">
             {/* Image Section */}
             <img
                 src="https://fortune.com/img-assets/wp-content/uploads/2024/02/GettyImages-1291367852-e1707415428246.jpg?w=1440&q=75"
