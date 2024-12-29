@@ -9,7 +9,6 @@ import App from './App';
 import ErrorPage from './Components/ErrorPage/ErrorPage';
 import HomeRootPage from './Components/HomeRootPage/HomeRootPage';
 import HomeRoute from './Components/Routes/HomeRoute';
-import NewsRoute from './Components/Routes/NewsRoute';
 import TechRoute from './Components/Routes/TechRoute';
 import Finance from './Components/Routes/Finance';
 import Leadership from './Components/Routes/Leadership';
@@ -21,6 +20,11 @@ import RecommendsEducation from './Components/Routes/UnderTheRoutes/UnderRecomme
 import RecommendsBusinessSolutions from './Components/Routes/UnderTheRoutes/UnderRecommends/RecommendsComponents/RecommendsBusinessSolutions';
 import RecommendsShopping from './Components/Routes/UnderTheRoutes/UnderRecommends/RecommendsComponents/RecommendsShopping';
 import RecommendsHomeLayout from './Components/Routes/UnderTheRoutes/UnderRecommends/RecommendsHomeLayout';
+import BlogsRoute from './Components/Routes/BlogsRoute';
+// import { getTodos, postTodo } from '../my-api'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import DataContextProvider, { DataContext } from './Components/fetchDataContext/DataContextProvider';
+
 
 const router = createBrowserRouter([
   // defining the path of the routes and the elements of the pages
@@ -38,8 +42,8 @@ const router = createBrowserRouter([
             element: <HomeRoute></HomeRoute>
           },
           {
-            path: '/section/news',
-            element: <NewsRoute></NewsRoute>
+            path: '/section/blogs',
+            element: <BlogsRoute></BlogsRoute>
           },
           {
             path: '/section/tech',
@@ -95,8 +99,14 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient()
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <DataContextProvider>
+        <RouterProvider router={router} />
+      </DataContextProvider>
+    </QueryClientProvider>
   </StrictMode>,
 )

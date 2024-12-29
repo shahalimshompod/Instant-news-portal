@@ -16,10 +16,10 @@ const LatestNews = () => {
                     <hr className=' border-black my-3' />
                     <div className='w-full'>
                         {
-                            latestData.map(data => <>
+                            latestData.map(data => <div key={data.id}>
                                 <h4 className='mb-2 font-caslon text-xl font-bold'>{data.title}</h4>
                                 <p className='mb-5'>{data.time}</p>
-                            </>)
+                            </div>)
                         }
                     </div>
                 </div>

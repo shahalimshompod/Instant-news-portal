@@ -1,26 +1,34 @@
-import HomeSecondSecCard from "./HomeSecondSecCard";
+import { useContext, useEffect, useState } from "react";
+import BlogCards from "./BlogCards";
 import LatestNews from "./LatestNews";
+import axios from "axios";
 
 const HomeSecondSec = () => {
-    // fake data for frontend..
-    const otherData = [
-        { id: 4, category: "category", heading: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, nesciunt. Nulla natus iusto nobis praesentium, nihil distinctio ducimus eligendi mollitia!", name: "KRISTIN STOLLER", date: "Deccember 1, 2024" },
-        { id: 5, category: "category", heading: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, nesciunt. Nulla natus iusto nobis praesentium, nihil distinctio ducimus eligendi mollitia!", name: "KRISTIN STOLLER", date: "Deccember 1, 2024" },
-        { id: 6, category: "category", heading: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, nesciunt. Nulla natus iusto nobis praesentium, nihil distinctio ducimus eligendi mollitia!", name: "KRISTIN STOLLER", date: "Deccember 1, 2024" },
-        { id: 7, category: "category", heading: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, nesciunt. Nulla natus iusto nobis praesentium, nihil distinctio ducimus eligendi mollitia!", name: "KRISTIN STOLLER", date: "Deccember 1, 2024" }
-    ]
-    // fake data for frontend..
-    const cardData = [
-        { id: 1, category: "category", heading: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, nesciunt. Nulla natus iusto nobis praesentium, nihil distinctio ducimus eligendi mollitia!", name: "KRISTIN STOLLER", date: "Deccember 1, 2024" },
-        { id: 2, category: "category", heading: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, nesciunt. Nulla natus iusto nobis praesentium, nihil distinctio ducimus eligendi mollitia!", name: "KRISTIN STOLLER", date: "Deccember 1, 2024" },
-        { id: 3, category: "category", heading: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, nesciunt. Nulla natus iusto nobis praesentium, nihil distinctio ducimus eligendi mollitia!", name: "KRISTIN STOLLER", date: "Deccember 1, 2024" }
-    ]
+    const [featuredBlogs, setFeaturedBlogs] = useState([])
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState(true)
+
+    console.log(featuredBlogs);
+    // fetching data
+    useEffect(()=>{
+        const FetchFeaturedBlogsData = async () => {
+            try{
+                const response = await axios.get('http://localhost:5000/featured-blogs')
+            setFeaturedBlogs(response.data)
+            }catch(err){
+                setError(err.message)
+            }finally{
+                setLoading(false);
+            }
+        }
+        FetchFeaturedBlogsData();
+    },[])
     return (
         <>
             <div className="flex flex-col-reverse lg:flex-row justify-center gap-14 mb-4">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-20 px-3 lg:px-0">
                     {
-                        cardData.map(card => <HomeSecondSecCard key={card.id} card={card}></HomeSecondSecCard>)
+                        featuredBlogs.slice(0, 3).map(data => <BlogCards key={data._id} data={data}></BlogCards>)
                     }
                 </div>
                 <div>
@@ -29,7 +37,7 @@ const HomeSecondSec = () => {
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-20 px-3 lg:px-0">
                 {
-                    otherData.map(card => <HomeSecondSecCard key={card.id} card={card} ></HomeSecondSecCard>)
+                    featuredBlogs.map(data => <BlogCards key={data._id} data={data} ></BlogCards>)
                 }
             </div>
         </>

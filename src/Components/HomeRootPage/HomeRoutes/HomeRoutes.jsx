@@ -4,7 +4,7 @@ import './homeroutes.css';
 const HomeRoutes = () => {
     const routes = [
         { path: "/", label: "Home" },
-        { path: "/section/news", label: "News" },
+        { path: "/section/blogs", label: "Blogs" },
         { path: "/section/tech", label: "Tech", dropdown: ["AI"] },
         { path: "/section/finance", label: "Finance", dropdown: ["PERSONAL FINANCE", "REAL STATE", "CRYPTO"] },
         { path: "/section/leadership", label: "Leadership", dropdown: ["SUCCESS"] },
