@@ -1,22 +1,53 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 
 const HomeFirstSection = () => {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [err, setErr] = useState('')
+    const navigate = useNavigate();
+
+    const { blog_added_by, blog_added_date, blog_category, blog_details, blog_location, blog_photo, blog_title, _id } = data;
+
+    useEffect(() => {
+        const fetchOneData = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/home');
+                setData(response.data[0]);
+            } catch (err) {
+                setErr(err.message)
+            } finally {
+                setLoading(false)
+            }
+        }
+        fetchOneData();
+    }, [])
+
+    // details handler
+    const clickToDetails = (id) => {
+        navigate(`/section/blog-details/${id}`)
+    }
+
+    // category handler
+    const clickToCategory = (category) => {
+        console.log(category);
+        navigate(`/section/${category}`)
+    }
+
     return (
-        <div className='bg-[#EFF8FA] lg:h-80 2xl:h-96 lg:mb-56 mb-10 mt-0 lg:mt-20 lg:relative px-3 lg:px-0'>
-            <div>
-                <img className='lg:absolute lg:w-5/12 lg:top-3 2xl:-top-5 lg:left-20 2xl:left-28' src="https://i.ibb.co.com/12HZwPM/Getty-Images-2184329067-e1732106649612.jpg" alt="section-1 image" />
+        <div className='bg-[#EFF8FA] lg:flex items-center gap-10 lg:px-10 px-3 lg:py-5'>
+            <div onClick={() => clickToDetails(_id)} className='lg:w-1/2 hover:cursor-pointer hover:opacity-90'>
+                <img className="w-full" src={blog_photo} alt="Blog Photo" />
             </div>
-            <div className='lg:w-1/3 lg:absolute top-5 lg:right-44 2xl:right-48'>
+            <div className='lg:w-1/2'>
                 {/* category here */}
-                <p className='text-red-600 font-bebas tracking-widest font-bold mb-4'>HEALTH</p>
-                <h1 className='text-2xl lg:text-4xl 2xl:text-5xl font-caslon font-semibold mb-5 leading-tight'>Trump’s return has women who use $349 smart ring to track their periods panicking over privacy. Oura’s CEO wants to assure them.</h1>
-                <p className='text-xl font-caslon font-light mb-5 leading-tight'>
+                <p onClick={() => clickToCategory(blog_category)} className='text-red-600 font-bebas tracking-widest font-bold mb-4 hover:underline hover:cursor-pointer w-14 text-center'>{blog_category}</p>
+                <h1 onClick={() => clickToDetails(_id)} className='text-2xl lg:text-4xl 2xl:text-5xl font-caslon font-semibold mb-5 leading-tight hover:text-blue-800 hover:cursor-pointer'>${blog_title}</h1>
+                <p onClick={() => clickToDetails(_id)} className='text-xl font-caslon font-light mb-5 leading-tight hover:text-blue-800 hover:cursor-pointer'>{blog_details}</p>
 
-                    "There's all these sort of things where women are saying 'You know what? My body, my choice. I will own my health experience and I'll do it independent of the patriarchy.' Oura, weirdly, has become an emblem of that."
-                </p>
-
-                <p className='font-sora text-sm font-thin'>BY <span className='font-bold'>ELEANOR PRINGLE</span></p>
-                <p className='text-[#000]/50 font-sora text-sm '>December 1, 2024</p>
+                <p className='font-sora text-sm font-thin'>BY <span className='font-bold'>{blog_added_by}</span></p>
+                <p className='text-[#000]/50 font-sora text-sm '>{blog_added_date}</p>
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
 const NewsLetterCards = ({ data, index }) => {
-    console.log(data.title, index);
+  
     return (
       <div
         className={`text-white lg:h-48 mr-5 mb-5 lg:mb-10 border-b border-white pb-4 lg:pb-0 ${

@@ -7,9 +7,9 @@ const BlogsRoute = () => {
     console.log(blogData);
     return (
         <section className="container mx-auto">
-            <h1 className="border-l-2 border-red-500 text-6xl font-caslon">The latest ({blogData.length})</h1>
+            <h1 className="border-l-2 border-red-500 text-6xl font-caslon font-bold">The latest ({blogData.length})</h1>
             <div>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-3 gap-10 my-16">
                     {
                         blogData.map(data => <BlogCards key={blogData._id} data={data}></BlogCards>)
                     }

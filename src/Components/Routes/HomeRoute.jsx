@@ -7,7 +7,7 @@ const HomeRoute = () => {
     return (
         <>
         {/* home section-1 here */}
-        <section className='container mx-auto mb-28'>
+        <section className='container mx-auto lg:mb-28 mb-10'>
         <HomeFirstSection></HomeFirstSection>
         </section>
 

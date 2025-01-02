@@ -24,6 +24,8 @@ import BlogsRoute from './Components/Routes/BlogsRoute';
 // import { getTodos, postTodo } from '../my-api'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import DataContextProvider, { DataContext } from './Components/fetchDataContext/DataContextProvider';
+import BlogDetails from './Components/BlogDetailsPageLayout/BlogDetailsPageComponents/BlogDetails';
+import BlogsLayout from './Components/BlogsLayout/BlogsLayout';
 
 
 const router = createBrowserRouter([
@@ -43,7 +45,7 @@ const router = createBrowserRouter([
           },
           {
             path: '/section/blogs',
-            element: <BlogsRoute></BlogsRoute>
+            element: <BlogsLayout></BlogsLayout>
           },
           {
             path: '/section/tech',
@@ -64,6 +66,10 @@ const router = createBrowserRouter([
           {
             path: '/section/instant-360',
             element: <Instant360></Instant360>
+          },
+          {
+            path: '/section/blog-details/:id',
+            element: <BlogDetails></BlogDetails>
           }
         ]
       },
