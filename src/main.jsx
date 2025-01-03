@@ -9,9 +9,6 @@ import App from './App';
 import ErrorPage from './Components/ErrorPage/ErrorPage';
 import HomeRootPage from './Components/HomeRootPage/HomeRootPage';
 import HomeRoute from './Components/Routes/HomeRoute';
-import TechRoute from './Components/Routes/TechRoute';
-import Finance from './Components/Routes/Finance';
-import Leadership from './Components/Routes/Leadership';
 import Well from './Components/Routes/Well';
 import Instant360 from './Components/Routes/Instant360';
 import RecommendsLayout from './Components/Routes/UnderTheRoutes/UnderRecommends/RecommendsLayout';
@@ -26,6 +23,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import DataContextProvider, { DataContext } from './Components/fetchDataContext/DataContextProvider';
 import BlogDetails from './Components/BlogDetailsPageLayout/BlogDetailsPageComponents/BlogDetails';
 import BlogsLayout from './Components/BlogsLayout/BlogsLayout';
+import CategoryWIseBlogLayout from './Components/CategoryWiseBlog/CategoryWIseBlogLayout';
 
 
 const router = createBrowserRouter([
@@ -48,16 +46,8 @@ const router = createBrowserRouter([
             element: <BlogsLayout></BlogsLayout>
           },
           {
-            path: '/section/tech',
-            element: <TechRoute></TechRoute>
-          },
-          {
-            path: '/section/finance',
-            element: <Finance></Finance>
-          },
-          {
-            path: '/section/leadership',
-            element: <Leadership></Leadership>
+            path: '/section/:category',
+            element: <CategoryWIseBlogLayout></CategoryWIseBlogLayout>,
           },
           {
             path: '/well',

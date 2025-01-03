@@ -13,10 +13,7 @@ const BlogCards = ({ data }) => {
         navigate(`/section/blog-details/${id}`)
     }
 
-    // category handler
-    const clickToCategory = (category) => {
-        navigate(`/section/${category}`)
-    }
+    
 
     return (
         <div>
@@ -24,7 +21,6 @@ const BlogCards = ({ data }) => {
                 <div className='mb-2 hover:cursor-pointer hover:opacity-90'>
                     <a href={`/section/blog-details/${_id}`}><img
                         className="w-full lg:h-48 2xl:h-64 object-cover"
-                        // onClick={() => clickToDetails(_id)}
                         src={blog_photo}
                         alt="Blog Photo"
                     /></a>
@@ -38,12 +34,13 @@ const BlogCards = ({ data }) => {
                             </a>
                         )
                     }
+                    <a href={`/section/blog-details/${_id}`}>
                     <h2
-                        onClick={() => clickToDetails(_id)}
                         className='text-2xl font-caslon font-semibold mb-5 hover:cursor-pointer hover:text-blue-800'
                     >
                         {blog_title}
                     </h2>
+                    </a>
                     <p className='font-sora text-sm font-thin'>
                         BY <span className='font-bold'>{blog_added_by}</span>
                     </p>
