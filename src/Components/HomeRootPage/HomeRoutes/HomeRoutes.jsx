@@ -43,7 +43,7 @@ const HomeRoutes = () => {
                 { label: "BUSINESS SOLUTION", path: "/recommend/business-solution" }
             ]
         },
-        { path: "/section/instant-360", label: "Instant360" },
+        { path: "/section/our-goal", label: "Our Goal" },
     ];
 
     return (

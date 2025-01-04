@@ -10,20 +10,22 @@ import ErrorPage from './Components/ErrorPage/ErrorPage';
 import HomeRootPage from './Components/HomeRootPage/HomeRootPage';
 import HomeRoute from './Components/Routes/HomeRoute';
 import Well from './Components/Routes/Well';
-import Instant360 from './Components/Routes/Instant360';
-import RecommendsLayout from './Components/Routes/UnderTheRoutes/UnderRecommends/RecommendsLayout';
-import RecommendsPersonalFinance from './Components/Routes/UnderTheRoutes/UnderRecommends/RecommendsRoutes/RecommendsPersonalFinance';
-import RecommendsEducation from './Components/Routes/UnderTheRoutes/UnderRecommends/RecommendsComponents/RecommendsEducation';
-import RecommendsBusinessSolutions from './Components/Routes/UnderTheRoutes/UnderRecommends/RecommendsComponents/RecommendsBusinessSolutions';
-import RecommendsShopping from './Components/Routes/UnderTheRoutes/UnderRecommends/RecommendsComponents/RecommendsShopping';
-import RecommendsHomeLayout from './Components/Routes/UnderTheRoutes/UnderRecommends/RecommendsHomeLayout';
-import BlogsRoute from './Components/Routes/BlogsRoute';
 // import { getTodos, postTodo } from '../my-api'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import DataContextProvider, { DataContext } from './Components/fetchDataContext/DataContextProvider';
 import BlogDetails from './Components/BlogDetailsPageLayout/BlogDetailsPageComponents/BlogDetails';
 import BlogsLayout from './Components/BlogsLayout/BlogsLayout';
 import CategoryWIseBlogLayout from './Components/CategoryWiseBlog/CategoryWIseBlogLayout';
+import Recommend from './Components/Routes/Recommend';
+import OurGoal from './Components/Routes/OurGoal';
+import AdminPanelRootPage from './Components/AdminPanel/AdminPanelRoot/AdminPanelRootPage';
+import AddBlogs from './Components/AdminPanel/AddingRoutes/AddBlogs';
+import Dashboard from './Components/AdminPanel/Dashboard/Dashboard';
+import AddVideos from './Components/AdminPanel/AddingRoutes/AddVideos';
+import UpdateTravelTips from './Components/AdminPanel/AddingRoutes/UpdateTravelTips';
+import MyAddedBlogs from './Components/AdminPanel/AddedRoutes/MyAddedBlogs';
+import MyAddedVideos from './Components/AdminPanel/AddedRoutes/MyAddedVideos';
+import MyUpdatedTips from './Components/AdminPanel/AddedRoutes/MyUpdatedTips';
 
 
 const router = createBrowserRouter([
@@ -54,45 +56,62 @@ const router = createBrowserRouter([
             element: <Well></Well>
           },
           {
-            path: '/section/instant-360',
-            element: <Instant360></Instant360>
+            path: '/section/our-goal',
+            element: <OurGoal></OurGoal>
           },
           {
             path: '/section/blog-details/:id',
             element: <BlogDetails></BlogDetails>
-          }
+          },
+          
         ]
       },
 
     ]
   },
+
+
   // recommend tab routes
   {
     path: '/recommend',
-    element: <RecommendsLayout></RecommendsLayout>,
-    children: [
+    element: <Recommend></Recommend>
+  },
+
+  // admin panel routes and tabs
+  {
+    path: '/admin-panel',
+    element: <AdminPanelRootPage></AdminPanelRootPage>,
+    children:[
       {
-        path: '/recommend',
-        element: <RecommendsHomeLayout></RecommendsHomeLayout>
+        path: '/admin-panel',
+        element: <Dashboard></Dashboard>
       },
       {
-        path: '/recommend/personal-finance',
-        element: <RecommendsPersonalFinance></RecommendsPersonalFinance>
+        path: '/admin-panel/add-blogs',
+        element: <AddBlogs></AddBlogs>
       },
       {
-        path: '/recommend/education',
-        element: <RecommendsEducation></RecommendsEducation>
+        path: '/admin-panel/add-videos',
+        element: <AddVideos></AddVideos>
       },
       {
-        path: '/recommend/business-solutions',
-        element: <RecommendsBusinessSolutions></RecommendsBusinessSolutions>
+        path: '/admin-panel/update-tips',
+        element: <UpdateTravelTips></UpdateTravelTips>
       },
       {
-        path: '/recommend/shopping',
-        element: <RecommendsShopping></RecommendsShopping>
+        path: '/admin-panel/my-added-blogs',
+        element: <MyAddedBlogs></MyAddedBlogs>
+      },
+      {
+        path: '/admin-panel/my-added-videos',
+        element: <MyAddedVideos></MyAddedVideos>
+      },
+      {
+        path: '/admin-panel/my-updated-tips',
+        element: <MyUpdatedTips></MyUpdatedTips>
       },
     ]
-  },
+  }
 ]);
 
 const queryClient = new QueryClient()

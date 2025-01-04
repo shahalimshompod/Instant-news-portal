@@ -52,7 +52,7 @@ const Navbar = () => {
                     </div>
                     {/* site name here */}
                     <div className='flex-1 md:flex-none md:navbar-center ml-3 md:ml-0'>
-                        <a className="text-4xl lg:text-5xl font-bold font-caslon">InstantR</a>
+                        <a href="/" className="text-4xl lg:text-5xl font-bold font-caslon">InstantR</a>
                     </div>
 
                     {/* search button here */}

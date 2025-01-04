@@ -2,10 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import BlogCards from "../../HomeSections/home2ndSec/BlogCards";
+import MostPopularSectionForDetailsPage from "../../MostPopularSection/MostPopularSectionForDetailsPage";
 
 const BlogDetails = () => {
     const [detailsData, setDetailsData] = useState({});
     const [relatedBlogData, setRelatedBlogData] = useState([])
+    const [popularBlogs, setPopularBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
     const { id } = useParams();
     // console.log(detailsData);
@@ -20,6 +22,7 @@ const BlogDetails = () => {
                 const res = await axios.get(`http://localhost:5000/section/blog-details/${id}`)
                 setDetailsData(res.data.selectedBlogForDetails);
                 setRelatedBlogData(res.data.relatedBlogs);
+                setPopularBlogs(res.data.popularBlogs);
             } catch (err) {
                 console.error(err)
             } finally {
@@ -69,12 +72,18 @@ const BlogDetails = () => {
             </div>
 
             <div>
-                <div className="divider font-caslon font-bold text-3xl mb-10"><span className="border-b-4 border-red-500">Latest in {blog_category}</span></div>
-                <div className="grid grid-cols-4 gap-10">
+                <div className="divider font-caslon font-bold text-3xl"><span className="border-b-4 border-red-500">Latest in {blog_category}</span></div>
+                <div className="grid grid-cols-4 gap-10 my-20">
                     {
                         relatedBlogData.map(relatedData => <BlogCards key={relatedData._id} data={relatedData}></BlogCards>)
                     }
                 </div>
+            </div>
+
+            <div className="divider font-caslon font-bold text-3xl mb-10"><span className="border-b-4 border-red-500">Most Popular</span></div>
+
+            <div>
+                <MostPopularSectionForDetailsPage mostPopularBlogs={popularBlogs}></MostPopularSectionForDetailsPage>
             </div>
 
         </div>

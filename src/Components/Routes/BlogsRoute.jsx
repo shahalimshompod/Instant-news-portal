@@ -11,7 +11,7 @@ const BlogsRoute = () => {
             <div>
                 <div className="grid grid-cols-3 gap-10 my-16">
                     {
-                        blogData.map(data => <BlogCards key={blogData._id} data={data}></BlogCards>)
+                        blogData.map(data => <BlogCards key={data._id} data={data}></BlogCards>)
                     }
                 </div>
                 <div>

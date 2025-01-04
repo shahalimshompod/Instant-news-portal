@@ -26,12 +26,12 @@ const LatestNews = () => {
         <div className='px-3 lg:px-0'>
             <div className='lg:w-[370px] border-l-0 lg:border-l-4 pl-4 border-[#EFF8FA]'>
                 <div>
-                    <h1 className='font-caslon text-3xl font-bold'>Latest</h1>
+                    <h1 className='font-caslon text-3xl font-bold hover:text-blue-600'><a href="/section/blogs">Latest</a></h1>
                     <hr className=' border-black my-3' />
                     <div className='w-full'>
                         {
-                            latestData.map(data => <div key={data._id}>
-                                <h4 className='font-caslon font-bold text-xl'>{data.blog_title}</h4>
+                            latestData.map(data => <div className='border-b-2 mb-2' key={data._id}>
+                                <h4 className='font-caslon font-bold text-xl hover:text-blue-600 mb-2'><a href={`/section/blog-details/${data._id}`}>{data.blog_title}</a></h4>
                                 <p className='mb-3 text-xs font-sora'>{data.blog_added_date}</p>
                             </div>)
                         }

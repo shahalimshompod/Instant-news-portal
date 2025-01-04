@@ -6,17 +6,29 @@ const BlogCards = ({ data }) => {
     // news card here with category
     const location = useLocation();
     const path = location.pathname;
-    const navigate = useNavigate();
 
-    // details handler
-    const clickToDetails = (id) => {
-        navigate(`/section/blog-details/${id}`)
+    // view count handler
+    const viewCounts = (id) => {
+        fetch(`http://localhost:5000/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
-    
+
+
 
     return (
-        <div>
+        <div onClick={() => viewCounts(_id)}>
             <div className='w-full'>
                 <div className='mb-2 hover:cursor-pointer hover:opacity-90'>
                     <a href={`/section/blog-details/${_id}`}><img
@@ -27,20 +39,22 @@ const BlogCards = ({ data }) => {
                 </div>
                 <div>
                     {
-                        path === '/' && (
+                        path === '/section/blogs' ? ('') : (
                             <a href={`/section/${blog_category}`}><p className='text-red-600 text-lg font-bebas tracking-widest font-bold mb-4 hover:underline hover:cursor-pointer w-16 text-center'>
                                 {blog_category}
                             </p>
                             </a>
-                        )
+                        ) 
                     }
+
                     <a href={`/section/blog-details/${_id}`}>
-                    <h2
-                        className='text-2xl font-caslon font-semibold mb-5 hover:cursor-pointer hover:text-blue-800'
-                    >
-                        {blog_title}
-                    </h2>
+                        <h2
+                            className='text-2xl font-caslon font-semibold mb-5 hover:cursor-pointer hover:text-blue-800'
+                        >
+                            {blog_title}
+                        </h2>
                     </a>
+
                     <p className='font-sora text-sm font-thin'>
                         BY <span className='font-bold'>{blog_added_by}</span>
                     </p>
