@@ -11,8 +11,6 @@ const CategoryWIseBlogLayout = () => {
 
     const {category} = useParams();
 
-    // console.log(blogData);
-
     // fetching data dynamically for different categories.
     useEffect(()=>{
         const fetchData = async() =>{
@@ -28,7 +26,7 @@ const CategoryWIseBlogLayout = () => {
         fetchData();
     },[category])
     return (
-        <div className="container mx-auto flex">
+        <div className="container mx-auto flex flex-col xl:flex-row gap-10 px-3 xl:px-0">
             <CategoryWiseBlogs blogData={blogData}></CategoryWiseBlogs>
             <MostPopularSection></MostPopularSection>
         </div>

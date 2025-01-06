@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 
 const MostPopularSection = () => {
     const [mostPopularBlogs, setMostPopularBlogs] = useState([])
+    const location = useLocation();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -10,15 +12,15 @@ const MostPopularSection = () => {
                 const res = await axios.get('http://localhost:5000/most-popular');
                 setMostPopularBlogs(res?.data);
             } catch (err) {
-                console.log('ERROR FETCHING DATA IN MOST POPULAR BLOGS --> ', err);
+                console.error('ERROR FETCHING DATA IN MOST POPULAR BLOGS --> ', err);
             }
         }
         fetchData();
     }, [])
 
     return (
-        <div className='px-3 lg:px-0 my-72'>
-            <div className='lg:w-[370px] border-l-0 lg:border-l-4 pl-4'>
+        <div className={`lg:px-0  ${location.pathname === '/well' ? 'my-0' : 'lg:my-72'}`}>
+            <div className='xl:w-[370px] lg:w-full border-l-0 lg:border-l-4 lg:pl-4 pl-0'>
                 <div>
                     <h1 className='font-caslon text-3xl font-bold'>Most Popular</h1>
                     <hr className=' border-black my-3' />
@@ -29,7 +31,7 @@ const MostPopularSection = () => {
                                     <a href={`/section/${data.blog_category}`}><p className="font-bebas text-red-600 hover:underline">{data.blog_category}</p></a>
                                     <a href={`/section/blog-details/${data._id}`}>
                                         <div className="flex items-center justify-between mb-5">
-                                            <h4 className='font-caslon text-xl font-bold hover:text-blue-600'>{data.blog_title}</h4>
+                                            <h4 className='font-caslon text-xl font-bold hover:text-blue-600 line-clamp-4'>{data.blog_title}</h4>
                                             <img className="w-1/3 hover:opacity-75" src={data.blog_photo} alt="blog photo" />
                                         </div>
                                     </a>

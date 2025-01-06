@@ -5,35 +5,35 @@ const HomeRoutes = () => {
     const routes = [
         { path: "/", label: "Home" },
         { path: "/section/blogs", label: "Blogs" },
-        { 
-            path: "/section/tech", 
-            label: "Tech", 
+        {
+            path: "/section/tech",
+            label: "Tech",
             dropdown: [
                 { label: "AI", path: "/section/ai" }
             ]
         },
-        { 
-            path: "/section/explore", 
-            label: "Explore", 
+        {
+            path: "/section/explore",
+            label: "Explore",
             dropdown: [
                 { label: "Travel", path: "/section/travel" },
-                { label: "Tips", path: "/section/tips" }
+                { label: "Tips", path: "/section/travel/tips" }
             ]
         },
         { path: "/section/personality", label: "Personality" },
-        { 
-            path: "/well", 
-            label: "Well", 
+        {
+            path: "/well",
+            label: "Well",
             dropdown: [
-                { label: "LIFE", path: "/well/life" },
-                { label: "HEALTH", path: "/well/health" },
-                { label: "MIND", path: "/well/mind" },
-                { label: "FOOD", path: "/well/food" }
+                { label: "LIFE", path: "/well/section/life" },
+                { label: "HEALTH", path: "/well/section/health" },
+                { label: "MIND", path: "/well/section/mind" },
+                { label: "FOOD", path: "/well/section/food" }
             ]
         },
-        { 
-            path: "/recommend", 
-            label: "Recommend", 
+        {
+            path: "/recommend",
+            label: "Recommend",
             dropdown: [
                 { label: "CREDIT CARDS", path: "/recommend/credit-cards" },
                 { label: "BANKING", path: "/recommend/banking" },
@@ -43,12 +43,12 @@ const HomeRoutes = () => {
                 { label: "BUSINESS SOLUTION", path: "/recommend/business-solution" }
             ]
         },
-        { path: "/section/our-goal", label: "Our Goal" },
+        { path: "/section/our-goal", label: "OurGoal" },
     ];
 
     return (
         <section className="my-8 pl-3 lg:px-0">
-            <div className="flex lg:flex lg:items-center lg:justify-center gap-3 lg:gap-12 lg:container lg:mx-auto overflow-x-scroll md:overflow-x-visible scrollbar-hide">
+            <div className="flex lg:flex lg:items-center lg:justify-center gap-8 lg:gap-12 lg:container lg:mx-auto overflow-x-scroll md:overflow-x-visible scrollbar-hide">
                 {routes.map((route, index) => (
                     <div key={index} className="relative group">
                         {/* Main NavLink */}

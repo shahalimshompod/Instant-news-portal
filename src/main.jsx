@@ -26,6 +26,10 @@ import UpdateTravelTips from './Components/AdminPanel/AddingRoutes/UpdateTravelT
 import MyAddedBlogs from './Components/AdminPanel/AddedRoutes/MyAddedBlogs';
 import MyAddedVideos from './Components/AdminPanel/AddedRoutes/MyAddedVideos';
 import MyUpdatedTips from './Components/AdminPanel/AddedRoutes/MyUpdatedTips';
+import WellRootPageLayout from './Components/Well/WellRootPageLayout/WellRootPageLayout';
+import WellHomePageLayout from './Components/Well/WellHomePageLayout/WellHomePageLayout';
+import WellHomePage from './Components/Well/WellPages/WellHomePage';
+import SearchLayout from './Components/Routes/SearchLayout/SearchLayout';
 
 
 const router = createBrowserRouter([
@@ -52,10 +56,6 @@ const router = createBrowserRouter([
             element: <CategoryWIseBlogLayout></CategoryWIseBlogLayout>,
           },
           {
-            path: '/well',
-            element: <Well></Well>
-          },
-          {
             path: '/section/our-goal',
             element: <OurGoal></OurGoal>
           },
@@ -70,12 +70,37 @@ const router = createBrowserRouter([
     ]
   },
 
-
-  // recommend tab routes
+  // wel routes and tabs
   {
-    path: '/recommend',
-    element: <Recommend></Recommend>
+    path: '/well',
+    element: <WellRootPageLayout></WellRootPageLayout>,
+    children:[
+      {
+        path: '/well',
+        element: <WellHomePageLayout></WellHomePageLayout>,
+        children:[
+          {
+            path: '/well/',
+            element: <WellHomePage></WellHomePage>
+          },
+          {
+            path: '/well/section/:category',
+            element: <CategoryWIseBlogLayout></CategoryWIseBlogLayout>
+          },
+          {
+            path: '/well/section/blog-details/:id',
+            element: <BlogDetails></BlogDetails>
+          },
+        ]
+      }
+    ]
   },
+
+  // {
+  //   path: '/search',
+  //   element: <SearchLayout></SearchLayout>
+  // },
+  
 
   // admin panel routes and tabs
   {
@@ -111,7 +136,13 @@ const router = createBrowserRouter([
         element: <MyUpdatedTips></MyUpdatedTips>
       },
     ]
-  }
+  },
+
+  // recommend tab routes
+  {
+    path: '/recommend',
+    element: <Recommend></Recommend>
+  },
 ]);
 
 const queryClient = new QueryClient()

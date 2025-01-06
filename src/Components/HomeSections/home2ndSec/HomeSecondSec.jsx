@@ -26,7 +26,7 @@ const HomeSecondSec = () => {
     return (
         <>
             <div className="flex flex-col-reverse lg:flex-row justify-center gap-14 mb-4">
-                <div className="grid grid-cols-1 lg:grid-cols-3 px-3 gap-10 lg:px-0">
+                <div className="grid grid-cols-1 md:grid-cols-3 px-3 gap-10 lg:px-0">
                     {
                         featuredBlogs.slice(0, 3).map(data => <BlogCards key={data._id} data={data}></BlogCards>)
                     }
@@ -35,7 +35,7 @@ const HomeSecondSec = () => {
                     <LatestNews></LatestNews>
                 </div>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-4 px-3 gap-10 lg:px-0">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 px-3 gap-10 lg:px-0">
                 {
                     featuredBlogs.slice(3, 15).map(data => <BlogCards key={data._id} data={data} ></BlogCards>)
                 }

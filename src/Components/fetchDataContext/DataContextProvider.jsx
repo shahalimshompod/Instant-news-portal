@@ -7,8 +7,6 @@ const DataContextProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState([])
 
-    // console.log(blogData);
-
     useEffect(()=>{
         const fetchData = async () => {
             try{

@@ -7,10 +7,7 @@ import axios from 'axios';
 
 const HomeRoute = () => {
     const [blogData, setBlogData] = useState({});
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
-
-    console.log(blogData);
+    
     
     useEffect(()=>{
         const fetchData = async()=>{
@@ -18,9 +15,7 @@ const HomeRoute = () => {
                 const res = await axios.get('http://localhost:5000/home-category-sections')
                 setBlogData(res.data);
             }catch(err){
-                console.log(err);
-            }finally{
-                setLoading(false);
+                console.error(err);
             }
         }
         fetchData();

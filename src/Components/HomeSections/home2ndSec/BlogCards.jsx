@@ -15,41 +15,50 @@ const BlogCards = ({ data }) => {
                 'Content-Type': 'application/json'
             },
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-            })
             .catch(error => {
-                console.log(error);
-            })
-    }
+                console.error("Error updating view count:", error);
+            });
+    };
 
 
-
+    // navigate well for well categories
+    const wellCategories = ['Life', 'Health', 'Mind', 'Food'];
 
     return (
-        <div onClick={() => viewCounts(_id)}>
+        <div className="group" onClick={() => viewCounts(_id)}>
             <div className='w-full'>
-                <div className='mb-2 hover:cursor-pointer hover:opacity-90'>
-                    <a href={`/section/blog-details/${_id}`}><img
-                        className="w-full lg:h-48 2xl:h-64 object-cover"
-                        src={blog_photo}
-                        alt="Blog Photo"
-                    /></a>
+                <div className='mb-2 hover:cursor-pointer group-hover:brightness-75'>
+                    <a href={wellCategories.includes(blog_category)
+                        ? `/well/section/blog-details/${_id}`
+                        : `/section/blog-details/${_id}`}
+                    >
+                        <img
+                            className="w-full aspect-[16/9] sm:aspect-[4/3] md:aspect-[3/2] lg:aspect-[16/9] object-cover"
+                            src={blog_photo}
+                            alt="Blog Photo"
+                        />
+                    </a>
                 </div>
                 <div>
                     {
                         path === '/section/blogs' ? ('') : (
-                            <a href={`/section/${blog_category}`}><p className='text-red-600 text-lg font-bebas tracking-widest font-bold mb-4 hover:underline hover:cursor-pointer w-16 text-center'>
-                                {blog_category}
-                            </p>
+                            <a
+                                href={wellCategories.includes(blog_category)
+                                    ? `/well/section/${blog_category}`
+                                    : `/section/${blog_category}`}
+                            >
+                                <p className='text-red-600 text-lg font-bebas tracking-widest font-bold mb-4 hover:underline hover:cursor-pointer w-16'>
+                                    {blog_category}
+                                </p>
                             </a>
-                        ) 
+                        )
                     }
 
-                    <a href={`/section/blog-details/${_id}`}>
+                    <a href={wellCategories.includes(blog_category)
+                        ? `/well/section/blog-details/${_id}`
+                        : `/section/blog-details/${_id}`}>
                         <h2
-                            className='text-2xl font-caslon font-semibold mb-5 hover:cursor-pointer hover:text-blue-800'
+                            className='text-lg md:text-xl lg:text-2xl font-caslon font-semibold mb-5 hover:cursor-pointer group-hover:text-blue-600'
                         >
                             {blog_title}
                         </h2>
@@ -64,6 +73,7 @@ const BlogCards = ({ data }) => {
                 </div>
             </div>
         </div>
+
     );
 };
 

@@ -1,7 +1,5 @@
 const NewsLetterCards = ({ data, index }) => {
 
-  console.log(data);
-
   const {blog_title, blog_added_by, blog_category, _id} = data;
   
     return (

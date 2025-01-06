@@ -1,14 +1,18 @@
 import BlogCards from "../HomeSections/home2ndSec/BlogCards";
 
 const CategoryWiseHomeBlogSectionLayout = ({ category, dataForBlogs }) => {
-
-    // console.log(category);
-    console.log(dataForBlogs);
+    
+    const wellCategories = ['Life', 'Health', 'Mind', 'Food'];
 
     return (
-        <div className="container mx-auto mb-44">
-            <h1 className="font-caslon font-bold text-5xl my-10 border-b border-black pb-3">{category.charAt(0).toUpperCase() + category.slice(1)}</h1>
-            <div className="grid grid-cols-4 gap-10">
+        <div className="container mx-auto mb-10 md:mb-16  lg:mb-44 px-3">
+            <a href={wellCategories.includes(category)
+                ? `/well/section/${category}`
+                : `/section/${category}`
+            }>
+                <h1 className="font-caslon font-bold text-5xl my-10 border-b border-black pb-3">{category.charAt(0).toUpperCase() + category.slice(1)}</h1>
+            </a>
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4 gap-10">
                 {
                     dataForBlogs.map(blogData => <BlogCards key={blogData._id} data={blogData}></BlogCards>)
                 }

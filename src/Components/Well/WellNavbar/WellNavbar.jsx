@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { RxCross1 } from "react-icons/rx";
-import SearchLayout from "../Routes/SearchLayout/SearchLayout";
+import React, { useState } from 'react';
+import { RxCross1 } from 'react-icons/rx';
+import SearchLayout from '../../Routes/SearchLayout/SearchLayout';
 import { IoSearchOutline } from "react-icons/io5";
-import { IoIosArrowForward } from "react-icons/io";
-import { IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowForward, IoIosArrowUp } from 'react-icons/io';
 
-const Navbar = () => {
+const WellNavbar = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleOpenModal = () => setIsModalOpen(true);
     const handleCloseModal = () => setIsModalOpen(false)
@@ -25,7 +24,6 @@ const Navbar = () => {
     const handleToggle3 = () => {
         setToggle3(!toggle3)
     }
-
 
     return (
         <div className=" sticky top-0 z-50">
@@ -148,7 +146,7 @@ const Navbar = () => {
                     </div>
                     {/* site name here */}
                     <div className='flex-1 md:flex-none md:navbar-center ml-3 md:ml-0'>
-                        <a href="/" className="text-4xl lg:text-5xl font-bold font-caslon">InstantR</a>
+                        <a href="/well" className="text-4xl lg:text-5xl font-bold font-caslon">InstantR <span className='font-bebas font-bold text-[#2E3DFF]'>Well<span className='text-[#00AEEF]'>.</span></span></a>
                     </div>
 
                     {/* search button here */}
@@ -162,4 +160,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default WellNavbar;

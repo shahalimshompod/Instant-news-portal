@@ -5,7 +5,7 @@ const AddVideos = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data);
+        
         // Handle form submission logic here
     };
 
