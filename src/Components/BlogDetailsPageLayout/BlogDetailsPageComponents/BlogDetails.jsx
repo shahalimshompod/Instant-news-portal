@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import BlogCards from "../../HomeSections/home2ndSec/BlogCards";
 import MostPopularSectionForDetailsPage from "../../MostPopularSection/MostPopularSectionForDetailsPage";
 
@@ -10,10 +10,16 @@ const BlogDetails = () => {
     const [popularBlogs, setPopularBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
     const { id } = useParams();
+    const navigate = useNavigate();
     // destructuring details data
-    const { blog_added_by, blog_added_date, blog_category, blog_details, blog_location, blog_photo, blog_title } = detailsData;
+    const { blog_added_by, blog_added_date, blog_category, blog_details, blog_location, blog_photo, blog_title, _id } = detailsData;
 
-    
+    useEffect(() => {
+        if (!loading && id !== _id) {
+            return navigate('/not-found')
+        }
+    }, [id, navigate, _id, loading])
+
     // fetching data for details page
     useEffect(() => {
         const fetchDetailsAndRelatedData = async () => {

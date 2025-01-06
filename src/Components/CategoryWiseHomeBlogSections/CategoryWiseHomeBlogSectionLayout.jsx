@@ -1,7 +1,7 @@
 import BlogCards from "../HomeSections/home2ndSec/BlogCards";
 
 const CategoryWiseHomeBlogSectionLayout = ({ category, dataForBlogs }) => {
-    
+
     const wellCategories = ['Life', 'Health', 'Mind', 'Food'];
 
     return (

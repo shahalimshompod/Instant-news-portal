@@ -4,30 +4,32 @@ import axios from "axios";
 
 const NewsLetterSection = () => {
 
-    
+
     const [newslettersCardsData, setNewslettersCardsData] = useState([]);
     const [] = useState('');
 
-    useEffect(()=>{
-        const fetchData = async () =>{
-            try{
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
                 const res = await axios.get('http://localhost:5000/newsletters')
                 setNewslettersCardsData(res.data);
-            }catch(err){
+            } catch (err) {
                 console.error(err);
             }
         }
         fetchData();
-    },[])
+    }, [])
 
 
     return (
         <div className="bg-black px-3 lg:px-10 py-3 lg:py-8 container mx-auto mt-20">
-            <h1 className="text-white font-bold font-caslon text-4xl">Newsletters</h1>
+            <a href="/section/Newsletters">
+                <h1 className="text-white font-bold font-caslon text-4xl">Newsletter</h1>
+            </a>
             <hr className="mb-6" />
             <div className="grid grid-cols-1 lg:grid-cols-3 ">
                 {
-                    newslettersCardsData.map( (data, index) => <NewsLetterCards key={data._id} data={data} index={index}></NewsLetterCards>)
+                    newslettersCardsData.map((data, index) => <NewsLetterCards key={data._id} data={data} index={index}></NewsLetterCards>)
                 }
             </div>
         </div>

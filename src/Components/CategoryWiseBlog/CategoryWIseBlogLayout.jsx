@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import CategoryWiseBlogs from "./CategoryWiseBlogs";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -8,23 +8,34 @@ const CategoryWIseBlogLayout = () => {
     const [blogData, setBlogData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const { category } = useParams();
+    const navigate = useNavigate();
 
-    const {category} = useParams();
+    const confirmedCategories = ['Life', 'Health', 'Mind', 'Food', 'Tech', 'Explore', 'Travel', 'Education', 'Politics', 'Newsletters', 'Ai', 'Personality', 'Magazine']
+
+    useEffect(() => {
+        // Convert category and confirmedCategories to lowercase for comparison
+        const lowerCaseCategories = confirmedCategories.map(cat => cat.toLowerCase());
+        if (!lowerCaseCategories.includes(category.toLowerCase())) {
+            return navigate('/not-found');
+        }
+    }, [navigate, category, confirmedCategories]);
+
 
     // fetching data dynamically for different categories.
-    useEffect(()=>{
-        const fetchData = async() =>{
-            try{
-                const res = await axios.get(`http://localhost:5000/section/${category}`) 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(`http://localhost:5000/section/${category}`)
                 setBlogData(res.data);
-            }catch(error){
+            } catch (error) {
                 setError(error);
-            }finally{
+            } finally {
                 setLoading(false)
             }
         }
         fetchData();
-    },[category])
+    }, [category])
     return (
         <div className="container mx-auto flex flex-col xl:flex-row gap-10 px-3 xl:px-0">
             <CategoryWiseBlogs blogData={blogData}></CategoryWiseBlogs>
