@@ -35,7 +35,7 @@ const LatestBlogContentsInSearch = () => {
 
     return (
         <div className='mt-24 mb-16 w-full'>
-            <div className="divider font-caslon text-3xl font-bold pt-8">Latest Blogs</div>
+            <div className="divider font-caslon text-xl md:text-2xl lg:text-3xl font-bold md:pt-8">Latest Blogs</div>
             <div className='mt-10'>
                 {
                     latestData.map((data, index) => <LatestCardInSearch key={index} data={data}></LatestCardInSearch>)

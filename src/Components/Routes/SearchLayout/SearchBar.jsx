@@ -10,9 +10,9 @@ const SearchBar = ({ onClose, setSearchTerm, searchTerm }) => {
     };
 
     return (
-        <div className="flex items-center justify-between bg-white shadow-md lg:px-12 py-3 md:py-5 fixed w-full">
+        <div className="flex items-center justify-between bg-white shadow-md px-3 lg:px-12 py-3 md:py-5 fixed w-full">
             <div>
-                <a className="btn btn-ghost text-xl md:text-2xl lg:text-4xl font-caslon">InstantR</a>
+                <a href="/" className="text-2xl lg:text-4xl font-caslon">InstantR</a>
             </div>
 
             <div className="w-10/12">
@@ -26,8 +26,8 @@ const SearchBar = ({ onClose, setSearchTerm, searchTerm }) => {
             </div>
 
             <div>
-                <button onClick={onClose} className="btn btn-circle bg-transparent border-none shadow-none hover:bg-transparent">
-                    <RxCross1 size={35} />
+                <button onClick={onClose} className="btn btn-circle bg-transparent border-none shadow-none hover:bg-transparent lg:text-4xl text-2xl">
+                    <RxCross1 />
                 </button>
             </div>
         </div>

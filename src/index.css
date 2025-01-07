@@ -26,3 +26,11 @@
   font-weight: normal;
   font-style: normal;
 }
+
+.slick-slide > div{
+  margin: 0 10px;
+}
+
+html{
+  scroll-behavior: smooth;
+}

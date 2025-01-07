@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import BlogCards from "./BlogCards";
 import LatestNews from "./LatestNews";
 import axios from "axios";
@@ -10,19 +10,30 @@ const HomeSecondSec = () => {
 
 
     // fetching data
-    useEffect(()=>{
+    useEffect(() => {
         const FetchFeaturedBlogsData = async () => {
-            try{
+            try {
                 const response = await axios.get('http://localhost:5000/featured-blogs')
-            setFeaturedBlogs(response.data)
-            }catch(err){
+                setFeaturedBlogs(response.data)
+            } catch (err) {
                 setError(err.message)
-            }finally{
+            } finally {
                 setLoading(false);
             }
         }
         FetchFeaturedBlogsData();
-    },[])
+    }, [])
+
+    // Loader
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-[50vh]">
+                <span className="loading loading-bars loading-md"></span>
+            </div>
+        );
+    }
+
+
     return (
         <>
             <div className="flex flex-col-reverse lg:flex-row justify-center gap-14 mb-4">

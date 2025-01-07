@@ -9,10 +9,7 @@ import App from './App';
 import ErrorPage from './Components/ErrorPage/ErrorPage';
 import HomeRootPage from './Components/HomeRootPage/HomeRootPage';
 import HomeRoute from './Components/Routes/HomeRoute';
-import Well from './Components/Routes/Well';
-// import { getTodos, postTodo } from '../my-api'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import DataContextProvider, { DataContext } from './Components/fetchDataContext/DataContextProvider';
 import BlogDetails from './Components/BlogDetailsPageLayout/BlogDetailsPageComponents/BlogDetails';
 import BlogsLayout from './Components/BlogsLayout/BlogsLayout';
 import CategoryWIseBlogLayout from './Components/CategoryWiseBlog/CategoryWIseBlogLayout';
@@ -29,7 +26,8 @@ import MyUpdatedTips from './Components/AdminPanel/AddedRoutes/MyUpdatedTips';
 import WellRootPageLayout from './Components/Well/WellRootPageLayout/WellRootPageLayout';
 import WellHomePageLayout from './Components/Well/WellHomePageLayout/WellHomePageLayout';
 import WellHomePage from './Components/Well/WellPages/WellHomePage';
-import SearchLayout from './Components/Routes/SearchLayout/SearchLayout';
+import VideoRouteLayout from './Components/VideoRoute/VideoRouteLayout';
+import TipsPageLayout from './Components/Routes/Tips/TipsPageLayout/TipsPageLayout';
 
 
 const router = createBrowserRouter([
@@ -45,25 +43,55 @@ const router = createBrowserRouter([
         children: [
           {
             path: '/',
-            element: <HomeRoute></HomeRoute>
+            element: <HomeRoute></HomeRoute>,
+            loader: () => {
+              document.title = "InstantR - InstantR Daily latest blogs everyday on your favorite category"
+            }
           },
           {
             path: '/section/blogs',
-            element: <BlogsLayout></BlogsLayout>
+            element: <BlogsLayout></BlogsLayout>,
+            loader: () => {
+              document.title = "Latest | InstantR - Latest Blogs everyday on your favorite category"
+            }
           },
           {
             path: '/section/:category',
             element: <CategoryWIseBlogLayout></CategoryWIseBlogLayout>,
+            loader: (param) => {
+              const category = param.params.category;
+              document.title = `${category.toUpperCase()} | InstantR - Latest blogs everyday on your favorite category`
+            }
           },
           {
             path: '/section/our-goal',
-            element: <OurGoal></OurGoal>
+            element: <OurGoal></OurGoal>,
+            loader: () => {
+              document.title = "Our Goal | InstantR - Latest blogs everyday on your favorite category"
+            }
           },
           {
             path: '/section/blog-details/:id',
-            element: <BlogDetails></BlogDetails>
+            element: <BlogDetails></BlogDetails>,
+            loader: () => {
+              document.title = "Blog Details | InstantR - Latest blogs everyday on your favorite category"
+            }
           },
-          
+          {
+            path: '/videos',
+            element: <VideoRouteLayout></VideoRouteLayout>,
+            loader: () => {
+              document.title = "Videos | InstantR - Latest blogs everyday on your favorite category"
+            }
+          },
+          {
+            path: '/section/travel/tips',
+            element: <TipsPageLayout></TipsPageLayout>,
+            loader: () => {
+              document.title = "Travel Tips | InstantR - Latest blogs everyday on your favorite category"
+            }
+          }
+
         ]
       },
 
@@ -74,66 +102,92 @@ const router = createBrowserRouter([
   {
     path: '/well',
     element: <WellRootPageLayout></WellRootPageLayout>,
-    children:[
+    children: [
       {
         path: '/well',
         element: <WellHomePageLayout></WellHomePageLayout>,
-        children:[
+        children: [
           {
             path: '/well/',
-            element: <WellHomePage></WellHomePage>
+            element: <WellHomePage></WellHomePage>,
+            loader: () => {
+              document.title = "Health, Life, Mind & Food | InstantR Well - InstantR"
+            }
           },
           {
             path: '/well/section/:category',
-            element: <CategoryWIseBlogLayout></CategoryWIseBlogLayout>
+            element: <CategoryWIseBlogLayout></CategoryWIseBlogLayout>,
+            loader: (param) => {
+              const category = param.params.category;
+              document.title = `${category.toUpperCase()} | InstantR Well - Tips to treat, prevent and cure`
+            }
           },
           {
             path: '/well/section/blog-details/:id',
-            element: <BlogDetails></BlogDetails>
+            element: <BlogDetails></BlogDetails>,
+            loader: () => {
+              document.title = "Blog Details | InstantR Well - Tips to treat, prevent and cure"
+            }
           },
         ]
       }
     ]
   },
 
-  // {
-  //   path: '/search',
-  //   element: <SearchLayout></SearchLayout>
-  // },
-  
 
   // admin panel routes and tabs
   {
-    path: '/admin-panel',
+    path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard`,
     element: <AdminPanelRootPage></AdminPanelRootPage>,
-    children:[
+    children: [
       {
-        path: '/admin-panel',
-        element: <Dashboard></Dashboard>
+        path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard`,
+        element: <Dashboard></Dashboard>,
+        loader: () => {
+          document.title = "Admin panel | InstantR - Create Something Everyday"
+        }
       },
       {
-        path: '/admin-panel/add-blogs',
-        element: <AddBlogs></AddBlogs>
+        path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/add-blogs`,
+        element: <AddBlogs></AddBlogs>,
+        loader: () => {
+          document.title = "Add Blogs | Admin panel | InstantR - Create Something Everyday"
+        }
       },
       {
-        path: '/admin-panel/add-videos',
-        element: <AddVideos></AddVideos>
+        path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/add-videos`,
+        element: <AddVideos></AddVideos>,
+        loader: () => {
+          document.title = "Add Videos | Admin panel | InstantR - Create Something Everyday"
+        }
       },
       {
-        path: '/admin-panel/update-tips',
-        element: <UpdateTravelTips></UpdateTravelTips>
+        path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/update-travel-tips`,
+        element: <UpdateTravelTips></UpdateTravelTips>,
+        loader: () => {
+          document.title = "Add Travel Tips | Admin panel | InstantR - Create Something Everyday"
+        }
       },
       {
-        path: '/admin-panel/my-added-blogs',
-        element: <MyAddedBlogs></MyAddedBlogs>
+        path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/my-added-blogs`,
+        element: <MyAddedBlogs></MyAddedBlogs>,
+        loader: () => {
+          document.title = "My added blogs | Admin panel | InstantR - Create Something Everyday"
+        }
       },
       {
-        path: '/admin-panel/my-added-videos',
-        element: <MyAddedVideos></MyAddedVideos>
+        path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/my-added-videos`,
+        element: <MyAddedVideos></MyAddedVideos>,
+        loader: () => {
+          document.title = "My added videos | Admin panel | InstantR - Create Something Everyday"
+        }
       },
       {
-        path: '/admin-panel/my-updated-tips',
-        element: <MyUpdatedTips></MyUpdatedTips>
+        path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/my-updated-tips`,
+        element: <MyUpdatedTips></MyUpdatedTips>,
+        loader: () => {
+          document.title = "Update my tips | Admin panel | InstantR - Create Something Everyday"
+        }
       },
     ]
   },
@@ -141,7 +195,10 @@ const router = createBrowserRouter([
   // recommend tab routes
   {
     path: '/recommend',
-    element: <Recommend></Recommend>
+    element: <Recommend></Recommend>,
+    loader: () => {
+      document.title = "Recommends | Instant Recommends"
+    }
   },
 ]);
 
@@ -150,9 +207,7 @@ const queryClient = new QueryClient()
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <DataContextProvider>
-        <RouterProvider router={router} />
-      </DataContextProvider>
+      <RouterProvider router={router} />
     </QueryClientProvider>
   </StrictMode>,
 )

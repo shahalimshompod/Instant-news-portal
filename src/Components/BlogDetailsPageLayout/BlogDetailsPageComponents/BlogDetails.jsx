@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import BlogCards from "../../HomeSections/home2ndSec/BlogCards";
 import MostPopularSectionForDetailsPage from "../../MostPopularSection/MostPopularSectionForDetailsPage";
+import RelatedBlogs from "../../MostPopularSection/RelatedBlogs";
 
 const BlogDetails = () => {
     const [detailsData, setDetailsData] = useState({});
@@ -45,6 +46,8 @@ const BlogDetails = () => {
             </div>
         );
     }
+
+
     return (
         <div className="container mx-auto">
             <div className="flex flex-col xl:flex-row items-center justify-between">
@@ -81,7 +84,7 @@ const BlogDetails = () => {
 
             <div className="mt-14">
                 <div className="divider font-caslon font-bold text-3xl"><span className="border-b-4 border-red-500">Latest in {blog_category}</span></div>
-                <div className="grid grid-cols-4 gap-10 my-14 lg:my-20 px-3 xl:px-0">
+                <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-10 my-14 lg:my-20 px-3 xl:px-0">
                     {
                         relatedBlogData.map(relatedData => <BlogCards key={relatedData._id} data={relatedData}></BlogCards>)
                     }
@@ -92,6 +95,12 @@ const BlogDetails = () => {
 
             <div>
                 <MostPopularSectionForDetailsPage mostPopularBlogs={popularBlogs}></MostPopularSectionForDetailsPage>
+            </div>
+
+            <div className="divider font-caslon font-bold text-3xl mb-10"><span className="border-b-4 border-red-500">Related Blogs</span></div>
+
+            <div>
+                <RelatedBlogs mostPopularBlogs={popularBlogs}></RelatedBlogs>
             </div>
 
         </div>

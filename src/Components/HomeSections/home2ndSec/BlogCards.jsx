@@ -27,6 +27,7 @@ const BlogCards = ({ data }) => {
     return (
         <div className="group" onClick={() => viewCounts(_id)}>
             <div className='w-full'>
+                {/* image */}
                 <div className='mb-2 hover:cursor-pointer group-hover:brightness-75'>
                     <a href={wellCategories.includes(blog_category)
                         ? `/well/section/blog-details/${_id}`
@@ -42,6 +43,7 @@ const BlogCards = ({ data }) => {
                 <div>
                     {
                         path === '/section/blogs' ? ('') : (
+                            // blog category
                             <a
                                 href={wellCategories.includes(blog_category)
                                     ? `/well/section/${blog_category}`
@@ -54,6 +56,7 @@ const BlogCards = ({ data }) => {
                         )
                     }
 
+                    {/* blog title */}
                     <a href={wellCategories.includes(blog_category)
                         ? `/well/section/blog-details/${_id}`
                         : `/section/blog-details/${_id}`}>

@@ -10,7 +10,7 @@ const CategoryWiseHomeBlogSectionLayout = ({ category, dataForBlogs }) => {
                 ? `/well/section/${category}`
                 : `/section/${category}`
             }>
-                <h1 className="font-caslon font-bold text-5xl my-10 border-b border-black pb-3">{category.charAt(0).toUpperCase() + category.slice(1)}</h1>
+                <h1 className="font-caslon font-bold text-3xl lg:text-5xl my-10 border-b border-black pb-3">{category.charAt(0).toUpperCase() + category.slice(1)}</h1>
             </a>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4 gap-10">
                 {

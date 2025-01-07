@@ -4,6 +4,7 @@ import HomeSecondSec from '../HomeSections/home2ndSec/HomeSecondSec';
 import NewsLetterSection from '../HomeSections/NewsLetterSec/NewsLetterSection';
 import CategoryWiseHomeBlogSectionLayout from '../CategoryWiseHomeBlogSections/CategoryWiseHomeBlogSectionLayout';
 import axios from 'axios';
+import HomeSectionVideoLayout from '../VideoRoute/HomeSectionVideoLayout';
 
 const HomeRoute = () => {
     const [blogData, setBlogData] = useState({});
@@ -30,6 +31,11 @@ const HomeRoute = () => {
         {/* home section-2 here */}
         <section className='container mx-auto'>
             <HomeSecondSec></HomeSecondSec>
+        </section>
+
+        {/* video gallery section */}
+        <section>
+            <HomeSectionVideoLayout></HomeSectionVideoLayout>
         </section>
 
         {/* newsletter section here (section-3) */}

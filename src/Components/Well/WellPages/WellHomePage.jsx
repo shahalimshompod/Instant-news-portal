@@ -7,7 +7,7 @@ import CategoryWiseHomeBlogSectionLayout from "../../CategoryWiseHomeBlogSection
 
 const WellHomePage = () => {
     const [blogData, setBlogData] = useState({});
-    
+
 
     useEffect(() => {
         const fetchData = async () => {
