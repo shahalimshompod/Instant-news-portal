@@ -1,24 +1,38 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { MdManageAccounts, MdSupervisorAccount } from "react-icons/md";
 import { BsDatabaseAdd } from "react-icons/bs";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { TbNavigationShare } from "react-icons/tb";
-import { FaFileCircleCheck } from "react-icons/fa6";
+import { FaFileCircleCheck, FaUsers } from "react-icons/fa6";
 import { MdOutlineVideoSettings } from "react-icons/md";
-import { MdTipsAndUpdates } from "react-icons/md";
 import { MdSpaceDashboard } from "react-icons/md";
 import { FaFileCirclePlus } from "react-icons/fa6";
 import { BiSolidVideoPlus } from "react-icons/bi";
-import { HiClipboardDocumentCheck } from "react-icons/hi2";
-
-
+import { AuthContext } from '../AuthContextProvider/AuthContextProvider';
+import axios from 'axios';
 
 const AdminPanelSidebar = () => {
+    const { user } = useContext(AuthContext)
+    const currentUserEmail = user.email;
+    const [userRole, setUserRole] = useState('');
+    useEffect(() => {
+        const fetchRole = async () => {
+            try {
+                const res = await axios.get(`http://localhost:5000/user-role?email=${currentUserEmail}`)
+                setUserRole(res.data);
+            } catch (error) {
+                console.error("Problem in fetching roles", error);
+            }
+        }
+        fetchRole();
+
+    }, [userRole])
+
 
     return (
-        <div className="w-64 h-screen bg-gray-800 text-white flex flex-col p-4 fixed top-0 left-0">
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2"><MdAdminPanelSettings size={40} /> <span className='font-sora'>Admin Panel</span></h2>
+        <div className="w-60 h-screen bg-gray-800 text-white flex flex-col p-4 fixed top-0 left-0 overflow-y-scroll">
+            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2"><MdAdminPanelSettings size={40} /> <span className='font-sora'>{userRole} </span></h2>
             <nav className="flex flex-col">
 
                 {/* Navigation (for all) */}
@@ -37,17 +51,19 @@ const AdminPanelSidebar = () => {
                         }
                     >
                         <MdSpaceDashboard size={20} />
-                        <span className='font-sora text-base text-base-300'>Dashboard</span>
+                        <span className='font-sora text-sm text-base-300'>Dashboard</span>
                     </NavLink>
                 </div>
+
+                <div className='border-b my-4 border-white/30'></div>
 
 
 
                 {/* manage own data (for all role) */}
                 <div>
-                    <div className='mb-2 mt-7 flex items-center gap-1'>
+                    <div className='mb-2 flex items-center gap-1'>
                         <MdManageAccounts />
-                        <h1 className='text-white/40 font-sora text-sm'>Manage your data</h1>
+                        <h1 className='text-white/40 font-sora text-sm'>Manage your posts</h1>
                     </div>
 
                     <NavLink
@@ -58,87 +74,62 @@ const AdminPanelSidebar = () => {
                         }
                     >
                         <FaFileCircleCheck size={20} />
-                        <span className='font-sora text-base text-base-300'>My Added Blogs</span>
+                        <span className='font-sora text-xs text-base-300'>My posted blogs</span>
                     </NavLink>
 
                     <NavLink
                         to={`/${import.meta.env.VITE_urlSecret}/admin-dashboard/my-added-videos`}
                         className={({ isActive }) =>
-                            `p-3 rounded-lg text-lg font-medium flex items-center gap-2 mb-2 ${isActive ? 'bg-blue-600' : 'hover:bg-gray-700'
-                            }`
-                        }
-                    >
-                        <MdOutlineVideoSettings size={20} />
-                        <span className='font-sora text-base text-base-300'>My Added Videos</span>
-                    </NavLink>
-
-                    <NavLink
-                        to={`/${import.meta.env.VITE_urlSecret}/admin-dashboard/my-updated-tips`}
-                        className={({ isActive }) =>
                             `p-3 rounded-lg text-lg font-medium flex items-center gap-2 ${isActive ? 'bg-blue-600' : 'hover:bg-gray-700'
                             }`
                         }
                     >
-                        <MdTipsAndUpdates size={20} />
-                        <span className='font-sora text-base text-base-300'>My Updated Tips</span>
+                        <MdOutlineVideoSettings size={20} />
+                        <span className='font-sora text-xs text-base-300'>My posted videos</span>
                     </NavLink>
                 </div>
 
+                <div className='border-b my-4 border-white/30'></div>
 
-
-                {/* Manage moderator & editor data (Only for admin) */}
+                {/* Manage others data (Only for admin and moderator(moderator can just edit other's post cant delete)) */}
                 <div>
                     {/* manage moderator & editors data */}
-                    <div className='mb-2 mt-7 flex items-center gap-1'>
+                    <div className='mb-2 flex items-center gap-1'>
                         <MdSupervisorAccount size={20} />
-                        <h1 className='text-white/40 font-sora text-sm'>Manage Moderator & Editors data</h1>
+                        <h1 className='text-white/40 font-sora text-sm'>Manage other's posts</h1>
                     </div>
 
                     <NavLink
-                        to={`/${import.meta.env.VITE_urlSecret}/admin-dashboard/my-added-blogs`}
+                        to={`/${import.meta.env.VITE_urlSecret}/admin-dashboard/others-posted-blogs`}
                         className={({ isActive }) =>
                             `p-3 rounded-lg text-lg font-medium flex items-center gap-2 mb-2 ${isActive ? 'bg-blue-600' : 'hover:bg-gray-700'
                             }`
                         }
                     >
                         <FaFileCircleCheck size={20} />
-                        <span className='font-sora text-base text-base-300'>My Added Blogs</span>
+                        <span className='font-sora text-xs text-base-300'>Other's posted blogs</span>
                     </NavLink>
 
                     <NavLink
-                        to={`/${import.meta.env.VITE_urlSecret}/admin-dashboard/my-added-videos`}
-                        className={({ isActive }) =>
-                            `p-3 rounded-lg text-lg font-medium flex items-center gap-2 mb-2 ${isActive ? 'bg-blue-600' : 'hover:bg-gray-700'
-                            }`
-                        }
-                    >
-                        <MdOutlineVideoSettings size={20} />
-                        <span className='font-sora text-base text-base-300'>My Added Videos</span>
-                    </NavLink>
-
-                    <NavLink
-                        to={`/${import.meta.env.VITE_urlSecret}/admin-dashboard/my-updated-tips`}
+                        to={`/${import.meta.env.VITE_urlSecret}/admin-dashboard/others-posted-videos`}
                         className={({ isActive }) =>
                             `p-3 rounded-lg text-lg font-medium flex items-center gap-2 ${isActive ? 'bg-blue-600' : 'hover:bg-gray-700'
                             }`
                         }
                     >
-                        <MdTipsAndUpdates size={20} />
-                        <span className='font-sora text-base text-base-300'>My Updated Tips</span>
+                        <MdOutlineVideoSettings size={20} />
+                        <span className='font-sora text-xs text-base-300'>Other's posted videos</span>
                     </NavLink>
                 </div>
 
-
-                        {/* manage users onl */}
-
-
-
+                <div className='border-b my-4 border-white/30'></div>
 
                 {/* add to your database (for all role) */}
-                <div><div className='mb-2 mt-7 flex items-center gap-1'>
-                    <BsDatabaseAdd />
-                    <h1 className='text-white/40 font-sora text-sm'>Add to your database</h1>
-                </div>
+                <div>
+                    <div className='mb-2 flex items-center gap-1'>
+                        <BsDatabaseAdd />
+                        <h1 className='text-white/40 font-sora text-sm'>Post to your Website</h1>
+                    </div>
 
                     <NavLink
                         to={`/${import.meta.env.VITE_urlSecret}/admin-dashboard/add-blogs`}
@@ -148,30 +139,45 @@ const AdminPanelSidebar = () => {
                         }
                     >
                         <FaFileCirclePlus size={20} />
-                        <span className='font-sora text-base text-base-300'>Add Blogs</span>
+                        <span className='font-sora text-xs text-base-300'>Post blogs</span>
                     </NavLink>
 
                     <NavLink
                         to={`/${import.meta.env.VITE_urlSecret}/admin-dashboard/add-videos`}
                         className={({ isActive }) =>
-                            `p-3 rounded-lg text-lg font-medium flex items-center gap-2 mb-2 ${isActive ? 'bg-blue-600' : 'hover:bg-gray-700'
-                            }`
-                        }
-                    >
-                        <BiSolidVideoPlus size={20} />
-                        <span className='font-sora text-base text-base-300'>Add Videos</span>
-                    </NavLink>
-                    <NavLink
-                        to={`/${import.meta.env.VITE_urlSecret}/admin-dashboard/update-travel-tips`}
-                        className={({ isActive }) =>
                             `p-3 rounded-lg text-lg font-medium flex items-center gap-2 ${isActive ? 'bg-blue-600' : 'hover:bg-gray-700'
                             }`
                         }
                     >
-                        <HiClipboardDocumentCheck size={20} />
-                        <span className='font-sora text-base text-base-300'>Update Travel Tips</span>
+                        <BiSolidVideoPlus size={20} />
+                        <span className='font-sora text-xs text-base-300'>Post videos</span>
                     </NavLink>
                 </div>
+
+                <div className='border-b my-4 border-white/30'></div>
+
+                {/* Manage users and their roles (for admin only) */}
+                {
+                    userRole === 'Admin' && (
+                        <div>
+                            <div className='mb-2 flex items-center gap-1'>
+                                <FaUsers />
+                                <h1 className='text-white/40 font-sora text-sm'>Manage your users and roles</h1>
+                            </div>
+
+                            <NavLink
+                                to={`/${import.meta.env.VITE_urlSecret}/admin-dashboard/all-users`}
+                                className={({ isActive }) =>
+                                    `p-3 rounded-lg text-lg font-medium flex items-center gap-2 mb-2 ${isActive ? 'bg-blue-600' : 'hover:bg-gray-700'
+                                    }`
+                                }
+                            >
+                                <FaUsers size={20} />
+                                <span className='font-sora text-xs text-base-300'>All users</span>
+                            </NavLink>
+                        </div>
+                    )
+                }
 
 
             </nav>

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 
 const VideoCard = ({ data, openModal }) => {
-    const { video_heading, video_thumbnail, video_added_date } = data;
+    const { video_heading, video_thumbnail, createdAt } = data;
     const location = useLocation();
     const path = location.pathname;
 
@@ -48,7 +47,7 @@ const VideoCard = ({ data, openModal }) => {
                 {/* Title */}
                 <div className={`${path === '/videos' ? 'line-clamp-3 text-left pt-2 px-3  font-sora' : 'line-clamp-1 text-left pt-2 px-3  font-sora'}`}>{video_heading}</div>
                 {/* date */}
-                <div className="text-right text-[14px] px-2 pb-2 font-bebas tracking-widest">{formatDate(video_added_date)}</div>
+                <div className="text-right text-[14px] px-2 pb-2 font-bebas tracking-widest">{formatDate(createdAt)}</div>
             </div>
         </div>
     );

@@ -1,4 +1,5 @@
 import React from 'react';
+import DOMPurify from 'dompurify';
 
 const LatestCardInSearch = ({ data }) => {
     // navigate well for well categories
@@ -14,6 +15,9 @@ const LatestCardInSearch = ({ data }) => {
         });
     };
 
+    // sanitize the html for blog details
+    const sanitizedHTML = DOMPurify.sanitize(data.blog_details);
+
     return (
         <div className="border-b flex items-center justify-between gap-3 w-11/12 pb-5 lg:pb-10 mt-5 mx-auto">
             <div className='w-9/12'>
@@ -25,13 +29,13 @@ const LatestCardInSearch = ({ data }) => {
                 <a href={wellCategories.includes(data?.blog_category)
                     ? `/well/section/blog-details/${data?._id}`
                     : `/section/blog-details/${data?._id}`}>
-                    <h3 className='text-lg md:text-2xl font-caslon font-bold mb-4'>{data?.blog_title}</h3>
+                    <h3 className='text-lg md:text-2xl font-caslon font-bold'>{data?.blog_title}</h3>
                 </a>
 
                 <a href={wellCategories.includes(data?.blog_category)
                     ? `/well/section/blog-details/${data?._id}`
                     : `/section/blog-details/${data?._id}`}>
-                    <p className='text-black/50 font-sora line-clamp-1 md:line-clamp-2'>{formatDate(data?.blog_added_date)} - {data?.blog_details}</p>
+                    <p className='text-black/50 font-sora line-clamp-1 md:line-clamp-2 flex items-center'><span>{formatDate(data?.createdAt)}</span> - <span><span dangerouslySetInnerHTML={{ __html: sanitizedHTML }} /></span></p>
                 </a>
 
 

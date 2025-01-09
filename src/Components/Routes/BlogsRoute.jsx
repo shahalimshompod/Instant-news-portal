@@ -65,7 +65,7 @@ const BlogsRoute = () => {
     return (
         <section className="container mx-auto">
             <h1 className="border-l-2 border-red-500 text-2xl md:text-3xl lg:text-5xl font-sora font-bold pl-3">
-                The latest ({totalCount})
+                The latest
             </h1>
 
             {/* Blog Grid with Loader */}

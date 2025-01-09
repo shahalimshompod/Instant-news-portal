@@ -4,36 +4,40 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../AuthContextProvider/AuthContextProvider";
 import { useNavigate } from "react-router";
-import useUserRole from "../Hooks/useUserRole";
 import Swal from "sweetalert2";
+import useUserRole from "../Hooks/useUserRole";
 
-const MyAddedVideos = () => {
+const OthersPostedBlogs = () => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const email = user.email;
-    const { userRole } = useUserRole(email)
     const [loading, setLoading] = useState(true);
+    const { userRole } = useUserRole(email)
+    const currentRole = userRole;
+    const [btnLoader, setBtnLoader] = useState(true)
 
-    const [myVideos, setMyVideos] = useState([]);
+    const [othersPost, setOthersPosts] = useState([]);
     const [page, setPage] = useState(1); // Current page
     const [totalPages, setTotalPages] = useState(1); // Total pages
 
     const limit = 10; // Number of blogs per page
 
-    // fetching data for my posted videos route
+    // fetching data for my posted blogs route
     useEffect(() => {
         const fetchLatestData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/my-posted-videos`, {
+                const res = await axios.get(`http://localhost:5000/others-posted-blogs`, {
                     params: {
                         email: email,
                         page: page,
                         limit: limit,
                     },
                 });
-                setMyVideos(res.data.blogs); // Setting blogs
+
+                setOthersPosts(res.data.blogs); // Setting blogs
                 setTotalPages(res.data.totalPages); // Setting total pages
                 setLoading(false)
+                setBtnLoader(false)
             } catch (error) {
                 console.error(error);
             }
@@ -68,21 +72,21 @@ const MyAddedVideos = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const res = await axios.delete(`http://localhost:5000/delete-video/${id}`);
+                    const res = await axios.delete(`http://localhost:5000/delete-blog/${id}`);
 
                     if (res.data.deletedCount > 0) {
-                        const restVideosToShow = myVideos.filter((video) => id !== video._id);
-                        setMyVideos([...restVideosToShow]);
+                        const restPostToShow = othersPost.filter((post) => id !== post._id);
+                        setOthersPosts([...restPostToShow]);
 
                         Swal.fire({
                             title: "Deleted!",
-                            text: "Video has been deleted from all places",
+                            text: "Post has been deleted from all places",
                             icon: "success",
                         });
                     } else {
                         Swal.fire({
                             title: "Error!",
-                            text: "Video could not be deleted!",
+                            text: "Post could not be deleted!",
                             icon: "error",
                         });
                     }
@@ -90,7 +94,7 @@ const MyAddedVideos = () => {
                     console.error("Delete request failed:", error);
                     Swal.fire({
                         title: "Error!",
-                        text: "Something went wrong while deleting the video.",
+                        text: "Something went wrong while deleting the post.",
                         icon: "error",
                     });
                 }
@@ -107,9 +111,9 @@ const MyAddedVideos = () => {
     const handleClickToUpdateRoute = (data) => {
         const dataToSend = {
             ...data,
-            from: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/my-added-videos`,
+            from: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/others-posted-blogs`
         }
-        navigate(`/${import.meta.env.VITE_urlSecret}/admin-dashboard/update-videos`, { state: dataToSend })
+        navigate(`/${import.meta.env.VITE_urlSecret}/admin-dashboard/update-blogs`, { state: dataToSend })
     }
 
 
@@ -121,27 +125,29 @@ const MyAddedVideos = () => {
         );
     }
 
+    const wellCategories = ['Life', 'Health', 'Mind', 'Food']; //for redirecting
 
     return (
         <div className="px-2 my-5">
             <h1 className="text-center text-3xl text-black font-sora mb-5 uppercase">
-                Your posted videos
+                Others posted blogs
             </h1>
             <table className="table-auto w-full">
                 <thead>
-                    <tr className="hidden lg:grid lg:grid-cols-3 border">
+                    <tr className="hidden lg:grid lg:grid-cols-4 border">
                         <th className="border py-3">Blog title</th>
                         <th className="border py-3">Blog Added By</th>
+                        <th className="border py-3">Blog views and clicks</th>
                         <th className="border py-3">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {myVideos.map((video, index) => (
+                    {othersPost.map((post, index) => (
                         <tr
                             key={index}
-                            className="lg:grid lg:grid-cols-3 items-center border py-1 flex flex-col lg:flex-row"
+                            className="lg:grid lg:grid-cols-4 items-center border py-1 flex flex-col lg:flex-row"
                         >
-                            {/* video Title */}
+                            {/* Blog Title */}
                             <td className="flex flex-col lg:flex-row items-center lg:gap-3 py-3 lg:py-0">
                                 <div className="avatar mb-2 lg:mb-0">
                                     <div className="mask h-24 w-36">
@@ -153,37 +159,58 @@ const MyAddedVideos = () => {
                                     </div>
                                 </div>
                                 <div>
+                                    <p className="font-bebas text-base text-red-600">{post.blog_category}</p>
                                     <div className="font-bold mb-2 text-lg line-clamp-2">
-                                        {video.video_heading}
+                                        {post.blog_title}
                                     </div>
-                                    <p className="font-sora text-xs">{formatDate(video.createdAt).date} | {formatDate(video.createdAt).time}</p>
+                                    <p className="font-sora text-xs">{formatDate(post.createdAt).date} | {formatDate(post.createdAt).time}</p>
                                 </div>
                             </td>
-                            {/* video Added By */}
+                            {/* Blog Added By */}
                             <td className="text-center mb-2 lg:mb-0">
                                 <div className="lg:hidden font-bold">Added By</div>
                                 <div className="flex items-center flex-col gap-2">
                                     <span className="border px-3 rounded-lg text-base font-bold py-1 font-sora">
-                                        {userRole}
+                                        {post.userRole}
                                     </span>
-                                    <span className="badge badge-ghost badge-sm font-sora">{video.userEmail}</span>
+                                    <span className="badge badge-ghost badge-sm font-sora">{post.userEmail}</span>
                                 </div>
                             </td>
-
-                            {/* Actions */}
-                            <td className="flex gap-3 items-center justify-center">
-                                <button onClick={() => handleClickToUpdateRoute(video)} data-tip="Update" className="btn lg:tooltip btn-circle bg-transparent border-none shadow-none hover:bg-transparent hover:text-green-500">
-                                    <GrUpdate size={20} />
-                                </button>
-
-                                <button onClick={() => handleDelete(video._id)} data-tip="Delete" className="btn btn-circle bg-transparent lg:tooltip border-none shadow-none hover:bg-transparent hover:text-red-500">
-                                    <MdDeleteForever size={25} />
-                                </button>
-
-                                <button data-tip="View video page" className="btn btn-circle bg-transparent lg:tooltip border-none shadow-none hover:bg-transparent hover:text-red-500">
-                                    <a href="/videos" target="_blank"><MdOpenInNew size={25} /></a>
-                                </button>
+                            {/* Blog Views */}
+                            <td className="text-center mb-2 lg:mb-0">
+                                <p className="font-sora text-base">{post.blog_viewCount || 0} views</p>
                             </td>
+                            {/* Actions */}
+                            {
+                                btnLoader ? ('Loading...') : (
+                                    <td className="flex gap-3 items-center justify-center">
+
+                                        {
+                                            currentRole !== 'Editor' && (
+                                                <div className="flex items-center gap-3">
+                                                    <button onClick={() => handleClickToUpdateRoute(post)} data-tip="Update" className="btn lg:tooltip btn-circle bg-transparent border-none shadow-none hover:bg-transparent hover:text-green-500">
+                                                        <GrUpdate size={20} />
+                                                    </button>
+
+                                                    {
+                                                        currentRole === 'Admin' && (
+                                                            <button onClick={() => handleDelete(post._id)} data-tip="Delete" className="btn btn-circle bg-transparent lg:tooltip border-none shadow-none hover:bg-transparent hover:text-red-500">
+                                                                <MdDeleteForever size={25} />
+                                                            </button>
+                                                        )
+                                                    }
+                                                </div>
+                                            )
+                                        }
+
+                                        <button data-tip="View Details" className="btn btn-circle bg-transparent lg:tooltip border-none shadow-none hover:bg-transparent hover:text-red-500">
+                                            <a href={wellCategories.includes(post.blog_category)
+                                                ? `/well/section/blog-details/${post._id}`
+                                                : `/section/blog-details/${post._id}`}><MdOpenInNew size={25} /></a>
+                                        </button>
+                                    </td>
+                                )
+                            }
                         </tr>
                     ))}
                 </tbody>
@@ -213,4 +240,4 @@ const MyAddedVideos = () => {
     );
 };
 
-export default MyAddedVideos;
+export default OthersPostedBlogs;

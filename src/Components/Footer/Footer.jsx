@@ -21,31 +21,31 @@ const Footer = () => {
                     </nav>
                     <div className="hidden md:block border-l border-black h-44"></div>
                     <nav>
-                        <h6 className="footer-title text-black font-caslon font-bold text-lg">Services</h6>
+                        <h6 className="footer-title text-black font-caslon font-bold text-lg">Hot links</h6>
                         <ul className="space-y-2 font-caslon">
-                            <li><a className="link link-hover">Branding</a></li>
-                            <li><a className="link link-hover">Design</a></li>
-                            <li><a className="link link-hover">Marketing</a></li>
-                            <li><a className="link link-hover">Advertisement</a></li>
+                            <li><a className="link link-hover" href='/'>Home</a></li>
+                            <li><a className="link link-hover" href='#'>Shop</a></li>
+                            <li><a className="link link-hover" href='/section/blogs'>Blogs</a></li>
+                            <li><a className="link link-hover" href='/well'>Well</a></li>
                         </ul>
                     </nav>
                     <div className="hidden md:block border-l border-black h-44"></div>
                     <nav>
                         <h6 className="footer-title font-bold text-lg font-caslon text-black">Company</h6>
                         <ul className="space-y-2 font-caslon">
-                            <li><a className="link link-hover">About us</a></li>
-                            <li><a className="link link-hover">Contact</a></li>
-                            <li><a className="link link-hover">Jobs</a></li>
-                            <li><a className="link link-hover">Press kit</a></li>
+                            <li><a className="link link-hover" href='#'>About us</a></li>
+                            <li><a className="link link-hover" href='#'>Contact</a></li>
+                            <li><a className="link link-hover" href='#'>Jobs</a></li>
+                            <li><a className="link link-hover" href='#'>Press kit</a></li>
                         </ul>
                     </nav>
                     <div className="hidden md:block border-l border-black h-44"></div>
                     <nav>
                         <h6 className="footer-title font-bold text-lg text-black font-caslon">Legal</h6>
                         <ul className="space-y-2 font-caslon">
-                            <li><a className="link link-hover">Terms of use</a></li>
-                            <li><a className="link link-hover">Privacy policy</a></li>
-                            <li><a className="link link-hover">Cookie policy</a></li>
+                            <li><a className="link link-hover" href='#'>Terms of use</a></li>
+                            <li><a className="link link-hover" href='#'>Privacy policy</a></li>
+                            <li><a className="link link-hover" href='#'>Cookie policy</a></li>
                         </ul>
                     </nav>
                 </div>

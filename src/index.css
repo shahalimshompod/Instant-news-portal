@@ -34,3 +34,22 @@
 html{
   scroll-behavior: smooth;
 }
+
+
+
+/* Unordered List (UL) */
+.jodit .jodit-wysiwyg ul {
+  list-style-type: disc; /* Bullet points */
+  padding-left: 20px; /* Adjust padding */
+}
+
+/* Ordered List (OL) */
+.jodit .jodit-wysiwyg ol {
+  list-style-type: decimal; /* Numbered list */
+  padding-left: 20px; /* Adjust padding */
+}
+
+/* Styling for list items */
+.jodit .jodit-wysiwyg li {
+  margin-bottom: 5px; /* Optional: Add spacing between list items */
+}

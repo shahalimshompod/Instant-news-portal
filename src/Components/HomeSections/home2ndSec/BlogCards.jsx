@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router";
 
 const BlogCards = ({ data }) => {
-    const { blog_added_by, blog_added_date, blog_category, blog_photo, blog_title, _id } = data;
+    const { blog_added_by, createdAt, blog_category, blog_photo, blog_title, _id } = data;
 
     // news card here with category
     const location = useLocation();
@@ -21,6 +21,18 @@ const BlogCards = ({ data }) => {
     };
 
 
+    const formatDate = (isoDateString) => {
+        const date = new Date(isoDateString);
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
+
+        const timeOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
+        const formattedTime = new Intl.DateTimeFormat('en-US', timeOptions).format(date);
+
+        return { date: formattedDate, time: formattedTime };
+    };
+
+
     // navigate well for well categories
     const wellCategories = ['Life', 'Health', 'Mind', 'Food'];
 
@@ -35,7 +47,8 @@ const BlogCards = ({ data }) => {
                     >
                         <img
                             className="w-full aspect-[16/9] sm:aspect-[4/3] md:aspect-[3/2] lg:aspect-[16/9] object-cover"
-                            src={blog_photo}
+                            // src={blog_photo}
+                            src="https://i.ibb.co.com/12HZwPM/Getty-Images-2184329067-e1732106649612.jpg"
                             alt="Blog Photo"
                         />
                     </a>
@@ -61,7 +74,7 @@ const BlogCards = ({ data }) => {
                         ? `/well/section/blog-details/${_id}`
                         : `/section/blog-details/${_id}`}>
                         <h2
-                            className='text-lg md:text-xl lg:text-2xl font-caslon font-semibold mb-5 hover:cursor-pointer group-hover:text-blue-600'
+                            className='line-clamp-4 text-lg md:text-xl lg:text-2xl font-caslon font-semibold mb-5 hover:cursor-pointer group-hover:text-blue-600'
                         >
                             {blog_title}
                         </h2>
@@ -71,7 +84,7 @@ const BlogCards = ({ data }) => {
                         BY <span className='font-bold'>{blog_added_by}</span>
                     </p>
                     <p className='text-[#000]/50 font-sora text-sm'>
-                        {blog_added_date}
+                        {formatDate(createdAt).date}
                     </p>
                 </div>
             </div>

@@ -1,52 +1,68 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../AuthContextProvider/AuthContextProvider';
 import useUserRole from '../Hooks/useUserRole';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useLocation, useNavigate } from 'react-router';
 
-const AddVideos = () => {
+const UpdateVideos = () => {
+    const navigate = useNavigate();
     const { user } = useContext(AuthContext);
+    const location = useLocation();
+    const dataFromAddedVideos = location.state || {};
     const email = user.email;
     const { userRole } = useUserRole(email);
+
+    // Initialize form
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-    const onSubmit = async (data) => {
-        try {
-            const videoData = {
-                ...data,
-                userEmail: email,
-                userRole
-            }
-
-            if (videoData && videoData.userEmail) {
-                const res = await axios.post('http://localhost:5000/add-videos', videoData);
-                if (res.data.insertedId) {
-                    Swal.fire({
-                        title: "Posted!",
-                        text: "Video posted successfully.",
-                        icon: "success",
-                    });
-                    reset();
-                }
-            }
-        } catch (error) {
-            console.error("error posting videos", error)
-            Swal.fire({
-                title: "Error",
-                text: "Error while posting blogs",
-                icon: "Error",
+    // Set default values in the form
+    useEffect(() => {
+        if (dataFromAddedVideos) {
+            reset({
+                video_heading: dataFromAddedVideos.video_heading || '',
+                video_thumbnail: dataFromAddedVideos.video_thumbnail || '',
+                video_link: dataFromAddedVideos.video_link || '',
             });
         }
-        // Handle form submission logic here
+    }, [dataFromAddedVideos, reset]);
+
+    // Handle form submission
+    const onSubmit = async (data) => {
+        try {
+            // Make API call to update the video
+            const res = await axios.put(`http://localhost:5000/update-videos/${dataFromAddedVideos._id}`, data);
+            
+            if (res.data.modifiedCount > 0) {
+                Swal.fire({
+                    title: "Success",
+                    text: "Video updated successfully!",
+                    icon: "success",
+                });
+                navigate(`${location.state.from}`)
+            } else {
+                Swal.fire({
+                    title: "No change!",
+                    text: "There is nothing updated in this video!",
+                    icon: "info",
+                });
+            }
+        } catch (error) {
+            console.error("Error updating video:", error);
+            Swal.fire({
+                title: "Error",
+                text: "Error while updating the video",
+                icon: "error",
+            });
+        }
     };
 
     return (
         <div className="p-8 w-full mx-auto bg-gray-100 shadow-md rounded-md h-screen">
-            <h1 className="text-2xl font-bold mb-5 text-gray-800 font-sora">Add Videos</h1>
+            <h1 className="text-2xl font-bold mb-5 text-gray-800 font-sora">Update Videos</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-
-                {/* video heading */}
+                {/* Video Heading */}
                 <div>
                     <label htmlFor="videoHeading" className="block text-sm font-medium text-gray-700 font-sora">
                         Video Heading
@@ -60,8 +76,7 @@ const AddVideos = () => {
                     {errors.video_heading && <p className="text-red-500 text-sm">{errors.video_heading.message}</p>}
                 </div>
 
-
-                {/* video thumbnail */}
+                {/* Video Thumbnail */}
                 <div>
                     <label htmlFor="videoThumbnail" className="block text-sm font-medium text-gray-700 font-sora">
                         Video Thumbnail (Photo Link)
@@ -76,6 +91,7 @@ const AddVideos = () => {
                     {errors.video_thumbnail && <p className="text-red-500 text-sm">{errors.video_thumbnail.message}</p>}
                 </div>
 
+                {/* Video Link */}
                 <div>
                     <label htmlFor="videoLink" className="block text-sm font-medium text-gray-700 font-sora">
                         Video Link
@@ -90,15 +106,16 @@ const AddVideos = () => {
                     {errors.video_link && <p className="text-red-500 text-sm">{errors.video_link.message}</p>}
                 </div>
 
+                {/* Submit Button */}
                 <button
                     type="submit"
                     className="px-3 bg-blue-600 text-white p-2 rounded-md shadow hover:bg-blue-700 focus:ring focus:ring-blue-500 focus:ring-opacity-50 font-sora"
                 >
-                    Add Video
+                    Update Video
                 </button>
             </form>
         </div>
     );
 };
 
-export default AddVideos;
+export default UpdateVideos;

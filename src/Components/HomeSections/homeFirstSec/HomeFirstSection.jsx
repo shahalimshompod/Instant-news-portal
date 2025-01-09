@@ -1,13 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
+import DOMPurify from 'dompurify';
+
 
 const HomeFirstSection = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const location = useLocation();
 
-    const { blog_added_by, blog_added_date, blog_category, blog_details, blog_photo, blog_title, _id } = data;
+    const { blog_added_by, createdAt, blog_category, blog_details, blog_photo, blog_title, _id } = data;
 
     useEffect(() => {
         const fetchOneData = async () => {
@@ -26,6 +28,22 @@ const HomeFirstSection = () => {
 
     // navigate well for well categories
     const wellCategories = ['Life', 'Health', 'Mind', 'Food'];
+
+    // date formatting
+    const formatDate = (isoDateString) => {
+        const date = new Date(isoDateString);
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
+
+        const timeOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
+        const formattedTime = new Intl.DateTimeFormat('en-US', timeOptions).format(date);
+
+        return { date: formattedDate, time: formattedTime };
+    };
+
+    // sanitize the html for blog details
+    const sanitizeHTML = DOMPurify.sanitize(blog_details);
+
 
 
     // Loader
@@ -60,11 +78,11 @@ const HomeFirstSection = () => {
                     ? `/well/section/blog-details/${_id}`
                     : `/section/blog-details/${_id}`}>
                     <h1 className='text-2xl lg:text-4xl 2xl:text-5xl font-caslon font-semibold mb-5 leading-tight group-hover:text-blue-600 hover:cursor-pointer'>{blog_title}</h1>
-                    <p className='text-[14px] md:text-base font-sora font-light mb-5 leading-tight hover:text-blue-600 hover:cursor-pointer line-clamp-4'>{blog_details}</p>
+                    <p className='text-[14px] md:text-base font-sora font-light mb-5 leading-tight hover:text-blue-600 hover:cursor-pointer line-clamp-4'><div dangerouslySetInnerHTML={{ __html: sanitizeHTML }} /></p>
                 </a>
 
                 <p className='font-sora text-sm font-thin'>BY <span className='font-bold'>{blog_added_by}</span></p>
-                <p className='text-[#000]/50 font-sora text-sm '>{blog_added_date}</p>
+                <p className='text-[#000]/50 font-sora text-sm '>{formatDate(createdAt).date}</p>
             </div>
         </div>
     );

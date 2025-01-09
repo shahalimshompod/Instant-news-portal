@@ -1,10 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { formatDistanceToNow } from 'date-fns';
 
 const LatestNews = () => {
     const [latestData, setLatestData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
 
     useEffect(() => {
         const fetchLatestData = async () => {
@@ -13,12 +12,11 @@ const LatestNews = () => {
                 setLatestData(res.data);
             } catch (error) {
                 setError(error);
-            } finally {
-                setLoading(false)
             }
         }
         fetchLatestData()
     }, [])
+
 
     return (
         <div className='px-3 lg:px-0'>
@@ -30,7 +28,7 @@ const LatestNews = () => {
                         {
                             latestData.map(data => <div className='border-b-2 mb-2' key={data._id}>
                                 <h4 className='font-caslon font-bold text-xl hover:text-blue-600 mb-2'><a href={`/section/blog-details/${data._id}`}>{data.blog_title}</a></h4>
-                                <p className='mb-3 text-xs font-sora'>{data.blog_added_date}</p>
+                                <p className='mb-3 text-xs font-sora'>{formatDistanceToNow(data.createdAt, { addSuffix: true })}</p>
                             </div>)
                         }
                     </div>

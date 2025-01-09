@@ -34,14 +34,14 @@ const HomeRoutes = () => {
         {
             path: "/recommend",
             label: "Recommend",
-            dropdown: [
-                { label: "CREDIT CARDS", path: "/recommend/credit-cards" },
-                { label: "BANKING", path: "/recommend/banking" },
-                { label: "INSURANCE", path: "/recommend/insurance" },
-                { label: "INVESTING", path: "/recommend/investing" },
-                { label: "EDUCATION", path: "/recommend/education" },
-                { label: "BUSINESS SOLUTION", path: "/recommend/business-solution" }
-            ]
+            // dropdown: [
+            //     { label: "CREDIT CARDS", path: "/recommend/credit-cards" },
+            //     { label: "BANKING", path: "/recommend/banking" },
+            //     { label: "INSURANCE", path: "/recommend/insurance" },
+            //     { label: "INVESTING", path: "/recommend/investing" },
+            //     { label: "EDUCATION", path: "/recommend/education" },
+            //     { label: "BUSINESS SOLUTION", path: "/recommend/business-solution" }
+            // ]
         },
         { path: "/section/our-goal", label: "OurGoal" },
     ];

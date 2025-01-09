@@ -9,31 +9,40 @@ import { FaArrowRight } from "react-icons/fa6";
 
 const HomeSectionVideoLayout = () => {
     const [videos, setVideos] = useState([]);
-
-    // modal related states
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedVideo, setSelectedVideo] = useState('');
+    const [selectedVideo, setSelectedVideo] = useState("");
 
-    const openModal = (videoLink) => {
-        setIsModalOpen(true);
-        setSelectedVideo(videoLink)
-    }
-    const closeModal = () => setIsModalOpen(false);
-
-    // Disable scrolling when modal is open
+    // Fetch videos on component mount
     useEffect(() => {
-        if (isModalOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "auto";
-        }
+        const fetchVideos = async () => {
+            try {
+                const { data } = await axios.get("http://localhost:5000/video-section");
+                setVideos(data);
+            } catch (error) {
+                console.error("Error fetching videos:", error);
+            }
+        };
+        fetchVideos();
+    }, []);
 
-        // Cleanup on component unmount
+    // Modal handlers
+    const openModal = (videoLink) => {
+        setSelectedVideo(videoLink);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setSelectedVideo("");
+        setIsModalOpen(false);
+    };
+
+    // Prevent scrolling when modal is open
+    useEffect(() => {
+        document.body.style.overflow = isModalOpen ? "hidden" : "auto";
         return () => (document.body.style.overflow = "auto");
     }, [isModalOpen]);
 
-
-    var settings = {
+    const sliderSettings = {
         dots: false,
         infinite: true,
         speed: 500,
@@ -66,41 +75,33 @@ const HomeSectionVideoLayout = () => {
         ],
     };
 
-
-    // videos data fetching 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.get('http://localhost:5000/video-section');
-                setVideos(res?.data);
-            } catch (err) {
-                console.error(err);
-            }
-        }
-
-        fetchData();
-    }, [settings])
-
-
     return (
-        <div className="container mx-auto my-28 z-50 px-3 xl:px-0">
-            <div className="flex items-center justify-between border-b border-black pb-3  mb-5">
+        <div className="container mx-auto my-28 px-3 xl:px-0">
+            <div className="flex items-center justify-between border-b border-black pb-3 mb-5">
                 <h1 className="font-caslon font-bold text-3xl lg:text-5xl">Video Gallery</h1>
-                <a href="/videos">
-                    <div className="flex items-center gap-2 hover:text-blue-600 font-sora">
-                        <p className="text-sm lg:text-xl">Show more</p>
-                        <FaArrowRight />
-                    </div>
+                <a href="/videos" className="flex items-center gap-2 hover:text-blue-600 font-sora">
+                    <p className="text-sm lg:text-xl">Show more</p>
+                    <FaArrowRight />
                 </a>
             </div>
-            <div className="overflow-x-hidden">
-                <Slider {...settings}>
-                    {
-                        videos.map((video, index) => <VideoCard openModal={() => openModal(video.video_link)} key={index} data={video}></VideoCard>)
-                    }
+            <div className="overflow-hidden">
+                <Slider {...sliderSettings}>
+                    {videos.map((video, index) => (
+                        <VideoCard
+                            key={index}
+                            data={video}
+                            openModal={() => openModal(video.video_link)}
+                        />
+                    ))}
                 </Slider>
             </div>
-            <VideoModal isModalOpen={isModalOpen} closeModal={closeModal} selectedVideo={selectedVideo}></VideoModal>
+            {isModalOpen && (
+                <VideoModal
+                    isModalOpen={isModalOpen}
+                    closeModal={closeModal}
+                    selectedVideo={selectedVideo}
+                />
+            )}
         </div>
     );
 };

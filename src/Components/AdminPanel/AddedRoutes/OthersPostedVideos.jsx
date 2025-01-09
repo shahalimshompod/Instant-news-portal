@@ -7,16 +7,18 @@ import { useNavigate } from "react-router";
 import useUserRole from "../Hooks/useUserRole";
 import Swal from "sweetalert2";
 
-const MyAddedVideos = () => {
+const OthersPostedVideos = () => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const email = user.email;
     const { userRole } = useUserRole(email)
+    const currentRole = userRole
     const [loading, setLoading] = useState(true);
 
     const [myVideos, setMyVideos] = useState([]);
     const [page, setPage] = useState(1); // Current page
     const [totalPages, setTotalPages] = useState(1); // Total pages
+    const [btnLoader, setBtnLoader] = useState(true)
 
     const limit = 10; // Number of blogs per page
 
@@ -24,7 +26,7 @@ const MyAddedVideos = () => {
     useEffect(() => {
         const fetchLatestData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/my-posted-videos`, {
+                const res = await axios.get(`http://localhost:5000/others-posted-videos`, {
                     params: {
                         email: email,
                         page: page,
@@ -34,6 +36,7 @@ const MyAddedVideos = () => {
                 setMyVideos(res.data.blogs); // Setting blogs
                 setTotalPages(res.data.totalPages); // Setting total pages
                 setLoading(false)
+                setBtnLoader(false)
             } catch (error) {
                 console.error(error);
             }
@@ -107,7 +110,7 @@ const MyAddedVideos = () => {
     const handleClickToUpdateRoute = (data) => {
         const dataToSend = {
             ...data,
-            from: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/my-added-videos`,
+            from: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/others-posted-videos`,
         }
         navigate(`/${import.meta.env.VITE_urlSecret}/admin-dashboard/update-videos`, { state: dataToSend })
     }
@@ -121,11 +124,10 @@ const MyAddedVideos = () => {
         );
     }
 
-
     return (
         <div className="px-2 my-5">
             <h1 className="text-center text-3xl text-black font-sora mb-5 uppercase">
-                Your posted videos
+                Others posted videos
             </h1>
             <table className="table-auto w-full">
                 <thead>
@@ -164,26 +166,40 @@ const MyAddedVideos = () => {
                                 <div className="lg:hidden font-bold">Added By</div>
                                 <div className="flex items-center flex-col gap-2">
                                     <span className="border px-3 rounded-lg text-base font-bold py-1 font-sora">
-                                        {userRole}
+                                        {video.userRole}
                                     </span>
                                     <span className="badge badge-ghost badge-sm font-sora">{video.userEmail}</span>
                                 </div>
                             </td>
 
                             {/* Actions */}
-                            <td className="flex gap-3 items-center justify-center">
-                                <button onClick={() => handleClickToUpdateRoute(video)} data-tip="Update" className="btn lg:tooltip btn-circle bg-transparent border-none shadow-none hover:bg-transparent hover:text-green-500">
-                                    <GrUpdate size={20} />
-                                </button>
+                            {
+                                btnLoader ? 'Loading...' : (
+                                    <td className="flex gap-3 items-center justify-center">
+                                        {
+                                            currentRole !== 'Editor' && (
+                                                <div className="flex items-center gap-3">
+                                                    <button onClick={() => handleClickToUpdateRoute(video)} data-tip="Update" className="btn lg:tooltip btn-circle bg-transparent border-none shadow-none hover:bg-transparent hover:text-green-500">
+                                                        <GrUpdate size={20} />
+                                                    </button>
 
-                                <button onClick={() => handleDelete(video._id)} data-tip="Delete" className="btn btn-circle bg-transparent lg:tooltip border-none shadow-none hover:bg-transparent hover:text-red-500">
-                                    <MdDeleteForever size={25} />
-                                </button>
+                                                    {
+                                                        currentRole === 'Admin' && (
+                                                            <button onClick={() => handleDelete(video._id)} data-tip="Delete" className="btn btn-circle bg-transparent lg:tooltip border-none shadow-none hover:bg-transparent hover:text-red-500">
+                                                                <MdDeleteForever size={25} />
+                                                            </button>
+                                                        )
+                                                    }
+                                                </div>
+                                            )
+                                        }
 
-                                <button data-tip="View video page" className="btn btn-circle bg-transparent lg:tooltip border-none shadow-none hover:bg-transparent hover:text-red-500">
-                                    <a href="/videos" target="_blank"><MdOpenInNew size={25} /></a>
-                                </button>
-                            </td>
+                                        <button data-tip="View video page" className="btn btn-circle bg-transparent lg:tooltip border-none shadow-none hover:bg-transparent hover:text-red-500">
+                                            <a href="/videos" target="_blank"><MdOpenInNew size={25} /></a>
+                                        </button>
+                                    </td>
+                                )
+                            }
                         </tr>
                     ))}
                 </tbody>
@@ -213,4 +229,4 @@ const MyAddedVideos = () => {
     );
 };
 
-export default MyAddedVideos;
+export default OthersPostedVideos;

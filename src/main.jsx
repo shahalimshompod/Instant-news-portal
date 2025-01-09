@@ -19,15 +19,22 @@ import AdminPanelRootPage from './Components/AdminPanel/AdminPanelRoot/AdminPane
 import AddBlogs from './Components/AdminPanel/AddingRoutes/AddBlogs';
 import Dashboard from './Components/AdminPanel/Dashboard/Dashboard';
 import AddVideos from './Components/AdminPanel/AddingRoutes/AddVideos';
-import UpdateTravelTips from './Components/AdminPanel/AddingRoutes/UpdateTravelTips';
 import MyAddedBlogs from './Components/AdminPanel/AddedRoutes/MyAddedBlogs';
 import MyAddedVideos from './Components/AdminPanel/AddedRoutes/MyAddedVideos';
-import MyUpdatedTips from './Components/AdminPanel/AddedRoutes/MyUpdatedTips';
 import WellRootPageLayout from './Components/Well/WellRootPageLayout/WellRootPageLayout';
 import WellHomePageLayout from './Components/Well/WellHomePageLayout/WellHomePageLayout';
 import WellHomePage from './Components/Well/WellPages/WellHomePage';
 import VideoRouteLayout from './Components/VideoRoute/VideoRouteLayout';
 import TipsPageLayout from './Components/Routes/Tips/TipsPageLayout/TipsPageLayout';
+import Login from './Components/AdminPanel/AdminPanelLogin/Login';
+import AuthContextProvider from './Components/AdminPanel/AuthContextProvider/AuthContextProvider';
+import SecureRoute from './Components/AdminPanel/SecureAdminPanelRoutes/SecureRoute';
+import AllUsers from './Components/AdminPanel/AddedRoutes/AllUsers';
+import UnauthorizedPage from './Components/AdminPanel/SecureAdminPanelRoutes/UnauthorizedPage';
+import OthersPostedBlogs from './Components/AdminPanel/AddedRoutes/OthersPostedBlogs';
+import OthersPostedVideos from './Components/AdminPanel/AddedRoutes/OthersPostedVideos';
+import UpdateBlogs from './Components/AdminPanel/UpdatingRoutes/UpdateBlogs';
+import UpdateVideos from './Components/AdminPanel/UpdatingRoutes/UpdateVideos';
 
 
 const router = createBrowserRouter([
@@ -138,59 +145,94 @@ const router = createBrowserRouter([
   // admin panel routes and tabs
   {
     path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard`,
-    element: <AdminPanelRootPage></AdminPanelRootPage>,
+    element: <SecureRoute allowedRoles={['Admin', 'Moderator', 'Editor', 'User']}><AdminPanelRootPage></AdminPanelRootPage></SecureRoute>,
     children: [
       {
         path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard`,
-        element: <Dashboard></Dashboard>,
+        element: <SecureRoute allowedRoles={['Admin', 'Moderator', 'Editor', 'User']}><Dashboard></Dashboard></SecureRoute>,
         loader: () => {
-          document.title = "Admin panel | InstantR - Create Something Everyday"
+          document.title = "Dashboard | InstantR - Create Something Everyday"
         }
       },
       {
         path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/add-blogs`,
-        element: <AddBlogs></AddBlogs>,
+        element: <SecureRoute allowedRoles={['Admin', 'Moderator', 'Editor']}><AddBlogs></AddBlogs></SecureRoute>,
         loader: () => {
-          document.title = "Add Blogs | Admin panel | InstantR - Create Something Everyday"
+          document.title = "Post Blogs | Admin panel | InstantR - Create Something Everyday"
         }
       },
       {
         path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/add-videos`,
-        element: <AddVideos></AddVideos>,
+        element: <SecureRoute allowedRoles={['Admin', 'Moderator', 'Editor']}><AddVideos></AddVideos></SecureRoute>,
         loader: () => {
-          document.title = "Add Videos | Admin panel | InstantR - Create Something Everyday"
-        }
-      },
-      {
-        path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/update-travel-tips`,
-        element: <UpdateTravelTips></UpdateTravelTips>,
-        loader: () => {
-          document.title = "Add Travel Tips | Admin panel | InstantR - Create Something Everyday"
+          document.title = "Post Videos | Admin panel | InstantR - Create Something Everyday"
         }
       },
       {
         path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/my-added-blogs`,
-        element: <MyAddedBlogs></MyAddedBlogs>,
+        element: <SecureRoute allowedRoles={['Admin', 'Moderator', 'Editor']}><MyAddedBlogs></MyAddedBlogs></SecureRoute>,
         loader: () => {
-          document.title = "My added blogs | Admin panel | InstantR - Create Something Everyday"
+          document.title = "My posted blogs | Admin panel | InstantR - Create Something Everyday"
         }
       },
       {
         path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/my-added-videos`,
-        element: <MyAddedVideos></MyAddedVideos>,
+        element: <SecureRoute allowedRoles={['Admin', 'Moderator', 'Editor']}><MyAddedVideos></MyAddedVideos></SecureRoute>,
         loader: () => {
-          document.title = "My added videos | Admin panel | InstantR - Create Something Everyday"
+          document.title = "My posted videos | Admin panel | InstantR - Create Something Everyday"
         }
       },
       {
-        path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/my-updated-tips`,
-        element: <MyUpdatedTips></MyUpdatedTips>,
+        path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/all-users`,
+        element: <SecureRoute allowedRoles={['Admin']}><AllUsers></AllUsers></SecureRoute>,
         loader: () => {
-          document.title = "Update my tips | Admin panel | InstantR - Create Something Everyday"
+          document.title = "All users | Admin panel | InstantR - Create Something Everyday"
+        }
+      },
+      {
+        path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/others-posted-blogs`,
+        element: <SecureRoute allowedRoles={['Admin', 'Moderator', 'Editor']}><OthersPostedBlogs></OthersPostedBlogs> </SecureRoute>,
+        loader: () => {
+          document.title = "Others posted blogs | Admin panel | InstantR - Create Something Everyday"
+        }
+      },
+      {
+        path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/others-posted-videos`,
+        element: <SecureRoute allowedRoles={['Admin', 'Moderator', 'Editor']}><OthersPostedVideos></OthersPostedVideos></SecureRoute>,
+        loader: () => {
+          document.title = "Others posted videos | Admin panel | InstantR - Create Something Everyday"
+        }
+      },
+      {
+        path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/update-blogs`,
+        element: <SecureRoute allowedRoles={['Admin', 'Moderator', 'Editor']}><UpdateBlogs></UpdateBlogs></SecureRoute>,
+        loader: () => {
+          document.title = "Update blogs | Admin panel | InstantR - Create Something Everyday"
+        }
+      },
+      {
+        path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/update-videos`,
+        element: <SecureRoute allowedRoles={['Admin', 'Moderator', 'Editor']}><UpdateVideos></UpdateVideos></SecureRoute>,
+        loader: () => {
+          document.title = "Update videos | Admin panel | InstantR - Create Something Everyday"
         }
       },
     ]
   },
+
+  // admin panel login
+  {
+    path: `/${import.meta.env.VITE_urlSecret}/login`,
+    element: <Login></Login>
+  },
+
+  // unauthorized page here
+  {
+    path: '/unauthorized',
+    element: <UnauthorizedPage></UnauthorizedPage>
+  },
+
+
 
   // recommend tab routes
   {
@@ -206,8 +248,10 @@ const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <AuthContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </AuthContextProvider>
   </StrictMode>,
 )
