@@ -9,7 +9,7 @@ const BlogCards = ({ data }) => {
 
     // view count handler
     const viewCounts = (id) => {
-        fetch(`http://localhost:5000/${id}`, {
+        fetch(`https://instant-news-portal-server.vercel.app/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'

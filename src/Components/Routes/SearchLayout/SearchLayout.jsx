@@ -12,7 +12,7 @@ const SearchLayout = ({ isOpen, onClose, children }) => {
     // search
     useEffect(() => {
         if (searchTerm) {
-            axios.get(`http://localhost:5000/search?query=${searchTerm}`)
+            axios.get(`https://instant-news-portal-server.vercel.app/search?query=${searchTerm}`)
                 .then((response) => {
                     setSearchResult(response?.data);
                     setLoading(false)

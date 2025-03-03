@@ -19,7 +19,7 @@ const AdminPanelSidebar = () => {
     useEffect(() => {
         const fetchRole = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/user-role?email=${currentUserEmail}`)
+                const res = await axios.get(`https://instant-news-portal-server.vercel.app/user-role?email=${currentUserEmail}`)
                 setUserRole(res.data);
             } catch (error) {
                 console.error("Problem in fetching roles", error);

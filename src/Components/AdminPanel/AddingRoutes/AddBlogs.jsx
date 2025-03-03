@@ -49,7 +49,7 @@ const AddBlogs = () => {
 
         // post req from client to database
         if (finalData && finalData.userEmail) {
-            axios.post('http://localhost:5000/add-blogs', finalData)
+            axios.post('https://instant-news-portal-server.vercel.app/add-blogs', finalData)
                 .then(response => {
                     if (response.data.insertedId) {
                         Swal.fire({

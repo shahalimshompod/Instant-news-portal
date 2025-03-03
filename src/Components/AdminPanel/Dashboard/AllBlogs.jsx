@@ -46,7 +46,7 @@ const AllBlogs = () => {
     useEffect(() => {
         const fetchLatestData = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/all-blog-Data');
+                const res = await axios.get('https://instant-news-portal-server.vercel.app/all-blog-Data');
                 setAllBlogsData(res.data);
             } catch (error) {
                 console.error(error);

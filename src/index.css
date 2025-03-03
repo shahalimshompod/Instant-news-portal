@@ -4,7 +4,7 @@
 
 /* instant custom font 'caslonPro' importing here */
 @font-face {
-  font-family: 'caslonPro';
+  font-family: 'ACaslonPro';
   src: url('./assets/fonts/ACaslonPro-Regular.otf') format('opentype'); /* Adjust path as needed */
   font-weight: normal;
   font-style: normal;

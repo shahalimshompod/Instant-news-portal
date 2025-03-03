@@ -32,7 +32,7 @@ const CategoryWiseBlogLayout = () => {
             setLoading(true);
             try {
                 const res = await axios.get(
-                    `http://localhost:5000/section/${category}?page=${currentPage - 1}&size=${itemsPerPage}`
+                    `https://instant-news-portal-server.vercel.app/section/${category}?page=${currentPage - 1}&size=${itemsPerPage}`
                 );
                 setBlogData(res.data.blogData || []);
                 setTotalCount(res.data.totalCount || 0);
