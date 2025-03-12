@@ -24,7 +24,7 @@ const MyAddedBlogs = () => {
     useEffect(() => {
         const fetchLatestData = async () => {
             try {
-                const res = await axios.get(`https://instant-news-portal-server.vercel.app/my-posted-blogs`, {
+                const res = await axios.get(`http://localhost:5000/my-posted-blogs`, {
                     params: {
                         email: email,
                         page: page,
@@ -68,7 +68,7 @@ const MyAddedBlogs = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const res = await axios.delete(`https://instant-news-portal-server.vercel.app/delete-blog/${id}`);
+                    const res = await axios.delete(`http://localhost:5000/delete-blog/${id}`);
 
                     if (res.data.deletedCount > 0) {
                         const restPostToShow = myPost.filter((post) => id !== post._id);

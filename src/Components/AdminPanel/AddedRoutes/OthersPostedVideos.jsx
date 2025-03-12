@@ -26,7 +26,7 @@ const OthersPostedVideos = () => {
     useEffect(() => {
         const fetchLatestData = async () => {
             try {
-                const res = await axios.get(`https://instant-news-portal-server.vercel.app/others-posted-videos`, {
+                const res = await axios.get(`http://localhost:5000/others-posted-videos`, {
                     params: {
                         email: email,
                         page: page,
@@ -71,7 +71,7 @@ const OthersPostedVideos = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const res = await axios.delete(`https://instant-news-portal-server.vercel.app/delete-video/${id}`);
+                    const res = await axios.delete(`http://localhost:5000/delete-video/${id}`);
 
                     if (res.data.deletedCount > 0) {
                         const restVideosToShow = myVideos.filter((video) => id !== video._id);

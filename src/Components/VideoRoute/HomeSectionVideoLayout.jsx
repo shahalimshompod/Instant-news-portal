@@ -16,7 +16,7 @@ const HomeSectionVideoLayout = () => {
     useEffect(() => {
         const fetchVideos = async () => {
             try {
-                const { data } = await axios.get("https://instant-news-portal-server.vercel.app/video-section");
+                const { data } = await axios.get("http://localhost:5000/video-section");
                 setVideos(data);
             } catch (error) {
                 console.error("Error fetching videos:", error);

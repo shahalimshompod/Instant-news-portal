@@ -13,7 +13,7 @@ const SecureRoute = ({ children, allowedRoles }) => {
             if (user?.email) {
                 try {
                     const res = await axios.get(
-                        `https://instant-news-portal-server.vercel.app/user-role?email=${user.email}`
+                        `http://localhost:5000/user-role?email=${user.email}`
                     );
                     setUserRole(res?.data);
                 } catch (error) {

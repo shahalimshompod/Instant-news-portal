@@ -9,7 +9,7 @@ const BlogCards = ({ data }) => {
 
     // view count handler
     const viewCounts = (id) => {
-        fetch(`https://instant-news-portal-server.vercel.app/${id}`, {
+        fetch(`http://localhost:5000/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ const BlogCards = ({ data }) => {
                         <img
                             className="w-full aspect-[16/9] sm:aspect-[4/3] md:aspect-[3/2] lg:aspect-[16/9] object-cover"
                             // src={blog_photo}
-                            src="https://i.ibb.co.com/12HZwPM/Getty-Images-2184329067-e1732106649612.jpg"
+                            src="https://plus.unsplash.com/premium_photo-1688561384438-bfa9273e2c00?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bmV3c3xlbnwwfHwwfHx8MA%3D%3D"
                             alt="Blog Photo"
                         />
                     </a>

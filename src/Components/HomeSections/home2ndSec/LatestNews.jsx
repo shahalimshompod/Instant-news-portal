@@ -8,7 +8,7 @@ const LatestNews = () => {
     useEffect(() => {
         const fetchLatestData = async () => {
             try {
-                const res = await axios.get('https://instant-news-portal-server.vercel.app/latest-blogs');
+                const res = await axios.get('http://localhost:5000/latest-blogs');
                 setLatestData(res.data);
             } catch (error) {
                 setError(error);

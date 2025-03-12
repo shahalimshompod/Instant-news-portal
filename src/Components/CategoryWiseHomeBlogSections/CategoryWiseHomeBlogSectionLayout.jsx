@@ -5,7 +5,7 @@ const CategoryWiseHomeBlogSectionLayout = ({ category, dataForBlogs }) => {
     const wellCategories = ['Life', 'Health', 'Mind', 'Food'];
 
     return (
-        <div className="container mx-auto mb-10 md:mb-16  lg:mb-44 px-3">
+        <div className="container mx-auto mb-10 md:mb-16  lg:mb-20 px-3">
             <a href={wellCategories.includes(category)
                 ? `/well/section/${category}`
                 : `/section/${category}`

@@ -33,7 +33,7 @@ const UpdateBlogs = () => {
                 blog_details: content,
             }
 
-            const response = await axios.put(`https://instant-news-portal-server.vercel.app/update-blogs/${id}`, updatedData);
+            const response = await axios.put(`http://localhost:5000/update-blogs/${id}`, updatedData);
             if (response.data.modifiedCount > 0) {
                 Swal.fire({
                     title: "Updated!",

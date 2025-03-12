@@ -46,7 +46,7 @@ const AllBlogs = () => {
     useEffect(() => {
         const fetchLatestData = async () => {
             try {
-                const res = await axios.get('https://instant-news-portal-server.vercel.app/all-blog-Data');
+                const res = await axios.get('http://localhost:5000/all-blog-Data');
                 setAllBlogsData(res.data);
             } catch (error) {
                 console.error(error);
@@ -67,7 +67,7 @@ const AllBlogs = () => {
                     </div>
                 </a>
             </div>
-            <div className="overflow-x-hidden">
+            <div className="overflow-x-hidden w-full">
                 <Slider {...settings}>
                     {
                         allBlogsData.map((data, index) => <BlogCards key={index} data={data}></BlogCards>)

@@ -14,7 +14,7 @@ const HomeFirstSection = () => {
     useEffect(() => {
         const fetchOneData = async () => {
             try {
-                const response = await axios.get(`${location.pathname === '/well' ? 'https://instant-news-portal-server.vercel.app/well/home' : 'https://instant-news-portal-server.vercel.app/home'}`);
+                const response = await axios.get(`${location.pathname === '/well' ? 'http://localhost:5000/well/home' : 'http://localhost:5000/home'}`);
                 setData(response?.data[0]);
             } catch (err) {
                 console.error("error fetching HomeFirstSection data -->", err.message)
@@ -77,7 +77,7 @@ const HomeFirstSection = () => {
                 <a href={wellCategories.includes(blog_category)
                     ? `/well/section/blog-details/${_id}`
                     : `/section/blog-details/${_id}`}>
-                    <h1 className='text-2xl lg:text-4xl 2xl:text-5xl font-semibold mb-5 leading-tight group-hover:text-blue-600 hover:cursor-pointer'>{blog_title}</h1>
+                    <h1 className='text-2xl lg:text-4xl 2xl:text-5xl font-caslon font-semibold mb-5 leading-tight group-hover:text-blue-600 hover:cursor-pointer'>{blog_title}</h1>
 
                     <p className='text-[14px] md:text-base font-sora font-light mb-5 leading-tight hover:text-blue-600 hover:cursor-pointer line-clamp-4'><div dangerouslySetInnerHTML={{ __html: sanitizeHTML }} /></p>
                 </a>

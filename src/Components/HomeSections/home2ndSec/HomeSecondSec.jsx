@@ -13,7 +13,7 @@ const HomeSecondSec = () => {
     useEffect(() => {
         const FetchFeaturedBlogsData = async () => {
             try {
-                const response = await axios.get('https://instant-news-portal-server.vercel.app/featured-blogs')
+                const response = await axios.get('http://localhost:5000/featured-blogs')
                 setFeaturedBlogs(response.data)
             } catch (err) {
                 setError(err.message)
@@ -35,9 +35,9 @@ const HomeSecondSec = () => {
 
 
     return (
-        <>
-            <div className="flex flex-col-reverse lg:flex-row justify-center gap-14 mb-4">
-                <div className="grid grid-cols-1 md:grid-cols-3 px-3 gap-10 lg:px-0">
+        <div className="w-full">
+            <div className="flex flex-col-reverse lg:flex-row justify-between gap-14 mb-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 px-3 gap-10 lg:px-0 w-full">
                     {
                         featuredBlogs.slice(0, 3).map(data => <BlogCards key={data._id} data={data}></BlogCards>)
                     }
@@ -51,7 +51,7 @@ const HomeSecondSec = () => {
                     featuredBlogs.slice(3, 15).map(data => <BlogCards key={data._id} data={data} ></BlogCards>)
                 }
             </div>
-        </>
+        </div>
     );
 };
 

@@ -20,7 +20,7 @@ const AddVideos = () => {
             }
 
             if (videoData && videoData.userEmail) {
-                const res = await axios.post('https://instant-news-portal-server.vercel.app/add-videos', videoData);
+                const res = await axios.post('http://localhost:5000/add-videos', videoData);
                 if (res.data.insertedId) {
                     Swal.fire({
                         title: "Posted!",

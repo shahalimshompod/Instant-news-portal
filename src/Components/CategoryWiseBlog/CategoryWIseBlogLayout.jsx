@@ -32,7 +32,7 @@ const CategoryWiseBlogLayout = () => {
             setLoading(true);
             try {
                 const res = await axios.get(
-                    `https://instant-news-portal-server.vercel.app/section/${category}?page=${currentPage - 1}&size=${itemsPerPage}`
+                    `http://localhost:5000/section/${category}?page=${currentPage - 1}&size=${itemsPerPage}`
                 );
                 setBlogData(res.data.blogData || []);
                 setTotalCount(res.data.totalCount || 0);
@@ -59,7 +59,7 @@ const CategoryWiseBlogLayout = () => {
     // Loader
     if (loading) {
         return (
-            <div className="flex justify-center items-center h-[70vh]">
+            <div className="flex justify-center items-center h-[73vh]">
                 <span className="loading loading-bars loading-md"></span>
             </div>
         );

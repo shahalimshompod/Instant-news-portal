@@ -31,7 +31,7 @@ const AdminPanelNav = () => {
     }
 
     return (
-        <div className="flex items-center bg-gray-800 sticky top-0 py-1 pr-10 z-50 w-1/">
+        <div className="flex items-center bg-gray-800 sticky top-0 py-1 pr-10 z-50 w-full">
             <div className="flex-1">
                 <span className='text-2xl font-sora font-bold px-3 py-1 text-white'>InstantR</span>
             </div>

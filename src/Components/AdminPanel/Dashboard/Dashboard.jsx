@@ -11,7 +11,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchLatestData = async () => {
             try {
-                const res = await axios.get('https://instant-news-portal-server.vercel.app/latest-blogs');
+                const res = await axios.get('http://localhost:5000/latest-blogs');
                 setLatestData(res.data);
             } catch (error) {
                 console.error(error);
@@ -26,7 +26,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get('https://instant-news-portal-server.vercel.app/most-popular-for-dashboard');
+                const res = await axios.get('http://localhost:5000/most-popular-for-dashboard');
                 setMostPopularBlogs(res?.data);
             } catch (err) {
                 console.error('ERROR FETCHING DATA IN MOST POPULAR BLOGS --> ', err);

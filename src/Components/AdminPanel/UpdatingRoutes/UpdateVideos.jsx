@@ -32,7 +32,7 @@ const UpdateVideos = () => {
     const onSubmit = async (data) => {
         try {
             // Make API call to update the video
-            const res = await axios.put(`https://instant-news-portal-server.vercel.app/update-videos/${dataFromAddedVideos._id}`, data);
+            const res = await axios.put(`http://localhost:5000/update-videos/${dataFromAddedVideos._id}`, data);
             
             if (res.data.modifiedCount > 0) {
                 Swal.fire({

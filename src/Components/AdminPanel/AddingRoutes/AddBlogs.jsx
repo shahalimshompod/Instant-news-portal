@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 const AddBlogs = () => {
     const { user } = useContext(AuthContext); //getting current user email
     const { userRole } = useUserRole(user.email) //getting current user role
+    console.log(userRole);
 
 
 
@@ -30,26 +31,19 @@ const AddBlogs = () => {
 
     // handle add data..
     const onSubmit = (data) => {
-        // if (content.length < 20) {
-        //     setError("blog_details", {
-        //         type: "manual",
-        //         message: "Description must be at least 20 characters",
-        //     });
-        //     return;
-        // } else {
-        //     clearErrors("blog_details");
-        // }
-
         const finalData = {
             ...data,
             userRole,
             userEmail: user.email,
             blog_details: content,
+            isPending: true,
         };
 
         // post req from client to database
         if (finalData && finalData.userEmail) {
-            axios.post('https://instant-news-portal-server.vercel.app/add-blogs', finalData)
+            
+            if(userRole === 'Admin'){
+                axios.post('http://localhost:5000/add-blogs-admin', finalData)
                 .then(response => {
                     if (response.data.insertedId) {
                         Swal.fire({
@@ -69,6 +63,28 @@ const AddBlogs = () => {
                         icon: "Error",
                     });
                 })
+            }else{
+                axios.post('http://localhost:5000/add-blogs-others', finalData)
+                .then(response => {
+                    if (response.data.insertedId) {
+                        Swal.fire({
+                            title: "Request sent!",
+                            text: "Kindly Wait For Admin Approval.",
+                            icon: "success",
+                        });
+                        reset()
+                        setResetTextEditor('')
+                    }
+                })
+                .catch(error => {
+                    console.error('Error in posting blogs', error)
+                    Swal.fire({
+                        title: "Error",
+                        text: "Error while posting blogs",
+                        icon: "Error",
+                    });
+                })
+            }
 
         }
     };
