@@ -7,14 +7,18 @@ import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import useUserRole from "../Hooks/useUserRole";
 import { BsFillPostcardFill } from "react-icons/bs";
+import ApprovalRequestModal from "../ApprovalRequestModal/ApprovalRequestModal";
 
 const ApprovalRequests = () => {
   const { user } = useContext(AuthContext);
   const email = user.email;
   const [loading, setLoading] = useState(true);
   const { userRole } = useUserRole(email);
-  const currentRole = userRole;
+  // const currentRole = userRole;
   const [btnLoader, setBtnLoader] = useState(true);
+  const [selectedReq, setSelectedReq] = useState(null)
+
+  console.log(selectedReq);
 
   const [othersPost, setOthersPosts] = useState([]);
   const [page, setPage] = useState(1); // Current page
@@ -26,16 +30,13 @@ const ApprovalRequests = () => {
   useEffect(() => {
     const fetchLatestData = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:5000/approval-req`,
-          {
-            params: {
-              email: email,
-              page: page,
-              limit: limit,
-            },
-          }
-        );
+        const res = await axios.get(`http://localhost:5000/approval-req`, {
+          params: {
+            email: email,
+            page: page,
+            limit: limit,
+          },
+        });
 
         setOthersPosts(res.data.blogs); // Setting blogs
         setTotalPages(res.data.totalPages); // Setting total pages
@@ -133,7 +134,7 @@ const ApprovalRequests = () => {
               {/* Blog Views */}
               <td className="text-center mb-2 lg:mb-0">
                 <p className="font-sora text-base border w-1/4 rounded bg-slate-100 shadow-lg mx-auto">
-                  {post.requestType || 'N/A'}
+                  {post.requestType || "N/A"}
                 </p>
               </td>
 
@@ -143,6 +144,7 @@ const ApprovalRequests = () => {
               ) : (
                 <td className="flex gap-3 items-center justify-center">
                   <button
+                  onClick={() => setSelectedReq(post)}
                     data-tip="View Details"
                     className="btn btn-circle bg-transparent lg:tooltip border-none shadow-none hover:bg-transparent hover:text-green-500"
                   >
@@ -156,25 +158,30 @@ const ApprovalRequests = () => {
       </table>
 
       {/* Pagination */}
-      <div className="flex justify-center items-center mt-5">
-        <button
-          disabled={page <= 1}
-          onClick={() => setPage(page - 1)}
-          className="btn btn-primary mr-3"
-        >
-          Previous
-        </button>
-        <span className="font-bold">
-          Page {page} of {totalPages}
-        </span>
-        <button
-          disabled={page >= totalPages}
-          onClick={() => setPage(page + 1)}
-          className="btn btn-primary ml-3"
-        >
-          Next
-        </button>
+      <div>
+        {othersPost.length > 10 && (
+          <div className="flex justify-center items-center mt-5">
+            <button
+              disabled={page <= 1}
+              onClick={() => setPage(page - 1)}
+              className="btn btn-primary mr-3"
+            >
+              Previous
+            </button>
+            <span className="font-bold">
+              Page {page} of {totalPages}
+            </span>
+            <button
+              disabled={page >= totalPages}
+              onClick={() => setPage(page + 1)}
+              className="btn btn-primary ml-3"
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
+      <ApprovalRequestModal selectedReq={selectedReq} setSelectedReq={setSelectedReq}/>
     </div>
   );
 };

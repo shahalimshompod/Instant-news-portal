@@ -33,6 +33,7 @@ import OthersPostedVideos from "./Components/AdminPanel/AddedRoutes/OthersPosted
 import UpdateBlogs from "./Components/AdminPanel/UpdatingRoutes/UpdateBlogs";
 import UpdateVideos from "./Components/AdminPanel/UpdatingRoutes/UpdateVideos";
 import ApprovalRequests from "./Components/AdminPanel/AddedRoutes/ApprovalRequests";
+import MyProfile from "./Components/AdminPanel/MyProfile/MyProfile";
 
 const router = createBrowserRouter([
   // defining the path of the routes and the elements of the pages
@@ -153,6 +154,17 @@ const router = createBrowserRouter([
       </SecureRoute>
     ),
     children: [
+      {
+        path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard/my-profile`,
+        element: (
+          <SecureRoute allowedRoles={["Admin", "Moderator", "Editor", "User"]}>
+            <MyProfile />
+          </SecureRoute>
+        ),
+        loader: () => {
+          document.title = "My Profile | InstantR - Create Something Everyday";
+        },
+      },
       {
         path: `/${import.meta.env.VITE_urlSecret}/admin-dashboard`,
         element: (

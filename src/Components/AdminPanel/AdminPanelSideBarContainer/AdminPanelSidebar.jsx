@@ -13,6 +13,7 @@ import { MdOutlineVideoSettings } from "react-icons/md";
 import { MdSpaceDashboard } from "react-icons/md";
 import { FaFileCirclePlus } from "react-icons/fa6";
 import { BiSolidVideoPlus } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
 import { AuthContext } from "../AuthContextProvider/AuthContextProvider";
 import axios from "axios";
 
@@ -62,6 +63,19 @@ const AdminPanelSidebar = () => {
             <TbNavigationShare />
             <h1 className="text-white/40 font-sora text-sm">Navigation</h1>
           </div>
+
+          <NavLink
+            to={`/${import.meta.env.VITE_urlSecret}/admin-dashboard/my-profile`}
+            end
+            className={({ isActive }) =>
+              `p-3 rounded-lg text-lg font-medium flex items-center gap-2 ${
+                isActive ? "bg-blue-600" : "hover:bg-gray-700"
+              }`
+            }
+          >
+            <CgProfile size={20} />
+            <span className="font-sora text-sm text-base-300">Profile</span>
+          </NavLink>
 
           <NavLink
             to={`/${import.meta.env.VITE_urlSecret}/admin-dashboard`}

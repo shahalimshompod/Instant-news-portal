@@ -26,7 +26,9 @@ const Login = () => {
                     axios.post('http://localhost:5000/users', {
                         email: userData.email,
                         role: "User",
-                        job: 'N/A'
+                        job: 'N/A',
+                        name: null,
+                        image: null,
                     })
                         .then(response => {
                         })
