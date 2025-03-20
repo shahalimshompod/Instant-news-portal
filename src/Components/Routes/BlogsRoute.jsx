@@ -15,7 +15,7 @@ const BlogsRoute = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:5000/section/blogs?page=${
+          `https://instant-news-portal-server.vercel.app/section/blogs?page=${
             currentPage - 1
           }&size=${itemsPerPage}`
         );

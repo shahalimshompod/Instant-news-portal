@@ -24,7 +24,7 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
   // fetch user data
   const fetchUserData = async () => {
     const res = await axios.get(
-      `http://localhost:5000/userData?email=${approverEmail}`
+      `https://instant-news-portal-server.vercel.app/userData?email=${approverEmail}`
     );
     if (res.data) {
       setUserData(res.data);
@@ -101,26 +101,26 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
   // handle approve
   const handleApproval = async () => {
     const postBlogRes = await axios.post(
-      "http://localhost:5000/approve-blog-post",
+      "https://instant-news-portal-server.vercel.app/approve-blog-post",
       approvedData
     );
 
     if (postBlogRes.data.insertedId) {
       const postBlogToHistoryRes = await axios.patch(
-        `http://localhost:5000/approval-history/${historyDataId}`,
+        `https://instant-news-portal-server.vercel.app/approval-history/${historyDataId}`,
         approvalHistoryData
       );
 
       if (postBlogToHistoryRes.data.message) {
         // patch to admin history
         const postBlogToAdminHistoryRes = await axios.patch(
-          `http://localhost:5000/admin-approval-history/${adminHistoryDataId}`,
+          `https://instant-news-portal-server.vercel.app/admin-approval-history/${adminHistoryDataId}`,
           approvalHistoryData
         );
 
         if (postBlogToAdminHistoryRes.data.message) {
           const clearApprovalRequest = await axios.delete(
-            `http://localhost:5000/delete-after-approval/${_id}`
+            `https://instant-news-portal-server.vercel.app/delete-after-approval/${_id}`
           );
 
           if (clearApprovalRequest.data.deletedCount > 0) {
@@ -140,24 +140,24 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
   // handle delete approval
   const handleDeletionApproval = async () => {
     const deleteRes = await axios.delete(
-      `http://localhost:5000/delete-blog/${blog_id}`
+      `https://instant-news-portal-server.vercel.app/delete-blog/${blog_id}`
     );
 
     if (deleteRes.data.deletedCount > 0) {
       const postBlogToHistoryRes = await axios.patch(
-        `http://localhost:5000/approval-history/${historyDataId}`,
+        `https://instant-news-portal-server.vercel.app/approval-history/${historyDataId}`,
         approvalHistoryData
       );
 
       if (postBlogToHistoryRes.data.message) {
         const postBlogToAdminHistoryRes = await axios.patch(
-          `http://localhost:5000/admin-approval-history/${adminHistoryDataId}`,
+          `https://instant-news-portal-server.vercel.app/admin-approval-history/${adminHistoryDataId}`,
           approvalHistoryData
         );
 
         if (postBlogToAdminHistoryRes.data.message) {
           const clearApprovalRequest = await axios.delete(
-            `http://localhost:5000/delete-after-approval/${_id}`
+            `https://instant-news-portal-server.vercel.app/delete-after-approval/${_id}`
           );
 
           if (clearApprovalRequest.data.deletedCount > 0) {
@@ -177,24 +177,24 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
   // handle update approval
   const handleUpdateApproval = async () => {
     const updateRes = await axios.put(
-      `http://localhost:5000/update-blogs-admin/${blog_id}`,
+      `https://instant-news-portal-server.vercel.app/update-blogs-admin/${blog_id}`,
       approvedData
     );
     if (updateRes.data.modifiedCount) {
       const postBlogToHistoryRes = await axios.patch(
-        `http://localhost:5000/approval-history/${historyDataId}`,
+        `https://instant-news-portal-server.vercel.app/approval-history/${historyDataId}`,
         approvalHistoryData
       );
 
       if (postBlogToHistoryRes.data.message) {
         const postBlogToAdminHistoryRes = await axios.patch(
-          `http://localhost:5000/admin-approval-history/${adminHistoryDataId}`,
+          `https://instant-news-portal-server.vercel.app/admin-approval-history/${adminHistoryDataId}`,
           approvalHistoryData
         );
 
         if (postBlogToAdminHistoryRes.data.message) {
           const clearApprovalRequest = await axios.delete(
-            `http://localhost:5000/delete-after-approval/${_id}`
+            `https://instant-news-portal-server.vercel.app/delete-after-approval/${_id}`
           );
 
           if (clearApprovalRequest.data.deletedCount > 0) {

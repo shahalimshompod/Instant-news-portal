@@ -13,7 +13,7 @@ const MyProfile = () => {
 
   const fetchUserData = async () => {
     const res = await axios.get(
-      `http://localhost:5000/userData?email=${userEmail}`
+      `https://instant-news-portal-server.vercel.app/userData?email=${userEmail}`
     );
     if (res.data) {
       setUserData(res.data);
@@ -30,7 +30,7 @@ const MyProfile = () => {
     console.log(nameInput, imageInput);
     const updatedUserData = { name: nameInput, image: imageInput };
     const res = await axios.patch(
-      `http://localhost:5000/add-userData/${_id}`,
+      `https://instant-news-portal-server.vercel.app/add-userData/${_id}`,
       updatedUserData
     );
     if (res.data) {

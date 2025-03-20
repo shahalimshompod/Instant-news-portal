@@ -28,7 +28,7 @@ const ApprovalRequests = () => {
 
   const fetchLatestData = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/approval-req`, {
+      const res = await axios.get(`https://instant-news-portal-server.vercel.app/approval-req`, {
         params: {
           email: email,
           page: page,

@@ -12,7 +12,7 @@ const MostPopularSectionForDetailsPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/most-popular-for-details-page');
+                const res = await axios.get('https://instant-news-portal-server.vercel.app/most-popular-for-details-page');
                 setMostPopularBlogs(res?.data)
             } catch (error) {
                 console.error('ERROR FETCHING DATA IN MostPopularSectionForDetailsPage -->', error)

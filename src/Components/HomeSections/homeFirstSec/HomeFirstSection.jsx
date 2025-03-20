@@ -14,7 +14,7 @@ const HomeFirstSection = () => {
     useEffect(() => {
         const fetchOneData = async () => {
             try {
-                const response = await axios.get(`${location.pathname === '/well' ? 'http://localhost:5000/well/home' : 'http://localhost:5000/home'}`);
+                const response = await axios.get(`${location.pathname === '/well' ? 'https://instant-news-portal-server.vercel.app/well/home' : 'https://instant-news-portal-server.vercel.app/home'}`);
                 setData(response?.data[0]);
             } catch (err) {
                 console.error("error fetching HomeFirstSection data -->", err.message)

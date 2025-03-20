@@ -16,6 +16,7 @@ import { BiSolidVideoPlus } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { AuthContext } from "../AuthContextProvider/AuthContextProvider";
 import axios from "axios";
+import { FaHistory } from "react-icons/fa";
 
 const AdminPanelSidebar = () => {
   const { user } = useContext(AuthContext);
@@ -27,7 +28,7 @@ const AdminPanelSidebar = () => {
     const fetchRole = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/user-role?email=${currentUserEmail}`
+          `https://instant-news-portal-server.vercel.app/user-role?email=${currentUserEmail}`
         );
         setUserRole(res.data);
       } catch (error) {
@@ -39,7 +40,7 @@ const AdminPanelSidebar = () => {
 
   useEffect(() => {
     const fetchLength = async () => {
-      const res = await axios.get("http://localhost:5000/approval-req-length");
+      const res = await axios.get("https://instant-news-portal-server.vercel.app/approval-req-length");
       if (res?.data) {
         const data = res?.data;
         const length = data.length;
@@ -207,7 +208,7 @@ const AdminPanelSidebar = () => {
                   }`
                 }
               >
-                <BiSolidVideoPlus size={20} />
+                <FaHistory size={18} />
                 <span className="font-sora text-xs text-base-300">
                   Approval History
                 </span>
@@ -262,7 +263,7 @@ const AdminPanelSidebar = () => {
                 }`
               }
             >
-              <BiSolidVideoPlus size={20} />
+              <FaHistory size={18} />
               <span className="font-sora text-xs text-base-300">
                 Approval History
               </span>

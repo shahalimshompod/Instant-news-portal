@@ -10,7 +10,7 @@ const LatestBlogContentsInSearch = () => {
     useEffect(() => {
         const fetchLatestData = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/latest-blogs-in-search');
+                const res = await axios.get('https://instant-news-portal-server.vercel.app/latest-blogs-in-search');
                 setLatestData(res.data);
             } catch (error) {
                 console.error(error)
