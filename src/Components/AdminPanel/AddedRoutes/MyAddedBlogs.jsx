@@ -177,8 +177,8 @@ const MyAddedBlogs = () => {
                 }
 
                 Swal.fire({
-                  title: "Deleted!",
-                  text: "Post has been deleted from all places",
+                  title: "Request Sent!",
+                  text: "Kindly Wait For The Admin Approval",
                   icon: "success",
                 });
               } else {

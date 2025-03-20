@@ -18,6 +18,7 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
   const { user } = useContext(AuthContext);
   const approverEmail = user.email;
   const [userData, setUserData] = useState({});
+  const [btnLoading, setBtnLoading] = useState(false);
 
   const { email, image, name, role } = userData;
 
@@ -100,6 +101,7 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
 
   // handle approve
   const handleApproval = async () => {
+    setBtnLoading(true);
     const postBlogRes = await axios.post(
       "https://instant-news-portal-server.vercel.app/approve-blog-post",
       approvedData
@@ -131,6 +133,7 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
             });
             closeModal();
             fetchLatestData();
+            setBtnLoading(false);
           }
         }
       }
@@ -139,6 +142,7 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
 
   // handle delete approval
   const handleDeletionApproval = async () => {
+    setBtnLoading(true);
     const deleteRes = await axios.delete(
       `https://instant-news-portal-server.vercel.app/delete-blog/${blog_id}`
     );
@@ -162,12 +166,13 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
 
           if (clearApprovalRequest.data.deletedCount > 0) {
             Swal.fire({
-                        title: "Approved!",
-                        text: "Blog Deletion Approved Successfully.",
-                        icon: "success",
-                      });
+              title: "Approved!",
+              text: "Blog Deletion Approved Successfully.",
+              icon: "success",
+            });
             closeModal();
             fetchLatestData();
+            setBtnLoading(false);
           }
         }
       }
@@ -176,6 +181,7 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
 
   // handle update approval
   const handleUpdateApproval = async () => {
+    setBtnLoading(true);
     const updateRes = await axios.put(
       `https://instant-news-portal-server.vercel.app/update-blogs-admin/${blog_id}`,
       approvedData
@@ -205,6 +211,7 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
             });
             closeModal();
             fetchLatestData();
+            setBtnLoading(false);
           }
         }
       }
@@ -342,14 +349,22 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
                   onClick={() => handleApproval()}
                   className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 font-sora text-sm"
                 >
-                  Approve Posting
+                  {btnLoading ? (
+                    <span className="loading loading-spinner loading-md"></span>
+                  ) : (
+                    "Approve Posting"
+                  )}
                 </button>
               ) : requestType === "Update" ? (
                 <button
                   onClick={() => handleUpdateApproval()}
                   className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 font-sora text-sm"
                 >
-                  Approve Updating
+                  {btnLoading ? (
+                    <span className="loading loading-spinner loading-md"></span>
+                  ) : (
+                    "Approve Updating"
+                  )}
                 </button>
               ) : (
                 requestType === "Delete" && (
@@ -357,7 +372,11 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
                     onClick={() => handleDeletionApproval()}
                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 font-sora text-sm"
                   >
-                    Approve Deletion
+                    {btnLoading ? (
+                      <span className="loading loading-spinner loading-md"></span>
+                    ) : (
+                      "Approve Deletion"
+                    )}
                   </button>
                 )
               )}

@@ -15,6 +15,7 @@ const RejectionFeedbackModal = ({
   const { user } = useContext(AuthContext);
   const approverEmail = user.email;
   const [userData, setUserData] = useState({});
+  const [btnLoading, setBtnLoading] = useState(false);
 
   const { email, image, name, role } = userData;
 
@@ -41,6 +42,7 @@ const RejectionFeedbackModal = ({
 
   //   reject and send feedback
   const handleSendFeedback = async () => {
+    setBtnLoading(true);
     // console.log(feedback);
     const finalDataForRejection = {
       rejectionFeedback: feedback,
@@ -78,6 +80,7 @@ const RejectionFeedbackModal = ({
           });
           closeFeedbackModal();
           fetchLatestData();
+          setBtnLoading(false);
         }
       }
     }
@@ -108,7 +111,11 @@ const RejectionFeedbackModal = ({
             className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
             onClick={handleSendFeedback}
           >
-            Reject & Send Feedback
+            {btnLoading ? (
+              <span className="loading loading-spinner loading-md"></span>
+            ) : (
+              "Reject & Send Feedback"
+            )}
           </button>
         </div>
       </div>

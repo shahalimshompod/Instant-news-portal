@@ -12,8 +12,9 @@ const AddBlogs = () => {
   console.log(userRole);
   const userMail = user.email;
   const [userData, setUserData] = useState({});
+  const [btnLoading, setBtnLoading] = useState(false);
 
-  const { email, image, name, role } = userData;
+  const { image, name } = userData;
 
   console.log(userData);
 
@@ -63,8 +64,12 @@ const AddBlogs = () => {
     // post req from client to database
     if (finalData && finalData.userEmail) {
       if (userRole === "Admin") {
+        setBtnLoading(true);
         axios
-          .post("https://instant-news-portal-server.vercel.app/add-blogs-admin", finalData)
+          .post(
+            "https://instant-news-portal-server.vercel.app/add-blogs-admin",
+            finalData
+          )
           .then((response) => {
             if (response.data.insertedId) {
               Swal.fire({
@@ -74,6 +79,7 @@ const AddBlogs = () => {
               });
               reset();
               setResetTextEditor("");
+              setBtnLoading(false);
             }
           })
           .catch((error) => {
@@ -83,8 +89,10 @@ const AddBlogs = () => {
               text: "Error while posting blogs",
               icon: "Error",
             });
+            setBtnLoading(false);
           });
       } else {
+        setBtnLoading(true);
         axios
           .post(
             "https://instant-news-portal-server.vercel.app/add-blogs-others-to-approval-history",
@@ -95,7 +103,8 @@ const AddBlogs = () => {
               const historyDataId = response.data.insertedId;
 
               const adminHistoryRes = await axios.post(
-                "https://instant-news-portal-server.vercel.app/add-blogs-to-admin-history", finalData
+                "https://instant-news-portal-server.vercel.app/add-blogs-to-admin-history",
+                finalData
               );
               console.log(adminHistoryRes.data);
               if (adminHistoryRes.data.insertedId) {
@@ -114,6 +123,7 @@ const AddBlogs = () => {
 
                   reset();
                   setResetTextEditor("");
+                  setBtnLoading(false);
                 }
               }
             }
@@ -125,6 +135,7 @@ const AddBlogs = () => {
               text: "Error while posting blogs",
               icon: "Error",
             });
+            setBtnLoading(false);
           });
       }
     }
@@ -302,7 +313,9 @@ const AddBlogs = () => {
             type="submit"
             className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition"
           >
-            Add Blog
+            {
+              btnLoading ? <span className="loading loading-spinner loading-md"></span> : "Add Blog"
+            }
           </button>
         </div>
       </form>

@@ -40,7 +40,9 @@ const AdminPanelSidebar = () => {
 
   useEffect(() => {
     const fetchLength = async () => {
-      const res = await axios.get("https://instant-news-portal-server.vercel.app/approval-req-length");
+      const res = await axios.get(
+        "https://instant-news-portal-server.vercel.app/approval-req-length"
+      );
       if (res?.data) {
         const data = res?.data;
         const length = data.length;
@@ -194,7 +196,7 @@ const AdminPanelSidebar = () => {
               >
                 <MdApproval size={20} />
                 <span className="font-sora text-xs text-base-300">
-                  Approval Requests ({approvalLength})
+                  Approval Requests {approvalLength > 0 ? `(${approvalLength})` : ""}
                 </span>
               </NavLink>
 

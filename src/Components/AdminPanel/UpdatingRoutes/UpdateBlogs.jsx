@@ -15,6 +15,7 @@ const UpdateBlogs = () => {
   const to = location.state.from;
   const { userRole } = useUserRole(user.email);
   const userMail = user.email;
+  const [btnLoading, setBtnLoading] = useState(false);
 
   const [userData, setUserData] = useState({});
 
@@ -78,6 +79,7 @@ const UpdateBlogs = () => {
       };
 
       if (userRole === "Admin") {
+        setBtnLoading(true);
         const response = await axios.put(
           `https://instant-news-portal-server.vercel.app/update-blogs-admin/${id}`,
           updatedData
@@ -89,6 +91,7 @@ const UpdateBlogs = () => {
             icon: "success",
           });
           navigate(`${to}`);
+          setBtnLoading(false);
         } else {
           Swal.fire({
             title: "No Changes",
@@ -97,6 +100,7 @@ const UpdateBlogs = () => {
           });
         }
       } else {
+        setBtnLoading(true);
         const response = await axios.post(
           "https://instant-news-portal-server.vercel.app/add-blogs-others-to-approval-history",
           finalUpdatingData
@@ -126,6 +130,7 @@ const UpdateBlogs = () => {
 
               reset();
               setResetTextEditor("");
+              setBtnLoading(false);
             }
           }
           navigate(`${to}`);
@@ -138,6 +143,7 @@ const UpdateBlogs = () => {
         text: "Error while updating blogs",
         icon: "error",
       });
+      setBtnLoading(false);
     } finally {
     }
   };
@@ -330,7 +336,11 @@ const UpdateBlogs = () => {
             type="submit"
             className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition"
           >
-            Update Blogs
+            {btnLoading ? (
+              <span className="loading loading-spinner loading-md"></span>
+            ) : (
+              "Update Blogs"
+            )}
           </button>
         </div>
       </form>
