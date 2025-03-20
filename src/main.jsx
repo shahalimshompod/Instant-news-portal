@@ -34,6 +34,7 @@ import UpdateBlogs from "./Components/AdminPanel/UpdatingRoutes/UpdateBlogs";
 import UpdateVideos from "./Components/AdminPanel/UpdatingRoutes/UpdateVideos";
 import ApprovalRequests from "./Components/AdminPanel/AddedRoutes/ApprovalRequests";
 import MyProfile from "./Components/AdminPanel/MyProfile/MyProfile";
+import ApprovalHistory from "./Components/AdminPanel/AddedRoutes/ApprovalHistory";
 
 const router = createBrowserRouter([
   // defining the path of the routes and the elements of the pages
@@ -198,6 +199,20 @@ const router = createBrowserRouter([
         loader: () => {
           document.title =
             "Post Videos | Admin panel | InstantR - Create Something Everyday";
+        },
+      },
+      {
+        path: `/${
+          import.meta.env.VITE_urlSecret
+        }/admin-dashboard/approval-history`,
+        element: (
+          <SecureRoute allowedRoles={["Admin", "Moderator", "Editor"]}>
+            <ApprovalHistory />
+          </SecureRoute>
+        ),
+        loader: () => {
+          document.title =
+            "Approval History | Admin panel | InstantR - Create Something Everyday";
         },
       },
       {

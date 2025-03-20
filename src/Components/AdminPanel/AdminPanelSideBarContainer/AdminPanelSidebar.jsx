@@ -180,21 +180,39 @@ const AdminPanelSidebar = () => {
           </NavLink>
 
           {userRole === "Admin" && (
-            <NavLink
-              to={`/${
-                import.meta.env.VITE_urlSecret
-              }/admin-dashboard/approval-requests`}
-              className={({ isActive }) =>
-                `p-3 rounded-lg text-lg font-medium flex items-center gap-2 mt-2 ${
-                  isActive ? "bg-blue-600" : "hover:bg-gray-700"
-                }`
-              }
-            >
-              <MdApproval size={20} />
-              <span className="font-sora text-xs text-base-300">
-                Approval Requests ({approvalLength})
-              </span>
-            </NavLink>
+            <>
+              <NavLink
+                to={`/${
+                  import.meta.env.VITE_urlSecret
+                }/admin-dashboard/approval-requests`}
+                className={({ isActive }) =>
+                  `p-3 rounded-lg text-lg font-medium flex items-center gap-2 my-2 ${
+                    isActive ? "bg-blue-600" : "hover:bg-gray-700"
+                  }`
+                }
+              >
+                <MdApproval size={20} />
+                <span className="font-sora text-xs text-base-300">
+                  Approval Requests ({approvalLength})
+                </span>
+              </NavLink>
+
+              <NavLink
+                to={`/${
+                  import.meta.env.VITE_urlSecret
+                }/admin-dashboard/approval-history`}
+                className={({ isActive }) =>
+                  `p-3 rounded-lg text-lg font-medium flex items-center gap-2 ${
+                    isActive ? "bg-blue-600" : "hover:bg-gray-700"
+                  }`
+                }
+              >
+                <BiSolidVideoPlus size={20} />
+                <span className="font-sora text-xs text-base-300">
+                  Approval History
+                </span>
+              </NavLink>
+            </>
           )}
         </div>
 
@@ -212,7 +230,7 @@ const AdminPanelSidebar = () => {
           <NavLink
             to={`/${import.meta.env.VITE_urlSecret}/admin-dashboard/add-blogs`}
             className={({ isActive }) =>
-              `p-3 rounded-lg text-lg font-medium flex items-center gap-2 mb-2 ${
+              `p-3 rounded-lg text-lg font-medium flex items-center gap-2 ${
                 isActive ? "bg-blue-600" : "hover:bg-gray-700"
               }`
             }
@@ -225,13 +243,31 @@ const AdminPanelSidebar = () => {
             to={`/${import.meta.env.VITE_urlSecret}/admin-dashboard/add-videos`}
             className={({ isActive }) =>
               `p-3 rounded-lg text-lg font-medium flex items-center gap-2 ${
-                isActive ? "bg-blue-600" : "hover:bg-gray-700"
-              }`
+                userRole !== "Admin" && "my-2"
+              } ${isActive ? "bg-blue-600" : "hover:bg-gray-700"}`
             }
           >
             <BiSolidVideoPlus size={20} />
             <span className="font-sora text-xs text-base-300">Post videos</span>
           </NavLink>
+
+          {userRole !== "Admin" && (
+            <NavLink
+              to={`/${
+                import.meta.env.VITE_urlSecret
+              }/admin-dashboard/approval-history`}
+              className={({ isActive }) =>
+                `p-3 rounded-lg text-lg font-medium flex items-center gap-2 ${
+                  isActive ? "bg-blue-600" : "hover:bg-gray-700"
+                }`
+              }
+            >
+              <BiSolidVideoPlus size={20} />
+              <span className="font-sora text-xs text-base-300">
+                Approval History
+              </span>
+            </NavLink>
+          )}
         </div>
 
         <div className="border-b my-4 border-white/30"></div>

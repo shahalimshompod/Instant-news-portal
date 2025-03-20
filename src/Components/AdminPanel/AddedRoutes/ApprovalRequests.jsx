@@ -1,9 +1,6 @@
-import { MdDeleteForever, MdOpenInNew } from "react-icons/md";
-import { GrUpdate } from "react-icons/gr";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../AuthContextProvider/AuthContextProvider";
-import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import useUserRole from "../Hooks/useUserRole";
 import { BsFillPostcardFill } from "react-icons/bs";
@@ -16,7 +13,8 @@ const ApprovalRequests = () => {
   const { userRole } = useUserRole(email);
   // const currentRole = userRole;
   const [btnLoader, setBtnLoader] = useState(true);
-  const [selectedReq, setSelectedReq] = useState(null)
+  const [selectedReq, setSelectedReq] = useState(null);
+  const closeModal = () => setSelectedReq(null);
 
   console.log(selectedReq);
 
@@ -27,25 +25,27 @@ const ApprovalRequests = () => {
   const limit = 10; // Number of blogs per page
 
   // fetching data for my posted blogs route
-  useEffect(() => {
-    const fetchLatestData = async () => {
-      try {
-        const res = await axios.get(`http://localhost:5000/approval-req`, {
-          params: {
-            email: email,
-            page: page,
-            limit: limit,
-          },
-        });
 
-        setOthersPosts(res.data.blogs); // Setting blogs
-        setTotalPages(res.data.totalPages); // Setting total pages
-        setLoading(false);
-        setBtnLoader(false);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const fetchLatestData = async () => {
+    try {
+      const res = await axios.get(`http://localhost:5000/approval-req`, {
+        params: {
+          email: email,
+          page: page,
+          limit: limit,
+        },
+      });
+
+      setOthersPosts(res.data.blogs); // Setting blogs
+      setTotalPages(res.data.totalPages); // Setting total pages
+      setLoading(false);
+      setBtnLoader(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
     fetchLatestData();
   }, [email, page]);
 
@@ -78,7 +78,7 @@ const ApprovalRequests = () => {
   return (
     <div className="px-2 my-5">
       <h1 className="text-center text-3xl text-black font-sora mb-5 uppercase">
-        Others posted blogs
+        Approval Requests
       </h1>
       <table className="table-auto w-full">
         <thead>
@@ -123,6 +123,9 @@ const ApprovalRequests = () => {
               <td className="text-center mb-2 lg:mb-0">
                 <div className="lg:hidden font-bold">Added By</div>
                 <div className="flex items-center flex-col gap-2">
+                <span className="text-base font-bold font-sora">
+                    {post.userName}
+                  </span>
                   <span className="border px-3 rounded-lg text-base font-bold py-1 font-sora">
                     {post.userRole}
                   </span>
@@ -144,7 +147,7 @@ const ApprovalRequests = () => {
               ) : (
                 <td className="flex gap-3 items-center justify-center">
                   <button
-                  onClick={() => setSelectedReq(post)}
+                    onClick={() => setSelectedReq(post)}
                     data-tip="View Details"
                     className="btn btn-circle bg-transparent lg:tooltip border-none shadow-none hover:bg-transparent hover:text-green-500"
                   >
@@ -181,7 +184,12 @@ const ApprovalRequests = () => {
           </div>
         )}
       </div>
-      <ApprovalRequestModal selectedReq={selectedReq} setSelectedReq={setSelectedReq}/>
+      <ApprovalRequestModal
+        selectedReq={selectedReq}
+        setSelectedReq={setSelectedReq}
+        closeModal={closeModal}
+        fetchLatestData={fetchLatestData}
+      />
     </div>
   );
 };

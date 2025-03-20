@@ -7,18 +7,32 @@ import Swal from "sweetalert2";
 import useUserRole from "../Hooks/useUserRole";
 import { AuthContext } from "../AuthContextProvider/AuthContextProvider";
 
-// ___todo____
-// implementing post blog approval
-
-
-
 const UpdateBlogs = () => {
-    const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const dataFromUpdateButton = location.state; // Data received from the previous route
   const to = location.state.from;
   const { userRole } = useUserRole(user.email);
+  const userMail = user.email;
+
+  const [userData, setUserData] = useState({});
+
+  const { email, image, name, role } = userData;
+
+  // fetch user data
+  const fetchUserData = async () => {
+    const res = await axios.get(
+      `http://localhost:5000/userData?email=${userMail}`
+    );
+    if (res.data) {
+      setUserData(res.data);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, [userMail]);
 
   // Variable for Jodit text editor
   const editor = useRef(null);
@@ -34,52 +48,88 @@ const UpdateBlogs = () => {
 
   // Handle form submission
   const onSubmit = async (data) => {
-    try {
-      const id = dataFromUpdateButton._id;
+    const id = dataFromUpdateButton._id;
 
+    const finalUpdatingData = {
+      blog_id: id,
+      blog_title: data.blog_title,
+      blog_category: data.blog_category,
+      blog_photo: data.blog_photo,
+      blog_photo_added_by: data.blog_photo_added_by,
+      blog_added_by: data.blog_added_by,
+      blog_photo_description: data.blog_photo_description,
+      blog_details: resetTextEditor,
+      createdAt: dataFromUpdateButton.createdAt,
+      userRole: userRole,
+      userName: name,
+      userEmail: userMail,
+      userImage: image,
+      isPending: true,
+      isApproved: false,
+      isRejected: false,
+      requestType: "Update",
+    };
+
+    console.log(finalUpdatingData);
+    try {
       const updatedData = {
         ...data,
         blog_details: content,
       };
 
-      if(userRole === 'Admin'){
+      if (userRole === "Admin") {
         const response = await axios.put(
-            `http://localhost:5000/update-blogs-admin/${id}`,
-            updatedData
-          );
-          if (response.data.modifiedCount > 0) {
-            Swal.fire({
-              title: "Updated!",
-              text: "Blog updated successfully.",
-              icon: "success",
-            });
-            navigate(`${to}`);
-          } else {
-            Swal.fire({
-              title: "No Changes",
-              text: "No data was updated.",
-              icon: "info",
-            });
-          }
-      }else{
+          `http://localhost:5000/update-blogs-admin/${id}`,
+          updatedData
+        );
+        if (response.data.modifiedCount > 0) {
+          Swal.fire({
+            title: "Updated!",
+            text: "Blog updated successfully.",
+            icon: "success",
+          });
+          navigate(`${to}`);
+        } else {
+          Swal.fire({
+            title: "No Changes",
+            text: "No data was updated.",
+            icon: "info",
+          });
+        }
+      } else {
         const response = await axios.post(
-            `http://localhost:5000/update-blogs-others`,
-            updatedData
+          "http://localhost:5000/add-blogs-others-to-approval-history",
+          finalUpdatingData
+        );
+        if (response.data.insertedId) {
+          console.log(response.data);
+          const historyDataId = response.data.insertedId;
+
+          const adminHistoryRes = await axios.post(
+            "http://localhost:5000/add-blogs-to-admin-history",
+            finalUpdatingData
           );
-          if (response.data.modifiedCount > 0) {
-            Swal.fire({
-              title: "Updated!",
-              text: "Blog updated successfully.",
-              icon: "success",
-            });
-            navigate(`${to}`);
-          } else {
-            Swal.fire({
-              title: "No Changes",
-              text: "No data was updated.",
-              icon: "info",
-            });
+
+          if (adminHistoryRes.data.insertedId) {
+            const adminHistoryDataId = adminHistoryRes.data.insertedId;
+            // add to pending approval
+            const res = await axios.post(
+              "http://localhost:5000/add-blogs-others",
+              { ...finalUpdatingData, historyDataId, adminHistoryDataId }
+            );
+            if (res.data.insertedId) {
+              Swal.fire({
+                title: "Update Request sent!",
+                text: "Kindly Wait For Admin Approval.",
+                icon: "success",
+              });
+
+              reset();
+              setResetTextEditor("");
+            }
           }
+          navigate(`${to}`);
+        }
       }
     } catch (error) {
       console.error(error);
