@@ -28,7 +28,7 @@ const AddVideos = () => {
 
       if (videoData && videoData.userEmail) {
         const res = await axios.post(
-          "https://instant-news-portal-server.vercel.app/add-videos",
+          "http://localhost:5000/add-videos",
           videoData
         );
         if (res.data.insertedId) {
@@ -55,7 +55,7 @@ const AddVideos = () => {
 
   return (
     <div className="p-8 w-full mx-auto bg-gray-100 shadow-md rounded-md h-screen">
-      <h1 className="text-2xl font-bold mb-5 text-gray-800 font-sora">
+      <h1 className="text-2xl font-bold mb-5 text-gray-800 font-montserrat">
         Add Videos
       </h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -63,7 +63,7 @@ const AddVideos = () => {
         <div>
           <label
             htmlFor="videoHeading"
-            className="block text-sm font-medium text-gray-700 font-sora"
+            className="block text-sm font-medium text-gray-700 font-montserrat"
           >
             Video Heading
           </label>
@@ -86,7 +86,7 @@ const AddVideos = () => {
         <div>
           <label
             htmlFor="videoThumbnail"
-            className="block text-sm font-medium text-gray-700 font-sora"
+            className="block text-sm font-medium text-gray-700 font-montserrat"
           >
             Video Thumbnail (Photo Link)
           </label>
@@ -109,7 +109,7 @@ const AddVideos = () => {
         <div>
           <label
             htmlFor="videoLink"
-            className="block text-sm font-medium text-gray-700 font-sora"
+            className="block text-sm font-medium text-gray-700 font-montserrat"
           >
             Video Link
           </label>
@@ -127,7 +127,7 @@ const AddVideos = () => {
 
         <button
           type="submit"
-          className="px-3 bg-blue-600 text-white p-2 rounded-md shadow hover:bg-blue-700 focus:ring focus:ring-blue-500 focus:ring-opacity-50 font-sora"
+          className="px-3 bg-blue-600 text-white p-2 rounded-md shadow hover:bg-blue-700 focus:ring focus:ring-blue-500 focus:ring-opacity-50 font-montserrat"
         >
             {
               btnLoading ? <span className="loading loading-spinner loading-md"></span> : "Add Video"

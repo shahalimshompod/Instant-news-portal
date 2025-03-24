@@ -26,7 +26,7 @@ const OthersPostedBlogs = () => {
     useEffect(() => {
         const fetchLatestData = async () => {
             try {
-                const res = await axios.get(`https://instant-news-portal-server.vercel.app/others-posted-blogs`, {
+                const res = await axios.get(`http://localhost:5000/others-posted-blogs`, {
                     params: {
                         email: email,
                         page: page,
@@ -72,7 +72,7 @@ const OthersPostedBlogs = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const res = await axios.delete(`https://instant-news-portal-server.vercel.app/delete-blog/${id}`);
+                    const res = await axios.delete(`http://localhost:5000/delete-blog/${id}`);
 
                     if (res.data.deletedCount > 0) {
                         const restPostToShow = othersPost.filter((post) => id !== post._id);
@@ -129,7 +129,7 @@ const OthersPostedBlogs = () => {
 
     return (
         <div className="px-2 my-5">
-            <h1 className="text-center text-3xl text-black font-sora mb-5 uppercase">
+            <h1 className="text-center text-3xl text-black font-montserrat mb-5 uppercase">
                 Others posted blogs
             </h1>
             <table className="table-auto w-full">
@@ -151,9 +151,14 @@ const OthersPostedBlogs = () => {
                             <td className="flex flex-col lg:flex-row items-center lg:gap-3 py-3 lg:py-0">
                                 <div className="avatar mb-2 lg:mb-0">
                                     <div className="mask h-24 w-36">
-                                        <img
+                                        {/* <img
                                             className="rounded-xl"
                                             src="https://i.ibb.co.com/12HZwPM/Getty-Images-2184329067-e1732106649612.jpg"
+                                            alt="Blog"
+                                        /> */}
+                                        <img
+                                            className="rounded-xl"
+                                            src={post.blog_photo}
                                             alt="Blog"
                                         />
                                     </div>
@@ -163,22 +168,22 @@ const OthersPostedBlogs = () => {
                                     <div className="font-bold mb-2 text-lg line-clamp-2">
                                         {post.blog_title}
                                     </div>
-                                    <p className="font-sora text-xs">{formatDate(post.createdAt).date} | {formatDate(post.createdAt).time}</p>
+                                    <p className="font-montserrat text-xs">{formatDate(post.createdAt).date} | {formatDate(post.createdAt).time}</p>
                                 </div>
                             </td>
                             {/* Blog Added By */}
                             <td className="text-center mb-2 lg:mb-0">
                                 <div className="lg:hidden font-bold">Added By</div>
                                 <div className="flex items-center flex-col gap-2">
-                                    <span className="border px-3 rounded-lg text-base font-bold py-1 font-sora">
+                                    <span className="border px-3 rounded-lg text-base font-bold py-1 font-montserrat">
                                         {post.userRole}
                                     </span>
-                                    <span className="badge badge-ghost badge-sm font-sora">{post.userEmail}</span>
+                                    <span className="badge badge-ghost badge-sm font-montserrat">{post.userEmail}</span>
                                 </div>
                             </td>
                             {/* Blog Views */}
                             <td className="text-center mb-2 lg:mb-0">
-                                <p className="font-sora text-base">{post.blog_viewCount || 0} views</p>
+                                <p className="font-montserrat text-base">{post.blog_viewCount || 0} views</p>
                             </td>
                             {/* Actions */}
                             {

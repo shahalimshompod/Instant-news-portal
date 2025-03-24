@@ -16,12 +16,10 @@ const ApprovalHistory = () => {
   // open reason modal
   const [rejectionReasonData, setRejectionReasonData] = useState("");
 
-  console.log(rejectionReasonData);
-
   // fetch history data
   const fetchApprovalHistoryData = async () => {
     const res = await axios.get(
-      `https://instant-news-portal-server.vercel.app/get-approval-history-data?email=${email}`
+      `http://localhost:5000/get-approval-history-data?email=${email}`
     );
     if (res.data) {
       setHistoryData(res.data);
@@ -31,7 +29,7 @@ const ApprovalHistory = () => {
   // fetch history data
   const fetchApprovalHistoryDataForAdmin = async () => {
     const res = await axios.get(
-      `https://instant-news-portal-server.vercel.app/get-approval-history-data-for-admin?email=${email}`
+      `http://localhost:5000/get-approval-history-data-for-admin?email=${email}`
     );
     if (res.data) {
       setHistoryDataForAdmin(res.data);
@@ -40,11 +38,9 @@ const ApprovalHistory = () => {
 
   //   handle delete history card
   const onDeleteOthersHistoryCards = async (id) => {
-    console.log("function called", id);
     const res = await axios.delete(
-      `https://instant-news-portal-server.vercel.app/delete-others-history-card/${id}`
+      `http://localhost:5000/delete-others-history-card/${id}`
     );
-    console.log(res.data);
     if (res.data.deletedCount > 0) {
       fetchApprovalHistoryData();
     }
@@ -52,11 +48,9 @@ const ApprovalHistory = () => {
 
   //   handle delete history card
   const onDeleteAdminHistoryCards = async (id) => {
-    console.log("function called", id);
     const res = await axios.delete(
-      `https://instant-news-portal-server.vercel.app/delete-admin-history-card/${id}`
+      `http://localhost:5000/delete-admin-history-card/${id}`
     );
-    console.log(res.data);
     if (res.data.deletedCount > 0) {
       fetchApprovalHistoryDataForAdmin();
     }
@@ -69,7 +63,7 @@ const ApprovalHistory = () => {
 
   return (
     <div className="px-2 my-5">
-      <h1 className="text-center text-3xl text-black font-sora mb-5 uppercase">
+      <h1 className="text-center text-3xl text-black font-montserrat mb-5 uppercase">
         Approval History
       </h1>
 

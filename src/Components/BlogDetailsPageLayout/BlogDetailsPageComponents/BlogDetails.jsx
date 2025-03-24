@@ -26,7 +26,7 @@ const BlogDetails = () => {
     useEffect(() => {
         const fetchDetailsAndRelatedData = async () => {
             try {
-                const res = await axios.get(`https://instant-news-portal-server.vercel.app/blog-details/${id}`)
+                const res = await axios.get(`http://localhost:5000/blog-details/${id}`)
                 setDetailsData(res.data.selectedBlogForDetails);
                 setRelatedBlogData(res.data.relatedBlogs);
                 setPopularBlogs(res.data.popularBlogs);
@@ -76,7 +76,7 @@ const BlogDetails = () => {
                     {/* added by */}
                     <p><span className="font-bebas">BY</span> <span className="font-bebas font-bold tracking-widest">{blog_added_by}</span></p>
                     {/* date */}
-                    <p className="text-xs font-sora text-black/50">{formatDate(createdAt).date} at {formatDate(createdAt).time}</p>
+                    <p className="text-xs font-montserrat text-black/50">{formatDate(createdAt).date} at {formatDate(createdAt).time}</p>
                 </div>
 
                 {/* photo */}
@@ -85,8 +85,8 @@ const BlogDetails = () => {
                     <img className="w-full mb-4 xl:mb-0" src={blog_photo} alt="Blog details image" />
                     {/* image description */}
                     <div className="px-3 xl:px-0">
-                        <p className="text-xs font-bold font-sora mb-2">{blog_photo_description}</p>
-                        <p className="text-xs font-bold font-sora">{blog_photo_added_by}</p>
+                        <p className="text-xs font-bold font-montserrat mb-2">{blog_photo_description}</p>
+                        <p className="text-sm font-bold font-montserrat">{blog_photo_added_by}</p>
                     </div>
                 </div>
             </div>
@@ -95,7 +95,7 @@ const BlogDetails = () => {
             </div>
             <div className="xl:w-8/12 mx-auto px-3 xl:px-0">
                 {/* details blog description */}
-                <div dangerouslySetInnerHTML={{ __html: sanitizeHTML }} />
+                <div className="font-caslon text-lg" dangerouslySetInnerHTML={{ __html: sanitizeHTML }} />
             </div>
 
             <div className="mt-14">

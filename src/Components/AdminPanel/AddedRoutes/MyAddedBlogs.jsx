@@ -20,7 +20,7 @@ const MyAddedBlogs = () => {
   // fetch user data
   const fetchUserData = async () => {
     const res = await axios.get(
-      `https://instant-news-portal-server.vercel.app/userData?email=${userMail}`
+      `http://localhost:5000/userData?email=${userMail}`
     );
     if (res.data) {
       setUserData(res.data);
@@ -34,7 +34,6 @@ const MyAddedBlogs = () => {
   const [myPost, setMyPosts] = useState([]);
   const [page, setPage] = useState(1); // Current page
   const [totalPages, setTotalPages] = useState(1); // Total pages
-  
 
   const limit = 10; // Number of blogs per page
 
@@ -42,7 +41,7 @@ const MyAddedBlogs = () => {
   useEffect(() => {
     const fetchLatestData = async () => {
       try {
-        const res = await axios.get(`https://instant-news-portal-server.vercel.app/my-posted-blogs`, {
+        const res = await axios.get(`http://localhost:5000/my-posted-blogs`, {
           params: {
             email: userMail,
             page: page,
@@ -77,7 +76,6 @@ const MyAddedBlogs = () => {
 
   // handle delete blogs
   const handleDelete = async (data) => {
-    console.log(data);
     const finalDeletingData = {
       blog_id: data._id,
       blog_title: data.blog_title,
@@ -111,11 +109,11 @@ const MyAddedBlogs = () => {
         if (result.isConfirmed) {
           try {
             const res = await axios.delete(
-              `https://instant-news-portal-server.vercel.app/delete-blog/${id}`
+              `http://localhost:5000/delete-blog/${data._id}`
             );
 
             if (res.data.deletedCount > 0) {
-              const restPostToShow = myPost.filter((post) => id !== post._id);
+              const restPostToShow = myPost.filter((post) => data._id !== post._id);
               setMyPosts([...restPostToShow]);
 
               Swal.fire({
@@ -154,39 +152,38 @@ const MyAddedBlogs = () => {
           if (result.isConfirmed) {
             try {
               const res = await axios.post(
-                "https://instant-news-portal-server.vercel.app/add-blogs-others-to-approval-history",
+                "http://localhost:5000/add-blogs-others-to-approval-history",
                 finalDeletingData
               );
 
               if (res.data.insertedId) {
-                console.log(res.data);
-
                 const historyDataId = res.data.insertedId;
                 const response = await axios.post(
-                  "https://instant-news-portal-server.vercel.app/add-blogs-to-admin-history",
+                  "http://localhost:5000/add-blogs-to-admin-history",
                   finalDeletingData
                 );
 
                 if (response.data.insertedId) {
-                  console.log(response.data);
                   const adminHistoryDataId = response.data.insertedId;
                   const responseToPendingApproval = await axios.post(
-                    "https://instant-news-portal-server.vercel.app/add-blogs-others",
+                    "http://localhost:5000/add-blogs-others",
                     { ...finalDeletingData, historyDataId, adminHistoryDataId }
                   );
-                }
 
-                Swal.fire({
-                  title: "Request Sent!",
-                  text: "Kindly Wait For The Admin Approval",
-                  icon: "success",
-                });
-              } else {
-                Swal.fire({
-                  title: "Error!",
-                  text: "Post could not be deleted!",
-                  icon: "error",
-                });
+                  if (responseToPendingApproval.data.insertedId) {
+                    Swal.fire({
+                      title: "Request Sent!",
+                      text: "Kindly Wait For The Admin Approval",
+                      icon: "success",
+                    });
+                  } else {
+                    Swal.fire({
+                      title: "Error!",
+                      text: "Post could not be deleted!",
+                      icon: "error",
+                    });
+                  }
+                }
               }
             } catch (error) {
               console.error("Delete request failed:", error);
@@ -227,7 +224,7 @@ const MyAddedBlogs = () => {
 
   return (
     <div className="px-2 my-5">
-      <h1 className="text-center text-3xl text-black font-sora mb-5 uppercase">
+      <h1 className="text-center text-3xl text-black font-montserrat mb-5 uppercase">
         Your posted blogs
       </h1>
       <table className="table-auto w-full">
@@ -249,10 +246,14 @@ const MyAddedBlogs = () => {
               <td className="flex flex-col lg:flex-row items-center lg:gap-3 py-3 lg:py-0">
                 <div className="avatar mb-2 lg:mb-0">
                   <div className="mask h-24 w-36">
-                    <img
+                    {/* <img
                       className="rounded-xl"
                       src="https://i.ibb.co.com/12HZwPM/Getty-Images-2184329067-e1732106649612.jpg"
                       alt="Blog"
+                    /> */}
+                    <img
+                      className="rounded-xl"
+                      src={post.blog_photo}
                     />
                   </div>
                 </div>
@@ -263,7 +264,7 @@ const MyAddedBlogs = () => {
                   <div className="font-bold mb-2 text-lg line-clamp-2">
                     {post.blog_title}
                   </div>
-                  <p className="font-sora text-xs">
+                  <p className="font-montserrat text-xs">
                     {formatDate(post.createdAt).date} |{" "}
                     {formatDate(post.createdAt).time}
                   </p>
@@ -273,17 +274,17 @@ const MyAddedBlogs = () => {
               <td className="text-center mb-2 lg:mb-0">
                 <div className="lg:hidden font-bold">Added By</div>
                 <div className="flex items-center flex-col gap-2">
-                  <span className="border px-3 rounded-lg text-base font-bold py-1 font-sora">
+                  <span className="border px-3 rounded-lg text-base font-bold py-1 font-montserrat">
                     {userRole}
                   </span>
-                  <span className="badge badge-ghost badge-sm font-sora">
+                  <span className="badge badge-ghost badge-sm font-montserrat">
                     {post.userEmail}
                   </span>
                 </div>
               </td>
               {/* Blog Views */}
               <td className="text-center mb-2 lg:mb-0">
-                <p className="font-sora text-base">
+                <p className="font-montserrat text-base">
                   {post.blog_viewCount || 0} views
                 </p>
               </td>

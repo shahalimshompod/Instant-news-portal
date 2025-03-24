@@ -3,7 +3,11 @@ import { FaCircleInfo, FaTrash } from "react-icons/fa6"; // Import FaTrash for t
 import { FiClock } from "react-icons/fi";
 import ReasonOfRejectionModal from "../ReasonOfRejectionModal/ReasonOfRejectionModal";
 
-const ApprovalHistoryCard = ({ data, onDeleteOthersHistoryCards, setRejectionReasonData }) => {
+const ApprovalHistoryCard = ({
+  data,
+  onDeleteOthersHistoryCards,
+  setRejectionReasonData,
+}) => {
   const {
     blog_title,
     createdAt,
@@ -17,6 +21,7 @@ const ApprovalHistoryCard = ({ data, onDeleteOthersHistoryCards, setRejectionRea
     rejectionFeedback,
     requestType,
     _id,
+    blog_photo,
   } = data;
 
   // Format Date
@@ -55,21 +60,22 @@ const ApprovalHistoryCard = ({ data, onDeleteOthersHistoryCards, setRejectionRea
 
       <div className="flex items-center gap-3">
         <div className="w-28">
-          <img
+          {/* <img
             className="rounded"
             src="https://plus.unsplash.com/premium_photo-1688561384438-bfa9273e2c00?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bmV3c3xlbnwwfHwwfHx8MA%3D%3D"
             alt="Blog Thumbnail"
-          />
+          /> */}
+          <img className="rounded" src={blog_photo} alt="Blog Thumbnail" />
         </div>
 
         <div>
           {/* Title */}
-          <h4 className="font-sora text-base font-bold">{blog_title}</h4>
+          <h4 className="font-montserrat text-base font-bold">{blog_title}</h4>
 
           <div className="flex">
             <div>
               {/* Created At */}
-              <p className="rounded text-xs font-sora">
+              <p className="rounded text-xs font-montserrat">
                 <span className="text-blue-400">Created:</span>{" "}
                 {formatDate(createdAt).date} || {formatDate(createdAt).time}
               </p>
@@ -78,7 +84,7 @@ const ApprovalHistoryCard = ({ data, onDeleteOthersHistoryCards, setRejectionRea
               {isApproved === true &&
                 isPending === false &&
                 isRejected === false && (
-                  <p className="rounded text-xs font-sora font-bold">
+                  <p className="rounded text-xs font-montserrat font-bold">
                     <span className="text-green-500">Approved at:</span>{" "}
                     {formatDate(approvedAt).date} ||{" "}
                     {formatDate(approvedAt).time}
@@ -88,7 +94,7 @@ const ApprovalHistoryCard = ({ data, onDeleteOthersHistoryCards, setRejectionRea
               {isRejected === true &&
                 isPending === false &&
                 isApproved === false && (
-                  <p className="rounded text-xs font-sora font-bold">
+                  <p className="rounded text-xs font-montserrat font-bold">
                     <span className="text-red-500">Rejected at:</span>{" "}
                     {formatDate(approvedAt).date} ||{" "}
                     {formatDate(approvedAt).time}
@@ -98,13 +104,15 @@ const ApprovalHistoryCard = ({ data, onDeleteOthersHistoryCards, setRejectionRea
               {isPending === true &&
                 isApproved === false &&
                 isRejected === false && (
-                  <p className="bg-red-400 text-sm pl-2 rounded font-sora text-white flex items-center gap-1">
+                  <p className="bg-red-400 text-sm pl-2 rounded font-montserrat text-white flex items-center gap-1">
                     <FiClock />
-                    <span>{isPending && `Pending ${requestType} approval`}</span>
+                    <span>
+                      {isPending && `Pending ${requestType} approval`}
+                    </span>
                   </p>
                 )}
             </div>
-            
+
             {isPending ? (
               ""
             ) : (
@@ -114,7 +122,7 @@ const ApprovalHistoryCard = ({ data, onDeleteOthersHistoryCards, setRejectionRea
             {isApproved === true && isRejected === false && (
               <div className="flex gap-4">
                 {/* Approved By */}
-                <p className="font-sora text-sm">Approved by:</p>
+                <p className="font-montserrat text-sm">Approved by:</p>
                 <div className="flex items-center gap-3">
                   <div className="avatar">
                     <div className="w-10 rounded-full">
@@ -125,7 +133,7 @@ const ApprovalHistoryCard = ({ data, onDeleteOthersHistoryCards, setRejectionRea
                     </div>
                   </div>
                   <h3>{approvedBy || "N/A"}</h3>
-                  <h4 className="border px-2 text-center font-sora shadow-lg rounded-lg py-1 text-xs">
+                  <h4 className="border px-2 text-center font-montserrat shadow-lg rounded-lg py-1 text-xs">
                     {approverRole || "Unknown Role"}
                   </h4>
                 </div>
@@ -135,7 +143,7 @@ const ApprovalHistoryCard = ({ data, onDeleteOthersHistoryCards, setRejectionRea
             {isApproved === false && isRejected === true && (
               <div className="flex gap-4">
                 {/* Approved By */}
-                <p className="font-sora text-sm text-red-500">Rejected by:</p>
+                <p className="font-montserrat text-sm text-red-500">Rejected by:</p>
                 <div className="flex items-center gap-3">
                   <div className="avatar">
                     <div className="w-10 rounded-full">
@@ -146,7 +154,7 @@ const ApprovalHistoryCard = ({ data, onDeleteOthersHistoryCards, setRejectionRea
                     </div>
                   </div>
                   <h3>{approvedBy || "N/A"}</h3>
-                  <h4 className="border px-2 text-center font-sora shadow-lg rounded-lg py-1 text-xs">
+                  <h4 className="border px-2 text-center font-montserrat shadow-lg rounded-lg py-1 text-xs">
                     {approverRole || "Unknown Role"}
                   </h4>
                 </div>
@@ -156,7 +164,21 @@ const ApprovalHistoryCard = ({ data, onDeleteOthersHistoryCards, setRejectionRea
         </div>
       </div>
 
-      <div className="mr-24">
+      <div className="mr-24 flex items-center gap-4">
+        {/* request type */}
+        {isPending || isRejected ? (
+          ""
+        ) : (
+          <p
+            className={`text-sm font-bold px-3 rounded font-montserrat bg-blue-200 text-black py-1`}
+          >
+            {requestType === "Update"
+              ? "Updated"
+              : requestType === "Post"
+              ? "Posted"
+              : requestType === "Delete" && "Deleted"}
+          </p>
+        )}
         {/* Status */}
         <p
           className={`text-sm font-bold ${
@@ -165,7 +187,7 @@ const ApprovalHistoryCard = ({ data, onDeleteOthersHistoryCards, setRejectionRea
               : isPending
               ? "bg-orange-400"
               : isApproved && "bg-green-500"
-          } px-3 rounded font-sora text-white py-1`}
+          } px-3 rounded font-montserrat text-white py-1`}
         >
           {isRejected
             ? "Rejected"
@@ -178,7 +200,10 @@ const ApprovalHistoryCard = ({ data, onDeleteOthersHistoryCards, setRejectionRea
       </div>
 
       {isRejected === true && isPending === false && isApproved === false && (
-        <button onClick={() => setRejectionReasonData(rejectionFeedback)} className="btn btn-circle mr-28">
+        <button
+          onClick={() => setRejectionReasonData(rejectionFeedback)}
+          className="btn btn-circle mr-28"
+        >
           <FaCircleInfo size={25} />
         </button>
       )}

@@ -24,7 +24,7 @@ const UpdateBlogs = () => {
   // fetch user data
   const fetchUserData = async () => {
     const res = await axios.get(
-      `https://instant-news-portal-server.vercel.app/userData?email=${userMail}`
+      `http://localhost:5000/userData?email=${userMail}`
     );
     if (res.data) {
       setUserData(res.data);
@@ -71,7 +71,6 @@ const UpdateBlogs = () => {
       requestType: "Update",
     };
 
-    console.log(finalUpdatingData);
     try {
       const updatedData = {
         ...data,
@@ -81,7 +80,7 @@ const UpdateBlogs = () => {
       if (userRole === "Admin") {
         setBtnLoading(true);
         const response = await axios.put(
-          `https://instant-news-portal-server.vercel.app/update-blogs-admin/${id}`,
+          `http://localhost:5000/update-blogs-admin/${id}`,
           updatedData
         );
         if (response.data.modifiedCount > 0) {
@@ -102,15 +101,14 @@ const UpdateBlogs = () => {
       } else {
         setBtnLoading(true);
         const response = await axios.post(
-          "https://instant-news-portal-server.vercel.app/add-blogs-others-to-approval-history",
+          "http://localhost:5000/add-blogs-others-to-approval-history",
           finalUpdatingData
         );
         if (response.data.insertedId) {
-          console.log(response.data);
           const historyDataId = response.data.insertedId;
 
           const adminHistoryRes = await axios.post(
-            "https://instant-news-portal-server.vercel.app/add-blogs-to-admin-history",
+            "http://localhost:5000/add-blogs-to-admin-history",
             finalUpdatingData
           );
 
@@ -118,7 +116,7 @@ const UpdateBlogs = () => {
             const adminHistoryDataId = adminHistoryRes.data.insertedId;
             // add to pending approval
             const res = await axios.post(
-              "https://instant-news-portal-server.vercel.app/add-blogs-others",
+              "http://localhost:5000/add-blogs-others",
               { ...finalUpdatingData, historyDataId, adminHistoryDataId }
             );
             if (res.data.insertedId) {
@@ -167,13 +165,13 @@ const UpdateBlogs = () => {
 
   return (
     <div className="p-4 w-full mx-auto bg-gray-100 rounded-lg shadow-md h-full">
-      <h1 className="text-2xl font-bold mb-5 font-sora">Update Blogs</h1>
+      <h1 className="text-2xl font-bold mb-5 font-montserrat">Update Blogs</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="flex w-full gap-4">
           {/* Blog Title */}
           <div className="w-full">
-            <label className="block font-medium mb-1 font-sora">
+            <label className="block font-medium mb-1 font-montserrat">
               Blog Title{" "}
               <span className="text-black/40">
                 (Must begin with a capital letter)
@@ -196,7 +194,7 @@ const UpdateBlogs = () => {
 
           {/* Blog Category */}
           <div className="w-full">
-            <label className="block font-medium mb-1 font-sora">
+            <label className="block font-medium mb-1 font-montserrat">
               Blog Category
             </label>
             <select
@@ -230,7 +228,7 @@ const UpdateBlogs = () => {
         <div className="flex items-center gap-4">
           {/* Blog Image */}
           <div className="w-full">
-            <label className="block font-medium mb-1 font-sora">
+            <label className="block font-medium mb-1 font-montserrat">
               Blog Image <span className="text-black/40">(URL)</span>
             </label>
             <input
@@ -248,7 +246,7 @@ const UpdateBlogs = () => {
 
           {/* Blog Photo Added By */}
           <div className="w-full">
-            <label className="block font-medium mb-1 font-sora">
+            <label className="block font-medium mb-1 font-montserrat">
               Photo Added By{" "}
               <span className="text-black/40">
                 (Must begin with a capital letter)
@@ -273,7 +271,7 @@ const UpdateBlogs = () => {
         <div className="flex items-center gap-4">
           {/* Blog Added By */}
           <div className="w-full">
-            <label className="block font-medium mb-1 font-sora">
+            <label className="block font-medium mb-1 font-montserrat">
               Blog Added By{" "}
               <span className="text-black/40">
                 (Must begin with a capital letter)
@@ -296,7 +294,7 @@ const UpdateBlogs = () => {
 
           {/* Blog Photo Description */}
           <div className="w-full">
-            <label className="block font-medium mb-1 font-sora">
+            <label className="block font-medium mb-1 font-montserrat">
               Photo Description
             </label>
             <input
@@ -317,7 +315,7 @@ const UpdateBlogs = () => {
 
         {/* Blog Details */}
         <div>
-          <label className="block font-medium mb-1 font-sora">
+          <label className="block font-medium mb-1 font-montserrat">
             Blog Description
           </label>
           <JoditEditor

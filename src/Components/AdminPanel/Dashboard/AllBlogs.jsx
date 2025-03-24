@@ -46,7 +46,7 @@ const AllBlogs = () => {
     useEffect(() => {
         const fetchLatestData = async () => {
             try {
-                const res = await axios.get('https://instant-news-portal-server.vercel.app/all-blog-Data');
+                const res = await axios.get('http://localhost:5000/all-blog-Data');
                 setAllBlogsData(res.data);
             } catch (error) {
                 console.error(error);
@@ -61,7 +61,7 @@ const AllBlogs = () => {
             <div className="flex items-center justify-between border-b border-black pb-3  mb-5">
                 <h1 className="font-caslon font-bold text-3xl lg:text-5xl">Blogs Gallery ({allBlogsData.length})</h1>
                 <a href="/section/blogs">
-                    <div className="flex items-center gap-2 hover:text-blue-600 font-sora">
+                    <div className="flex items-center gap-2 hover:text-blue-600 font-montserrat">
                         <p className="text-sm lg:text-xl">Show more</p>
                         <FaArrowRight />
                     </div>

@@ -16,13 +16,13 @@ const SearchResults = ({ searchResult, searchTerm, loading }) => {
         <div className='mt-24'>
             <div>
                 {
-                    searchResult?.length === 0 ? "" : <p className='font-sora text-black/60 bg-slate-300 px-3 py-3'>{searchResult.length} Search results for "{searchTerm}"</p>
+                    searchResult?.length === 0 ? "" : <p className='font-montserrat text-black/60 bg-slate-300 px-3 py-3'>{searchResult.length} Search results for "{searchTerm}"</p>
                 }
             </div>
 
             <div>
                 {
-                    searchResult?.length === 0 ? <h1 className='font-sora text-black/60 text-center my-36 text-base md:text-lg lg:text-xl font-bold'>No results found. Please search a different keyword.</h1> : <div className=''>
+                    searchResult?.length === 0 ? <h1 className='font-montserrat text-black/60 text-center my-36 text-base md:text-lg lg:text-xl font-bold'>No results found. Please search a different keyword.</h1> : <div className=''>
                         {
                             searchResult?.map((result, index) => <LatestCardInSearch key={index} data={result}></LatestCardInSearch>)
                         }

@@ -21,8 +21,8 @@
 
 /* instant custom font 'IrvinHeading' importing here */
 @font-face {
-  font-family: 'Sora';
-  src: url('./assets/fonts/Sora-VariableFont_wght.ttf') format('truetype');
+  font-family: 'Montserrat';
+  src: url('./assets/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }

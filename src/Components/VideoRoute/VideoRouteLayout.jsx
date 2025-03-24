@@ -38,7 +38,7 @@ const VideoRouteLayout = () => {
             setVideos([]); // Clear old data during fetch
             try {
                 const res = await axios.get(
-                    `https://instant-news-portal-server.vercel.app/videos?page=${currentPage - 1}&size=${itemsPerPage}`
+                    `http://localhost:5000/videos?page=${currentPage - 1}&size=${itemsPerPage}`
                 );
                 setVideos(res?.data.videos || []);
                 setTotalCount(res?.data.totalCount || 0);
@@ -98,7 +98,7 @@ const VideoRouteLayout = () => {
     return (
         <div className="container mx-auto mt-10 px-3 xl:px-0">
             <div className="flex items-center gap-3 mb-5 md:mb-10">
-                <h1 className="border-l-2 border-red-500 text-3xl md:text-4xl xl:text-5xl font-sora font-bold pl-3">
+                <h1 className="border-l-2 border-red-500 text-3xl md:text-4xl xl:text-5xl font-montserrat font-bold pl-3">
                     Videos
                 </h1>
                 <BiSolidVideos size={40} />

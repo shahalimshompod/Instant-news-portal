@@ -37,7 +37,7 @@ const UpdateVideos = () => {
     try {
       // Make API call to update the video
       const res = await axios.put(
-        `https://instant-news-portal-server.vercel.app/update-videos/${dataFromAddedVideos._id}`,
+        `http://localhost:5000/update-videos/${dataFromAddedVideos._id}`,
         data
       );
 
@@ -70,7 +70,7 @@ const UpdateVideos = () => {
 
   return (
     <div className="p-8 w-full mx-auto bg-gray-100 shadow-md rounded-md h-screen">
-      <h1 className="text-2xl font-bold mb-5 text-gray-800 font-sora">
+      <h1 className="text-2xl font-bold mb-5 text-gray-800 font-montserrat">
         Update Videos
       </h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -78,7 +78,7 @@ const UpdateVideos = () => {
         <div>
           <label
             htmlFor="videoHeading"
-            className="block text-sm font-medium text-gray-700 font-sora"
+            className="block text-sm font-medium text-gray-700 font-montserrat"
           >
             Video Heading
           </label>
@@ -101,7 +101,7 @@ const UpdateVideos = () => {
         <div>
           <label
             htmlFor="videoThumbnail"
-            className="block text-sm font-medium text-gray-700 font-sora"
+            className="block text-sm font-medium text-gray-700 font-montserrat"
           >
             Video Thumbnail (Photo Link)
           </label>
@@ -125,7 +125,7 @@ const UpdateVideos = () => {
         <div>
           <label
             htmlFor="videoLink"
-            className="block text-sm font-medium text-gray-700 font-sora"
+            className="block text-sm font-medium text-gray-700 font-montserrat"
           >
             Video Link
           </label>
@@ -144,7 +144,7 @@ const UpdateVideos = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="px-3 bg-blue-600 text-white p-2 rounded-md shadow hover:bg-blue-700 focus:ring focus:ring-blue-500 focus:ring-opacity-50 font-sora"
+          className="px-3 bg-blue-600 text-white p-2 rounded-md shadow hover:bg-blue-700 focus:ring focus:ring-blue-500 focus:ring-opacity-50 font-montserrat"
         >
           {btnLoading ? (
             <span className="loading loading-spinner loading-md"></span>

@@ -9,7 +9,7 @@ const Footer = () => {
                 <div className="footer flex flex-col md:flex-row md:justify-between text-base-content container mx-auto space-y-10 md:space-y-0">
                     <nav className="md:w-1/4">
                         <div>
-                            <h1 className="text-2xl md:text-3xl font-sora font-bold mb-4">
+                            <h1 className="text-2xl md:text-3xl font-montserrat font-bold mb-4">
                                 <a href="#">Description</a>
                             </h1>
                             <p className="text-sm md:text-base font-caslon line-clamp-5">
@@ -56,7 +56,7 @@ const Footer = () => {
                         <div className="border-x border-black px-3 flex items-center space-x-4">
                             <a href="/" className="text-3xl md:text-4xl lg:text-6xl font-bold font-caslon">InstantR</a>
                             <div>
-                                <p className="font-sora text-xs md:text-sm">Developed and maintained by</p>
+                                <p className="font-montserrat text-xs md:text-sm">Developed and maintained by</p>
                                 <p className="font-bebas text-lg md:text-2xl">Shah Alim Shompod</p>
                             </div>
                         </div>
@@ -77,7 +77,7 @@ const Footer = () => {
                     </nav>
                 </div>
             </footer>
-            <p className="text-center my-4 font-sora text-sm">
+            <p className="text-center my-4 font-montserrat text-sm">
                 © 2025 <span className="font-caslon font-bold">InstantR.</span> All rights reserved.
             </p>
         </div>

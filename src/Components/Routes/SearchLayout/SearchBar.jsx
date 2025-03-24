@@ -19,7 +19,7 @@ const SearchBar = ({ onClose, setSearchTerm, searchTerm }) => {
                 <input
                     type="text"
                     placeholder="Search InstantR..."
-                    className="font-sora w-full input focus:outline-none focus:border-b-black focus:border-t-0 focus:border-x-0 rounded-none border border-b-black text-lg md:text-xl lg:text-2xl"
+                    className="font-montserrat w-full input focus:outline-none focus:border-b-black focus:border-t-0 focus:border-x-0 rounded-none border border-b-black text-lg md:text-xl lg:text-2xl"
                     value={searchTerm}
                     onChange={handleInputChange}
                 />

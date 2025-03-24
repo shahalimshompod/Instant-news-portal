@@ -9,7 +9,7 @@ export default {
     extend: {
       fontFamily: {
         caslon: ['ACaslonPro', 'serif'],
-        sora: ['Sora', 'serif'],
+        montserrat: ['Montserrat', 'serif'],
         bebas: ['BebasNeue', 'serif']
       },
     },

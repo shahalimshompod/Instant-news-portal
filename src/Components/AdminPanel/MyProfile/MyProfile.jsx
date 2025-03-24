@@ -13,7 +13,7 @@ const MyProfile = () => {
 
   const fetchUserData = async () => {
     const res = await axios.get(
-      `https://instant-news-portal-server.vercel.app/userData?email=${userEmail}`
+      `http://localhost:5000/userData?email=${userEmail}`
     );
     if (res.data) {
       setUserData(res.data);
@@ -27,10 +27,9 @@ const MyProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(nameInput, imageInput);
     const updatedUserData = { name: nameInput, image: imageInput };
     const res = await axios.patch(
-      `https://instant-news-portal-server.vercel.app/add-userData/${_id}`,
+      `http://localhost:5000/add-userData/${_id}`,
       updatedUserData
     );
     if (res.data) {
@@ -41,7 +40,7 @@ const MyProfile = () => {
 
   return (
     <div className="flex flex-col items-center justify-center mt-12">
-      <h1 className="font-sora text-4xl mb-4">
+      <h1 className="font-montserrat text-4xl mb-4">
         Hello <span className="font-bold">{name || "User"}</span>! Welcome to
         your Profile
       </h1>
@@ -56,16 +55,16 @@ const MyProfile = () => {
               alt="Profile"
             />
           </div>
-          <h3 className="text-3xl font-bold font-sora mt-4 mb-2">{name}</h3>
+          <h3 className="text-3xl font-bold font-montserrat mt-4 mb-2">{name}</h3>
         </>
       ) : (
         <div className="mb-2">
-          <h1 className="text-green-500 font-bold font-sora">
+          <h1 className="text-green-500 font-bold font-montserrat">
             Setup your Name and Profile Picture
           </h1>
           <form onSubmit={handleSubmit} className="w-96">
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 font-sora">
+              <label className="block text-sm font-medium text-gray-700 font-montserrat">
                 Name
               </label>
               <input
@@ -74,11 +73,11 @@ const MyProfile = () => {
                 placeholder="Enter your name"
                 value={nameInput}
                 onChange={(e) => setNameInput(e.target.value)}
-                className="font-sora mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="font-montserrat mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 font-sora">
+              <label className="block text-sm font-medium text-gray-700 font-montserrat">
                 Image URL
               </label>
               <input
@@ -87,7 +86,7 @@ const MyProfile = () => {
                 placeholder="Enter image URL"
                 value={imageInput}
                 onChange={(e) => setImageInput(e.target.value)}
-                className="font-sora mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="font-montserrat mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
             <button
@@ -99,9 +98,9 @@ const MyProfile = () => {
           </form>
         </div>
       )}
-      <p className="font-sora text-xl mb-2">{email}</p>
-      <p className="bg-slate-300 px-4 rounded text-xl font-sora mb-3">{role}</p>
-      <p className="font-sora text-xl mb-2">
+      <p className="font-montserrat text-xl mb-2">{email}</p>
+      <p className="bg-slate-300 px-4 rounded text-xl font-montserrat mb-3">{role}</p>
+      <p className="font-montserrat text-xl mb-2">
         Job: <span>{job}</span>
       </p>
     </div>

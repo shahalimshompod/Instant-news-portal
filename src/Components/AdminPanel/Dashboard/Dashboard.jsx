@@ -11,7 +11,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchLatestData = async () => {
             try {
-                const res = await axios.get('https://instant-news-portal-server.vercel.app/latest-blogs');
+                const res = await axios.get('http://localhost:5000/latest-blogs');
                 setLatestData(res.data);
             } catch (error) {
                 console.error(error);
@@ -26,7 +26,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get('https://instant-news-portal-server.vercel.app/most-popular-for-dashboard');
+                const res = await axios.get('http://localhost:5000/most-popular-for-dashboard');
                 setMostPopularBlogs(res?.data);
             } catch (err) {
                 console.error('ERROR FETCHING DATA IN MOST POPULAR BLOGS --> ', err);
@@ -47,7 +47,7 @@ const Dashboard = () => {
             {/* latest section */}
             <div className="mb-10">
                 <div className="mb-4">
-                    <h1 className="font-sora font-bold text-3xl">Today's Latest</h1>
+                    <h1 className="font-montserrat font-bold text-3xl">Today's Latest</h1>
                 </div>
                 <div className="grid grid-cols-4 gap-5">
                     {
@@ -59,7 +59,7 @@ const Dashboard = () => {
             {/* most popular section */}
             <div>
                 <div className="mb-4">
-                    <h1 className="font-sora font-bold text-3xl">Most Popular</h1>
+                    <h1 className="font-montserrat font-bold text-3xl">Most Popular</h1>
                 </div>
                 <div className="grid grid-cols-4 gap-5">
                     {

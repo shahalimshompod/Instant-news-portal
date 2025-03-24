@@ -24,7 +24,7 @@ const MyAddedVideos = () => {
     useEffect(() => {
         const fetchLatestData = async () => {
             try {
-                const res = await axios.get(`https://instant-news-portal-server.vercel.app/my-posted-videos`, {
+                const res = await axios.get(`http://localhost:5000/my-posted-videos`, {
                     params: {
                         email: email,
                         page: page,
@@ -68,7 +68,7 @@ const MyAddedVideos = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const res = await axios.delete(`https://instant-news-portal-server.vercel.app/delete-video/${id}`);
+                    const res = await axios.delete(`http://localhost:5000/delete-video/${id}`);
 
                     if (res.data.deletedCount > 0) {
                         const restVideosToShow = myVideos.filter((video) => id !== video._id);
@@ -124,7 +124,7 @@ const MyAddedVideos = () => {
 
     return (
         <div className="px-2 my-5">
-            <h1 className="text-center text-3xl text-black font-sora mb-5 uppercase">
+            <h1 className="text-center text-3xl text-black font-montserrat mb-5 uppercase">
                 Your posted videos
             </h1>
             <table className="table-auto w-full">
@@ -145,9 +145,14 @@ const MyAddedVideos = () => {
                             <td className="flex flex-col lg:flex-row items-center lg:gap-3 py-3 lg:py-0">
                                 <div className="avatar mb-2 lg:mb-0">
                                     <div className="mask h-24 w-36">
-                                        <img
+                                        {/* <img
                                             className="rounded-xl"
                                             src="https://i.ibb.co.com/12HZwPM/Getty-Images-2184329067-e1732106649612.jpg"
+                                            alt="Blog"
+                                        /> */}
+                                        <img
+                                            className="rounded-xl"
+                                            src={video.video_thumbnail}
                                             alt="Blog"
                                         />
                                     </div>
@@ -156,17 +161,17 @@ const MyAddedVideos = () => {
                                     <div className="font-bold mb-2 text-lg line-clamp-2">
                                         {video.video_heading}
                                     </div>
-                                    <p className="font-sora text-xs">{formatDate(video.createdAt).date} | {formatDate(video.createdAt).time}</p>
+                                    <p className="font-montserrat text-xs">{formatDate(video.createdAt).date} | {formatDate(video.createdAt).time}</p>
                                 </div>
                             </td>
                             {/* video Added By */}
                             <td className="text-center mb-2 lg:mb-0">
                                 <div className="lg:hidden font-bold">Added By</div>
                                 <div className="flex items-center flex-col gap-2">
-                                    <span className="border px-3 rounded-lg text-base font-bold py-1 font-sora">
+                                    <span className="border px-3 rounded-lg text-base font-bold py-1 font-montserrat">
                                         {userRole}
                                     </span>
-                                    <span className="badge badge-ghost badge-sm font-sora">{video.userEmail}</span>
+                                    <span className="badge badge-ghost badge-sm font-montserrat">{video.userEmail}</span>
                                 </div>
                             </td>
 

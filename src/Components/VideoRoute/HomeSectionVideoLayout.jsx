@@ -16,7 +16,7 @@ const HomeSectionVideoLayout = () => {
     useEffect(() => {
         const fetchVideos = async () => {
             try {
-                const { data } = await axios.get("https://instant-news-portal-server.vercel.app/video-section");
+                const { data } = await axios.get("http://localhost:5000/video-section");
                 setVideos(data);
             } catch (error) {
                 console.error("Error fetching videos:", error);
@@ -79,7 +79,7 @@ const HomeSectionVideoLayout = () => {
         <div className="container mx-auto my-28 px-3 xl:px-0">
             <div className="flex items-center justify-between border-b border-black pb-3 mb-5">
                 <h1 className="font-caslon font-bold text-3xl lg:text-5xl">Video Gallery</h1>
-                <a href="/videos" className="flex items-center gap-2 hover:text-blue-600 font-sora">
+                <a href="/videos" className="flex items-center gap-2 hover:text-blue-600 font-montserrat">
                     <p className="text-sm lg:text-xl">Show more</p>
                     <FaArrowRight />
                 </a>

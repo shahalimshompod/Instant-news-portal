@@ -9,19 +9,16 @@ import Swal from "sweetalert2";
 const AddBlogs = () => {
   const { user } = useContext(AuthContext); //getting current user email
   const { userRole } = useUserRole(user.email); //getting current user role
-  console.log(userRole);
   const userMail = user.email;
   const [userData, setUserData] = useState({});
   const [btnLoading, setBtnLoading] = useState(false);
 
   const { image, name } = userData;
 
-  console.log(userData);
-
   // fetch user data
   const fetchUserData = async () => {
     const res = await axios.get(
-      `https://instant-news-portal-server.vercel.app/userData?email=${userMail}`
+      `http://localhost:5000/userData?email=${userMail}`
     );
     if (res.data) {
       setUserData(res.data);
@@ -67,7 +64,7 @@ const AddBlogs = () => {
         setBtnLoading(true);
         axios
           .post(
-            "https://instant-news-portal-server.vercel.app/add-blogs-admin",
+            "http://localhost:5000/add-blogs-admin",
             finalData
           )
           .then((response) => {
@@ -95,7 +92,7 @@ const AddBlogs = () => {
         setBtnLoading(true);
         axios
           .post(
-            "https://instant-news-portal-server.vercel.app/add-blogs-others-to-approval-history",
+            "http://localhost:5000/add-blogs-others-to-approval-history",
             finalData
           )
           .then(async (response) => {
@@ -103,15 +100,14 @@ const AddBlogs = () => {
               const historyDataId = response.data.insertedId;
 
               const adminHistoryRes = await axios.post(
-                "https://instant-news-portal-server.vercel.app/add-blogs-to-admin-history",
+                "http://localhost:5000/add-blogs-to-admin-history",
                 finalData
               );
-              console.log(adminHistoryRes.data);
               if (adminHistoryRes.data.insertedId) {
                 const adminHistoryDataId = adminHistoryRes.data.insertedId;
                 // add to pending approval
                 const res = await axios.post(
-                  "https://instant-news-portal-server.vercel.app/add-blogs-others",
+                  "http://localhost:5000/add-blogs-others",
                   { ...finalData, historyDataId, adminHistoryDataId }
                 );
                 if (res.data.insertedId) {
@@ -143,13 +139,13 @@ const AddBlogs = () => {
 
   return (
     <div className="p-4 md:p-8 w-full  mx-auto bg-gray-100 rounded-lg shadow-md h-full">
-      <h1 className="text-2xl font-bold mb-5 font-sora">Add Blogs</h1>
+      <h1 className="text-2xl font-bold mb-5 font-montserrat">Add Blogs</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="flex w-full gap-4">
           {/* Blog Title */}
           <div className="w-full">
-            <label className="block font-medium mb-1 font-sora">
+            <label className="block font-medium mb-1 font-montserrat">
               Blog Title{" "}
               <span className="text-black/40">
                 (Must begin with a capital letter)
@@ -172,7 +168,7 @@ const AddBlogs = () => {
 
           {/* blog category */}
           <div className="w-full">
-            <label className="block font-medium mb-1 font-sora">
+            <label className="block font-medium mb-1 font-montserrat">
               Blog Category
             </label>
             <select
@@ -206,7 +202,7 @@ const AddBlogs = () => {
         <div className="flex items-center gap-4">
           {/* Blog Image */}
           <div className="w-full">
-            <label className="block font-medium mb-1 font-sora">
+            <label className="block font-medium mb-1 font-montserrat">
               Blog Image <span className="text-black/40">(URL)</span>
             </label>
             <input
@@ -224,7 +220,7 @@ const AddBlogs = () => {
 
           {/* Blog Photo Added By */}
           <div className="w-full">
-            <label className="block font-medium mb-1 font-sora">
+            <label className="block font-medium mb-1 font-montserrat">
               Photo Added By{" "}
               <span className="text-black/40">
                 (Must begin with a capital letter)
@@ -249,7 +245,7 @@ const AddBlogs = () => {
         <div className="flex items-center gap-4">
           {/* Blog Added By */}
           <div className="w-full">
-            <label className="block font-medium mb-1 font-sora">
+            <label className="block font-medium mb-1 font-montserrat">
               Blog Added By{" "}
               <span className="text-black/40">
                 (Must begin with a capital letter)
@@ -272,7 +268,7 @@ const AddBlogs = () => {
 
           {/* Blog Photo Description */}
           <div className="w-full">
-            <label className="block font-medium mb-1 font-sora">
+            <label className="block font-medium mb-1 font-montserrat">
               Photo Description
             </label>
             <input
@@ -288,7 +284,7 @@ const AddBlogs = () => {
 
         {/* Blog details */}
         <div>
-          <label className="block font-medium mb-1 font-sora">
+          <label className="block font-medium mb-1 font-montserrat">
             Blog Description
           </label>
 

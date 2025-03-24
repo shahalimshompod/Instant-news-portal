@@ -69,7 +69,7 @@ const Navbar = () => {
                                         <a href="/" className="text-lg hover:underline font-bebas tracking-wider hover:text-red-600 ease-in-out duration-300">Homepage</a>
                                     </div>
                                     {/* Sidebar content here */}
-                                    <h3 className="font-sora text-2xl font-extrabold my-5 hover:text-blue-600"><a href="/" >Sections</a></h3>
+                                    <h3 className="font-montserrat text-2xl font-extrabold my-5 hover:text-blue-600"><a href="/" >Sections</a></h3>
 
                                     <div className="pl-7 flex flex-col gap-5 w-1/2">
                                         < li className="text-xl text-black font-bebas tracking-wider">

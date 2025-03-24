@@ -52,62 +52,62 @@ const CollapsibleSection = () => {
             >
                 <ul className="bg-gray-800 text-white p-4 space-y-2 rounded-b-xl">
 
-                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-sora text-base"> <a href="#para_1" >1. Research Your Destination</a></li>
+                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-montserrat text-base"> <a href="#para_1" >1. Research Your Destination</a></li>
 
 
-                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-sora text-base"><a href="#para_2" >2. Create a Flexible Itinerary</a></li>
-
-
-
-                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-sora text-base"><a href="#para_3" >3. Pack Smart and Light</a></li>
+                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-montserrat text-base"><a href="#para_2" >2. Create a Flexible Itinerary</a></li>
 
 
 
-                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-sora text-base"><a href="#para_4" >4. Use Travel Organizers</a></li>
+                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-montserrat text-base"><a href="#para_3" >3. Pack Smart and Light</a></li>
 
 
 
-                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-sora text-base"><a href="#para_5" >5. Secure Important Documents</a></li>
+                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-montserrat text-base"><a href="#para_4" >4. Use Travel Organizers</a></li>
 
 
 
-                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-sora text-base"><a href="#para_6" >6. Invest in Travel Insurance</a></li>
+                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-montserrat text-base"><a href="#para_5" >5. Secure Important Documents</a></li>
 
 
 
-                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-sora text-base"><a href="#para_7" >7. Stay Hydrated and Eat Wisely</a></li>
+                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-montserrat text-base"><a href="#para_6" >6. Invest in Travel Insurance</a></li>
 
 
 
-                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-sora text-base"><a href="#para_8" >8. Learn Basic Phrases of the Local Language</a></li>
+                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-montserrat text-base"><a href="#para_7" >7. Stay Hydrated and Eat Wisely</a></li>
 
 
 
-                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-sora text-base"><a href="#para_9" >9. Use Public Transport</a></li>
+                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-montserrat text-base"><a href="#para_8" >8. Learn Basic Phrases of the Local Language</a></li>
 
 
 
-                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-sora text-base"><a href="#para_10" >10. Keep Your Valuables Safe</a></li>
+                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-montserrat text-base"><a href="#para_9" >9. Use Public Transport</a></li>
 
 
 
-                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-sora text-base"><a href="#para_11" >11. Carry a Universal Adapter and Power Bank</a></li>
+                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-montserrat text-base"><a href="#para_10" >10. Keep Your Valuables Safe</a></li>
 
 
 
-                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-sora text-base"><a href="#para_12" >12. Be Mindful of Local Customs</a></li>
+                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-montserrat text-base"><a href="#para_11" >11. Carry a Universal Adapter and Power Bank</a></li>
 
 
 
-                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-sora text-base"><a href="#para_13" >13. Budget and Track Expenses</a></li>
+                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-montserrat text-base"><a href="#para_12" >12. Be Mindful of Local Customs</a></li>
 
 
 
-                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-sora text-base"><a href="#para_14" >14. Keep Emergency Contacts Handy</a></li>
+                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-montserrat text-base"><a href="#para_13" >13. Budget and Track Expenses</a></li>
 
 
 
-                    <li onClick={handleScroll} className="mt-2 font-sora text-base"><a href="#para_15" >15. Capture Memories but Stay Present</a></li>
+                    <li onClick={handleScroll} className="mt-2 border-b border-white/20 pb-2 font-montserrat text-base"><a href="#para_14" >14. Keep Emergency Contacts Handy</a></li>
+
+
+
+                    <li onClick={handleScroll} className="mt-2 font-montserrat text-base"><a href="#para_15" >15. Capture Memories but Stay Present</a></li>
 
                 </ul>
             </div>

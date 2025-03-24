@@ -14,7 +14,7 @@ const AllUsers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("https://instant-news-portal-server.vercel.app/users");
+        const res = await axios.get("http://localhost:5000/users");
         setUserData(res.data);
       } catch (err) {
         console.error(err);
@@ -43,7 +43,7 @@ const AllUsers = () => {
     const email = data.email;
     const dataForUpdate = data;
 
-    fetch(`https://instant-news-portal-server.vercel.app/update-user?email=${email}`, {
+    fetch(`http://localhost:5000/update-user?email=${email}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -100,7 +100,7 @@ const AllUsers = () => {
 
         // Perform the delete operation asynchronously
         return axios
-          .delete(`https://instant-news-portal-server.vercel.app/delete-users?email=${email}`)
+          .delete(`http://localhost:5000/delete-users?email=${email}`)
           .then((response) => {
             if (response.data.success && response.data.deletedCount > 0) {
               const restUserToShow = userData.filter(
@@ -176,16 +176,16 @@ const AllUsers = () => {
                   </div>
 
                   <div>
-                    <h1 className="text-lg font-sora font-semibold">{data.name}</h1>
+                    <h1 className="text-lg font-montserrat font-semibold">{data.name}</h1>
                   </div>
                 </div>
               </td>
               <td className="py-3">
-                <h1 className="font-bold font-sora">{data.email}</h1>
+                <h1 className="font-bold font-montserrat">{data.email}</h1>
               </td>
               <td className="py-3">{data.job}</td>
               <td className="py-3">
-                <h4 className="border w-24 text-center font-sora shadow-lg rounded-lg py-1">
+                <h4 className="border w-24 text-center font-montserrat shadow-lg rounded-lg py-1">
                   {data.role}
                 </h4>
               </td>

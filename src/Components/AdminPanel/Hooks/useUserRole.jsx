@@ -10,7 +10,7 @@ const useUserRole = (email) => {
         const fetchRole = async () => {
             try {
                 setLoading(true);
-                const res = await axios.get(`https://instant-news-portal-server.vercel.app/user-role?email=${email}`);
+                const res = await axios.get(`http://localhost:5000/user-role?email=${email}`);
                 setUserRole(res.data);
             } catch (err) {
                 console.error("Problem in fetching roles", err);

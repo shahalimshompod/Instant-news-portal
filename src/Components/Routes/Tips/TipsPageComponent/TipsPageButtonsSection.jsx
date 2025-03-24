@@ -15,7 +15,7 @@ const TipsPageButtonsSection = () => {
                 </h3>
                 <div className="md:w-10/12 mx-auto">
                     <CollapsibleSection></CollapsibleSection>
-                    <h4 className="my-10 font-sora font-bold text-xl">Lets begin...</h4>
+                    <h4 className="my-10 font-montserrat font-bold text-xl">Lets begin...</h4>
                     <div className="md:w-11/12 mx-auto">
                         <TipsPageContentSection></TipsPageContentSection>
                         <HomeSectionVideoLayout></HomeSectionVideoLayout>

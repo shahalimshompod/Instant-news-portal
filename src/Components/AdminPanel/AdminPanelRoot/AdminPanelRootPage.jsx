@@ -46,7 +46,7 @@ const AdminPanelRootPage = () => {
                                 <h1 className="text-white text-5xl text-center mb-4 font-caslon font-bold">
                                     Welcome to Your Dashboard
                                 </h1>
-                                <h2 className="text-white text-2xl font-sora text-center max-w-3xl">
+                                <h2 className="text-white text-2xl font-montserrat text-center max-w-3xl">
                                     Kindly wait for admin approval. Once your request is approved, you will be redirected to your dashboard.
                                 </h2>
                             </div>

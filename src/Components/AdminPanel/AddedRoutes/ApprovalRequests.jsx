@@ -16,8 +16,6 @@ const ApprovalRequests = () => {
   const [selectedReq, setSelectedReq] = useState(null);
   const closeModal = () => setSelectedReq(null);
 
-  console.log(selectedReq);
-
   const [othersPost, setOthersPosts] = useState([]);
   const [page, setPage] = useState(1); // Current page
   const [totalPages, setTotalPages] = useState(1); // Total pages
@@ -28,7 +26,7 @@ const ApprovalRequests = () => {
 
   const fetchLatestData = async () => {
     try {
-      const res = await axios.get(`https://instant-news-portal-server.vercel.app/approval-req`, {
+      const res = await axios.get(`http://localhost:5000/approval-req`, {
         params: {
           email: email,
           page: page,
@@ -77,7 +75,7 @@ const ApprovalRequests = () => {
 
   return (
     <div className="px-2 my-5">
-      <h1 className="text-center text-3xl text-black font-sora mb-5 uppercase">
+      <h1 className="text-center text-3xl text-black font-montserrat mb-5 uppercase">
         Approval Requests
       </h1>
       <table className="table-auto w-full">
@@ -99,9 +97,14 @@ const ApprovalRequests = () => {
               <td className="flex flex-col lg:flex-row items-center lg:gap-3 py-3 lg:py-0">
                 <div className="avatar mb-2 lg:mb-0">
                   <div className="mask h-24 w-36">
-                    <img
+                    {/* <img
                       className="rounded-xl"
                       src="https://plus.unsplash.com/premium_photo-1688561384438-bfa9273e2c00?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bmV3c3xlbnwwfHwwfHx8MA%3D%3D"
+                      alt="Blog"
+                    /> */}
+                    <img
+                      className="rounded-xl"
+                      src={post.blog_photo}
                       alt="Blog"
                     />
                   </div>
@@ -113,7 +116,7 @@ const ApprovalRequests = () => {
                   <div className="font-bold mb-2 text-lg line-clamp-2">
                     {post.blog_title}
                   </div>
-                  <p className="font-sora text-xs">
+                  <p className="font-montserrat text-xs">
                     {formatDate(post.createdAt).date} |{" "}
                     {formatDate(post.createdAt).time}
                   </p>
@@ -123,20 +126,20 @@ const ApprovalRequests = () => {
               <td className="text-center mb-2 lg:mb-0">
                 <div className="lg:hidden font-bold">Added By</div>
                 <div className="flex items-center flex-col gap-2">
-                <span className="text-base font-bold font-sora">
+                <span className="text-base font-bold font-montserrat">
                     {post.userName}
                   </span>
-                  <span className="border px-3 rounded-lg text-base font-bold py-1 font-sora">
+                  <span className="border px-3 rounded-lg text-base font-bold py-1 font-montserrat">
                     {post.userRole}
                   </span>
-                  <span className="badge badge-ghost badge-sm font-sora">
+                  <span className="badge badge-ghost badge-sm font-montserrat">
                     {post.userEmail}
                   </span>
                 </div>
               </td>
               {/* Blog Views */}
               <td className="text-center mb-2 lg:mb-0">
-                <p className="font-sora text-base border w-1/4 rounded bg-slate-100 shadow-lg mx-auto">
+                <p className="font-montserrat text-base border w-1/4 rounded bg-slate-100 shadow-lg mx-auto">
                   {post.requestType || "N/A"}
                 </p>
               </td>

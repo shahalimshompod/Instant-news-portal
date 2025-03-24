@@ -30,8 +30,8 @@ const ReasonOfRejectionModal = ({rejectionReasonData, setRejectionReasonData}) =
         </button>
 
         {/* Modal Content */}
-        <h2 className="text-xl font-semibold mb-4 font-sora">Reason of Rejection</h2>
-        <p className="text-gray-600 font-sora">{rejectionReasonData || "N/A"}</p>
+        <h2 className="text-xl font-semibold mb-4 font-montserrat">Reason of Rejection</h2>
+        <p className="text-gray-600 font-montserrat">{rejectionReasonData || "N/A"}</p>
       </div>
     </div>
   );

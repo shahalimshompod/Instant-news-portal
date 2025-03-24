@@ -13,7 +13,7 @@ const HomeSecondSec = () => {
     useEffect(() => {
         const FetchFeaturedBlogsData = async () => {
             try {
-                const response = await axios.get('https://instant-news-portal-server.vercel.app/featured-blogs')
+                const response = await axios.get('http://localhost:5000/featured-blogs')
                 setFeaturedBlogs(response.data)
             } catch (err) {
                 setError(err.message)

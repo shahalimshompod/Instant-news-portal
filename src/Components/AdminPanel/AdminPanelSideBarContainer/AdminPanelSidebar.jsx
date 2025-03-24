@@ -28,7 +28,7 @@ const AdminPanelSidebar = () => {
     const fetchRole = async () => {
       try {
         const res = await axios.get(
-          `https://instant-news-portal-server.vercel.app/user-role?email=${currentUserEmail}`
+          `http://localhost:5000/user-role?email=${currentUserEmail}`
         );
         setUserRole(res.data);
       } catch (error) {
@@ -41,7 +41,7 @@ const AdminPanelSidebar = () => {
   useEffect(() => {
     const fetchLength = async () => {
       const res = await axios.get(
-        "https://instant-news-portal-server.vercel.app/approval-req-length"
+        "http://localhost:5000/approval-req-length"
       );
       if (res?.data) {
         const data = res?.data;
@@ -57,14 +57,14 @@ const AdminPanelSidebar = () => {
     <div className="w-60 h-screen bg-gray-800 text-white flex flex-col p-4 fixed top-0 left-0 overflow-y-scroll">
       <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
         <MdAdminPanelSettings size={40} />{" "}
-        <span className="font-sora">{userRole} </span>
+        <span className="font-montserrat">{userRole} </span>
       </h2>
       <nav className="flex flex-col">
         {/* Navigation (for all) */}
         <div>
           <div className="mb-2 flex items-center gap-1">
             <TbNavigationShare />
-            <h1 className="text-white/40 font-sora text-sm">Navigation</h1>
+            <h1 className="text-white/40 font-montserrat text-sm">Navigation</h1>
           </div>
 
           <NavLink
@@ -77,7 +77,7 @@ const AdminPanelSidebar = () => {
             }
           >
             <CgProfile size={20} />
-            <span className="font-sora text-sm text-base-300">Profile</span>
+            <span className="font-montserrat text-sm text-base-300">Profile</span>
           </NavLink>
 
           <NavLink
@@ -90,7 +90,7 @@ const AdminPanelSidebar = () => {
             }
           >
             <MdSpaceDashboard size={20} />
-            <span className="font-sora text-sm text-base-300">Dashboard</span>
+            <span className="font-montserrat text-sm text-base-300">Dashboard</span>
           </NavLink>
         </div>
 
@@ -100,7 +100,7 @@ const AdminPanelSidebar = () => {
         <div>
           <div className="mb-2 flex items-center gap-1">
             <MdManageAccounts />
-            <h1 className="text-white/40 font-sora text-sm">
+            <h1 className="text-white/40 font-montserrat text-sm">
               Manage your posts
             </h1>
           </div>
@@ -116,7 +116,7 @@ const AdminPanelSidebar = () => {
             }
           >
             <FaFileCircleCheck size={20} />
-            <span className="font-sora text-xs text-base-300">
+            <span className="font-montserrat text-xs text-base-300">
               My posted blogs
             </span>
           </NavLink>
@@ -132,7 +132,7 @@ const AdminPanelSidebar = () => {
             }
           >
             <MdOutlineVideoSettings size={20} />
-            <span className="font-sora text-xs text-base-300">
+            <span className="font-montserrat text-xs text-base-300">
               My posted videos
             </span>
           </NavLink>
@@ -145,7 +145,7 @@ const AdminPanelSidebar = () => {
           {/* manage moderator & editors data */}
           <div className="mb-2 flex items-center gap-1">
             <MdSupervisorAccount size={20} />
-            <h1 className="text-white/40 font-sora text-sm">
+            <h1 className="text-white/40 font-montserrat text-sm">
               Manage other's posts
             </h1>
           </div>
@@ -161,7 +161,7 @@ const AdminPanelSidebar = () => {
             }
           >
             <FaFileCircleCheck size={20} />
-            <span className="font-sora text-xs text-base-300">
+            <span className="font-montserrat text-xs text-base-300">
               Other's posted blogs
             </span>
           </NavLink>
@@ -177,7 +177,7 @@ const AdminPanelSidebar = () => {
             }
           >
             <MdOutlineVideoSettings size={20} />
-            <span className="font-sora text-xs text-base-300">
+            <span className="font-montserrat text-xs text-base-300">
               Other's posted videos
             </span>
           </NavLink>
@@ -195,7 +195,7 @@ const AdminPanelSidebar = () => {
                 }
               >
                 <MdApproval size={20} />
-                <span className="font-sora text-xs text-base-300">
+                <span className="font-montserrat text-xs text-base-300">
                   Approval Requests {approvalLength > 0 ? `(${approvalLength})` : ""}
                 </span>
               </NavLink>
@@ -211,7 +211,7 @@ const AdminPanelSidebar = () => {
                 }
               >
                 <FaHistory size={18} />
-                <span className="font-sora text-xs text-base-300">
+                <span className="font-montserrat text-xs text-base-300">
                   Approval History
                 </span>
               </NavLink>
@@ -225,7 +225,7 @@ const AdminPanelSidebar = () => {
         <div>
           <div className="mb-2 flex items-center gap-1">
             <BsDatabaseAdd />
-            <h1 className="text-white/40 font-sora text-sm">
+            <h1 className="text-white/40 font-montserrat text-sm">
               Post to your Website
             </h1>
           </div>
@@ -239,7 +239,7 @@ const AdminPanelSidebar = () => {
             }
           >
             <FaFileCirclePlus size={20} />
-            <span className="font-sora text-xs text-base-300">Post blogs</span>
+            <span className="font-montserrat text-xs text-base-300">Post blogs</span>
           </NavLink>
 
           <NavLink
@@ -251,7 +251,7 @@ const AdminPanelSidebar = () => {
             }
           >
             <BiSolidVideoPlus size={20} />
-            <span className="font-sora text-xs text-base-300">Post videos</span>
+            <span className="font-montserrat text-xs text-base-300">Post videos</span>
           </NavLink>
 
           {userRole !== "Admin" && (
@@ -266,7 +266,7 @@ const AdminPanelSidebar = () => {
               }
             >
               <FaHistory size={18} />
-              <span className="font-sora text-xs text-base-300">
+              <span className="font-montserrat text-xs text-base-300">
                 Approval History
               </span>
             </NavLink>
@@ -280,7 +280,7 @@ const AdminPanelSidebar = () => {
           <div>
             <div className="mb-2 flex items-center gap-1">
               <FaUsers />
-              <h1 className="text-white/40 font-sora text-sm">
+              <h1 className="text-white/40 font-montserrat text-sm">
                 Manage your users and roles
               </h1>
             </div>
@@ -296,7 +296,7 @@ const AdminPanelSidebar = () => {
               }
             >
               <FaUsers size={20} />
-              <span className="font-sora text-xs text-base-300">All users</span>
+              <span className="font-montserrat text-xs text-base-300">All users</span>
             </NavLink>
           </div>
         )}

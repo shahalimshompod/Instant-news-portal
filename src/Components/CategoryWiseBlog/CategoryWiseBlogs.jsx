@@ -26,7 +26,7 @@ const CategoryWiseBlogs = ({ blogData, currentPage, totalPages, paginate, loadin
 
     return (
         <section className="container mx-auto">
-            <h1 className="border-l-2 border-red-500 text-3xl md:text-4xl xl:text-5xl font-sora font-bold pl-3 mt-10">
+            <h1 className="border-l-2 border-red-500 text-3xl md:text-4xl xl:text-5xl font-montserrat font-bold pl-3 mt-10">
                 {blogData[0]?.blog_category}
             </h1>
             <div>

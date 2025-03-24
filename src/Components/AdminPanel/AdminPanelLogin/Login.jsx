@@ -23,7 +23,7 @@ const Login = () => {
                 if (userData && userData.email) {
                     setUser(userData);
 
-                    axios.post('https://instant-news-portal-server.vercel.app/users', {
+                    axios.post('http://localhost:5000/users', {
                         email: userData.email,
                         role: "User",
                         job: 'N/A',
@@ -83,7 +83,7 @@ const Login = () => {
                 !user ? (
                     <div className='bg-gray-800 h-screen flex items-center justify-center'>
                         <div className='w-1/3 p-8 rounded shadow'>
-                            <h1 className='text-3xl font-bold text-center mb-6 text-white font-sora'>Dashboard Login</h1>
+                            <h1 className='text-3xl font-bold text-center mb-6 text-white font-montserrat'>Dashboard Login</h1>
 
                             <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -103,7 +103,7 @@ const Login = () => {
                                         </svg>
                                         <input
                                             type="text"
-                                            className="p-2 grow outline-none bg-transparent font-sora text-white"
+                                            className="p-2 grow outline-none bg-transparent font-montserrat text-white"
                                             placeholder="Enter your email"
                                             {...register("email", {
                                                 required: "Email is required",

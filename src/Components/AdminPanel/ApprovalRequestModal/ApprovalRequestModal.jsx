@@ -25,7 +25,7 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
   // fetch user data
   const fetchUserData = async () => {
     const res = await axios.get(
-      `https://instant-news-portal-server.vercel.app/userData?email=${approverEmail}`
+      `http://localhost:5000/userData?email=${approverEmail}`
     );
     if (res.data) {
       setUserData(res.data);
@@ -103,26 +103,26 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
   const handleApproval = async () => {
     setBtnLoading(true);
     const postBlogRes = await axios.post(
-      "https://instant-news-portal-server.vercel.app/approve-blog-post",
+      "http://localhost:5000/approve-blog-post",
       approvedData
     );
 
     if (postBlogRes.data.insertedId) {
       const postBlogToHistoryRes = await axios.patch(
-        `https://instant-news-portal-server.vercel.app/approval-history/${historyDataId}`,
+        `http://localhost:5000/approval-history/${historyDataId}`,
         approvalHistoryData
       );
 
       if (postBlogToHistoryRes.data.message) {
         // patch to admin history
         const postBlogToAdminHistoryRes = await axios.patch(
-          `https://instant-news-portal-server.vercel.app/admin-approval-history/${adminHistoryDataId}`,
+          `http://localhost:5000/admin-approval-history/${adminHistoryDataId}`,
           approvalHistoryData
         );
 
         if (postBlogToAdminHistoryRes.data.message) {
           const clearApprovalRequest = await axios.delete(
-            `https://instant-news-portal-server.vercel.app/delete-after-approval/${_id}`
+            `http://localhost:5000/delete-after-approval/${_id}`
           );
 
           if (clearApprovalRequest.data.deletedCount > 0) {
@@ -144,24 +144,24 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
   const handleDeletionApproval = async () => {
     setBtnLoading(true);
     const deleteRes = await axios.delete(
-      `https://instant-news-portal-server.vercel.app/delete-blog/${blog_id}`
+      `http://localhost:5000/delete-blog/${blog_id}`
     );
 
     if (deleteRes.data.deletedCount > 0) {
       const postBlogToHistoryRes = await axios.patch(
-        `https://instant-news-portal-server.vercel.app/approval-history/${historyDataId}`,
+        `http://localhost:5000/approval-history/${historyDataId}`,
         approvalHistoryData
       );
 
       if (postBlogToHistoryRes.data.message) {
         const postBlogToAdminHistoryRes = await axios.patch(
-          `https://instant-news-portal-server.vercel.app/admin-approval-history/${adminHistoryDataId}`,
+          `http://localhost:5000/admin-approval-history/${adminHistoryDataId}`,
           approvalHistoryData
         );
 
         if (postBlogToAdminHistoryRes.data.message) {
           const clearApprovalRequest = await axios.delete(
-            `https://instant-news-portal-server.vercel.app/delete-after-approval/${_id}`
+            `http://localhost:5000/delete-after-approval/${_id}`
           );
 
           if (clearApprovalRequest.data.deletedCount > 0) {
@@ -183,24 +183,24 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
   const handleUpdateApproval = async () => {
     setBtnLoading(true);
     const updateRes = await axios.put(
-      `https://instant-news-portal-server.vercel.app/update-blogs-admin/${blog_id}`,
+      `http://localhost:5000/update-blogs-admin/${blog_id}`,
       approvedData
     );
     if (updateRes.data.modifiedCount) {
       const postBlogToHistoryRes = await axios.patch(
-        `https://instant-news-portal-server.vercel.app/approval-history/${historyDataId}`,
+        `http://localhost:5000/approval-history/${historyDataId}`,
         approvalHistoryData
       );
 
       if (postBlogToHistoryRes.data.message) {
         const postBlogToAdminHistoryRes = await axios.patch(
-          `https://instant-news-portal-server.vercel.app/admin-approval-history/${adminHistoryDataId}`,
+          `http://localhost:5000/admin-approval-history/${adminHistoryDataId}`,
           approvalHistoryData
         );
 
         if (postBlogToAdminHistoryRes.data.message) {
           const clearApprovalRequest = await axios.delete(
-            `https://instant-news-portal-server.vercel.app/delete-after-approval/${_id}`
+            `http://localhost:5000/delete-after-approval/${_id}`
           );
 
           if (clearApprovalRequest.data.deletedCount > 0) {
@@ -229,7 +229,7 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
           <div className="bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/2 p-6 flex flex-col max-h-[90vh]">
             {/* Modal Header */}
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold font-sora">
+              <h2 className="text-xl font-semibold font-montserrat">
                 Request for{" "}
                 <span className="bg-slate-400/50 px-1 rounded">
                   {requestType}
@@ -259,15 +259,15 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
               {/* post information */}
               <div className="flex items-center my-3">
                 <div>
-                  <p className="font-sora text-sm">
+                  <p className="font-montserrat text-sm">
                     Posted By:{" "}
                     <span className="font-bold">{blog_added_by}</span>
                   </p>
-                  <p className="font-sora text-sm">
+                  <p className="font-montserrat text-sm">
                     Photo Added By:{" "}
                     <span className="font-bold">{blog_photo_added_by}</span>
                   </p>
-                  <p className="font-sora text-sm">
+                  <p className="font-montserrat text-sm">
                     Category:{" "}
                     <span className="font-bold text-red-500">
                       {blog_category}
@@ -276,13 +276,13 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
                 </div>
                 <div className="divider lg:divider-horizontal"></div>
                 <div>
-                  <p className="text-sm font-sora">
+                  <p className="text-sm font-montserrat">
                     Name: <span className="font-bold">{userName}</span>
                   </p>
-                  <p className="text-sm font-sora">
+                  <p className="text-sm font-montserrat">
                     Role: <span className="font-bold">{userRole}</span>
                   </p>
-                  <p className="text-sm font-sora">
+                  <p className="text-sm font-montserrat">
                     Email: <span className="font-bold">{userEmail}</span>
                   </p>
                 </div>
@@ -291,14 +291,14 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
               {/* created date */}
               <div>
                 <div className="flex items-center justify-between">
-                  <p className="text-sm bg-slate-600/20 px-2 rounded font-sora">
+                  <p className="text-sm bg-slate-600/20 px-2 rounded font-montserrat">
                     Created At:{" "}
                     <span className="font-bold">
                       {formatDate(createdAt).date} |{" "}
                       {formatDate(createdAt).time}
                     </span>
                   </p>
-                  <p className="bg-red-400 text-sm px-2 rounded font-sora text-white flex items-center gap-1">
+                  <p className="bg-red-400 text-sm px-2 rounded font-montserrat text-white flex items-center gap-1">
                     <FiClock />
                     <span>{isPending && "Pending approval"}</span>
                   </p>
@@ -307,25 +307,25 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
 
               {/* post image */}
               <div className="my-2">
-                <img
+                {/* <img
                   src="https://plus.unsplash.com/premium_photo-1688561384438-bfa9273e2c00?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bmV3c3xlbnwwfHwwfHx8MA%3D%3D"
                   alt="Blog image"
-                />
-                {/* <img src={blog_photo} alt="Blog image" /> */}
+                /> */}
+                <img className="w-full" src={blog_photo} alt="Blog image" />
               </div>
 
               {/* blog Photo description & photo description */}
               <div>
                 <div className="mb-12">
-                  <h3 className="font-sora ">Blog Photo Description:</h3>
-                  <p className="font-sora font-bold">
+                  <h3 className="font-montserrat font-bold text-lg">Blog Photo Description:</h3>
+                  <p className="font-montserrat">
                     {blog_photo_description}
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="font-sora border-b mb-3">Blog Description:</h3>
-                  <div dangerouslySetInnerHTML={{ __html: sanitizeHTML }} />
+                  <h3 className="font-montserrat border-b mb-3 font-bold text-lg">Blog Description:</h3>
+                  <div className="font-caslon text-lg" dangerouslySetInnerHTML={{ __html: sanitizeHTML }} />
                 </div>
               </div>
             </div>
@@ -334,20 +334,20 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
             <div className="flex justify-end mt-4">
               <button
                 onClick={closeModal}
-                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 font-sora text-sm"
+                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 font-montserrat text-sm"
               >
                 Cancel
               </button>
               <button
                 onClick={handleModalOpen}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 mx-2 font-sora text-sm"
+                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 mx-2 font-montserrat text-sm"
               >
                 Reject
               </button>
               {requestType === "Post" ? (
                 <button
                   onClick={() => handleApproval()}
-                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 font-sora text-sm"
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 font-montserrat text-sm"
                 >
                   {btnLoading ? (
                     <span className="loading loading-spinner loading-md"></span>
@@ -358,7 +358,7 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
               ) : requestType === "Update" ? (
                 <button
                   onClick={() => handleUpdateApproval()}
-                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 font-sora text-sm"
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 font-montserrat text-sm"
                 >
                   {btnLoading ? (
                     <span className="loading loading-spinner loading-md"></span>
@@ -370,7 +370,7 @@ const ApprovalRequestModal = ({ selectedReq, closeModal, fetchLatestData }) => {
                 requestType === "Delete" && (
                   <button
                     onClick={() => handleDeletionApproval()}
-                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 font-sora text-sm"
+                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 font-montserrat text-sm"
                   >
                     {btnLoading ? (
                       <span className="loading loading-spinner loading-md"></span>
