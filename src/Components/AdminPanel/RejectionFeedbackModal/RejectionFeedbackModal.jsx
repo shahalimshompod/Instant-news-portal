@@ -22,7 +22,7 @@ const RejectionFeedbackModal = ({
   // fetch user data
   const fetchUserData = async () => {
     const res = await axios.get(
-      `http://localhost:5000/userData?email=${approverEmail}`
+      `https://instant-news-portal-server.vercel.app/userData?email=${approverEmail}`
     );
     if (res.data) {
       setUserData(res.data);
@@ -54,18 +54,18 @@ const RejectionFeedbackModal = ({
     };
 
     const rejectedRes = await axios.patch(
-      `http://localhost:5000/reject-with-feedback/${selectedReq.historyDataId}`,
+      `https://instant-news-portal-server.vercel.app/reject-with-feedback/${selectedReq.historyDataId}`,
       finalDataForRejection
     );
     if (rejectedRes.data.message) {
       const updateAdminHistoryRes = await axios.patch(
-        `http://localhost:5000/admin-reject-history/${selectedReq.adminHistoryDataId}`,
+        `https://instant-news-portal-server.vercel.app/admin-reject-history/${selectedReq.adminHistoryDataId}`,
         finalDataForRejection
       );
       if (updateAdminHistoryRes.data.message) {
         setFeedback("");
         const clearRequestRes = await axios.delete(
-          `http://localhost:5000/delete-after-approval/${selectedReq._id}`
+          `https://instant-news-portal-server.vercel.app/delete-after-approval/${selectedReq._id}`
         );
 
         if (clearRequestRes.data.deletedCount > 0) {

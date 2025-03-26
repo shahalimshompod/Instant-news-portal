@@ -19,7 +19,7 @@ const LatestCardInSearch = ({ data }) => {
   // view count handler
   const viewCounts = async (id) => {
     const blogId = id;
-    const res = await axios.patch(`http://localhost:5000/${id}`);
+    const res = await axios.patch(`https://instant-news-portal-server.vercel.app/${id}`);
   };
 
   // sanitize the html for blog details

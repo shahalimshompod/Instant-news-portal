@@ -20,7 +20,7 @@ const MyAddedBlogs = () => {
   // fetch user data
   const fetchUserData = async () => {
     const res = await axios.get(
-      `http://localhost:5000/userData?email=${userMail}`
+      `https://instant-news-portal-server.vercel.app/userData?email=${userMail}`
     );
     if (res.data) {
       setUserData(res.data);
@@ -41,7 +41,7 @@ const MyAddedBlogs = () => {
   useEffect(() => {
     const fetchLatestData = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/my-posted-blogs`, {
+        const res = await axios.get(`https://instant-news-portal-server.vercel.app/my-posted-blogs`, {
           params: {
             email: userMail,
             page: page,
@@ -109,7 +109,7 @@ const MyAddedBlogs = () => {
         if (result.isConfirmed) {
           try {
             const res = await axios.delete(
-              `http://localhost:5000/delete-blog/${data._id}`
+              `https://instant-news-portal-server.vercel.app/delete-blog/${data._id}`
             );
 
             if (res.data.deletedCount > 0) {
@@ -152,21 +152,21 @@ const MyAddedBlogs = () => {
           if (result.isConfirmed) {
             try {
               const res = await axios.post(
-                "http://localhost:5000/add-blogs-others-to-approval-history",
+                "https://instant-news-portal-server.vercel.app/add-blogs-others-to-approval-history",
                 finalDeletingData
               );
 
               if (res.data.insertedId) {
                 const historyDataId = res.data.insertedId;
                 const response = await axios.post(
-                  "http://localhost:5000/add-blogs-to-admin-history",
+                  "https://instant-news-portal-server.vercel.app/add-blogs-to-admin-history",
                   finalDeletingData
                 );
 
                 if (response.data.insertedId) {
                   const adminHistoryDataId = response.data.insertedId;
                   const responseToPendingApproval = await axios.post(
-                    "http://localhost:5000/add-blogs-others",
+                    "https://instant-news-portal-server.vercel.app/add-blogs-others",
                     { ...finalDeletingData, historyDataId, adminHistoryDataId }
                   );
 

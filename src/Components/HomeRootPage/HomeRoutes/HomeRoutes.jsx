@@ -46,12 +46,15 @@ const HomeRoutes = () => {
         { path: "/section/our-goal", label: "OurGoal" },
     ];
 
+    
+
     return (
         <section className="my-8 pl-3 lg:px-0">
-            <div className="flex lg:flex lg:items-center lg:justify-center gap-8 lg:gap-12 lg:container lg:mx-auto overflow-x-scroll md:overflow-x-visible scrollbar-hide">
+            <div className="flex lg:flex md:items-center md:justify-center gap-8 lg:gap-12 lg:container lg:mx-auto overflow-x-scroll md:overflow-x-visible scrollbar-hide">
                 {routes.map((route, index) => (
                     <div key={index} className="relative group">
                         {/* Main NavLink */}
+                        {/* HEY DEEPSEEK MAKE THIS CENTER AT ALL BREAKPOINTS */}
                         <NavLink
                             className="hidden md:block hover:text-red-500 text-[#000]/60 hover:ease-in-out hover:duration-150 font-caslon text-xl font-semibold"
                             to={route.path}

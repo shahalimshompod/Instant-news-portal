@@ -15,7 +15,7 @@ const BlogsRoute = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:5000/section/blogs?page=${
+          `https://instant-news-portal-server.vercel.app/section/blogs?page=${
             currentPage - 1
           }&size=${itemsPerPage}`
         );
@@ -90,7 +90,7 @@ const BlogsRoute = () => {
 
   return (
     <section className="container mx-auto">
-      <h1 className="border-l-2 border-red-500 text-2xl md:text-3xl lg:text-5xl font-montserrat font-bold pl-3">
+      <h1 className="border-l-2 border-red-500 text-2xl md:text-3xl lg:text-5xl font-montserrat font-bold pl-3 ml-3 xl:ml-0">
         The latest
       </h1>
 

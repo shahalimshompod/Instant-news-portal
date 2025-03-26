@@ -8,7 +8,7 @@ const LatestNews = () => {
   useEffect(() => {
     const fetchLatestData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/latest-blogs");
+        const res = await axios.get("https://instant-news-portal-server.vercel.app/latest-blogs");
         setLatestData(res.data);
       } catch (error) {
         setError(error);
@@ -20,7 +20,7 @@ const LatestNews = () => {
   // view count handler
   const viewCounts = async (id) => {
     const blogId = id;
-    const res = await axios.patch(`http://localhost:5000/${id}`);
+    const res = await axios.patch(`https://instant-news-portal-server.vercel.app/${id}`);
   };
 
   return (
@@ -31,7 +31,7 @@ const LatestNews = () => {
             <a href="/section/blogs">Latest</a>
           </h1>
           <hr className=" border-black my-3" />
-          <div className="w-full">
+          <div className="w-full md:grid md:grid-cols-2 lg:grid-cols-1">
             {latestData.map((data) => (
               <div onClick={() => viewCounts(data._id)} className="border-b-2 mb-2" key={data._id}>
                 <h4 className="font-caslon font-bold text-xl hover:text-blue-600 mb-2">

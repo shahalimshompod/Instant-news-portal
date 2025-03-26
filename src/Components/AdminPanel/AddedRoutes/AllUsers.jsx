@@ -14,7 +14,7 @@ const AllUsers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/users");
+        const res = await axios.get("https://instant-news-portal-server.vercel.app/users");
         setUserData(res.data);
       } catch (err) {
         console.error(err);
@@ -43,7 +43,7 @@ const AllUsers = () => {
     const email = data.email;
     const dataForUpdate = data;
 
-    fetch(`http://localhost:5000/update-user?email=${email}`, {
+    fetch(`https://instant-news-portal-server.vercel.app/update-user?email=${email}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -100,7 +100,7 @@ const AllUsers = () => {
 
         // Perform the delete operation asynchronously
         return axios
-          .delete(`http://localhost:5000/delete-users?email=${email}`)
+          .delete(`https://instant-news-portal-server.vercel.app/delete-users?email=${email}`)
           .then((response) => {
             if (response.data.success && response.data.deletedCount > 0) {
               const restUserToShow = userData.filter(

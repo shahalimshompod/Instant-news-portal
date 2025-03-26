@@ -38,7 +38,7 @@ const VideoRouteLayout = () => {
             setVideos([]); // Clear old data during fetch
             try {
                 const res = await axios.get(
-                    `http://localhost:5000/videos?page=${currentPage - 1}&size=${itemsPerPage}`
+                    `https://instant-news-portal-server.vercel.app/videos?page=${currentPage - 1}&size=${itemsPerPage}`
                 );
                 setVideos(res?.data.videos || []);
                 setTotalCount(res?.data.totalCount || 0);

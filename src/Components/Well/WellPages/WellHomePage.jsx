@@ -12,7 +12,7 @@ const WellHomePage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/well/home-category-sections')
+                const res = await axios.get('https://instant-news-portal-server.vercel.app/well/home-category-sections')
                 setBlogData(res?.data);
             } catch (err) {
                 console.error(err);
@@ -27,7 +27,9 @@ const WellHomePage = () => {
                 <section className="w-full">
                     <HomeFirstSection></HomeFirstSection>
                 </section>
-                <MostPopularSection></MostPopularSection>
+                <section className="lg:hidden xl:block">
+                    <MostPopularSection></MostPopularSection>
+                </section>
             </div>
 
             <div className="px-3 xl:px-0">

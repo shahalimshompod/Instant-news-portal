@@ -23,7 +23,7 @@ const Login = () => {
                 if (userData && userData.email) {
                     setUser(userData);
 
-                    axios.post('http://localhost:5000/users', {
+                    axios.post('https://instant-news-portal-server.vercel.app/users', {
                         email: userData.email,
                         role: "User",
                         job: 'N/A',

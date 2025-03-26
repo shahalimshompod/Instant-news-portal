@@ -28,7 +28,7 @@ const AdminPanelSidebar = () => {
     const fetchRole = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/user-role?email=${currentUserEmail}`
+          `https://instant-news-portal-server.vercel.app/user-role?email=${currentUserEmail}`
         );
         setUserRole(res.data);
       } catch (error) {
@@ -41,7 +41,7 @@ const AdminPanelSidebar = () => {
   useEffect(() => {
     const fetchLength = async () => {
       const res = await axios.get(
-        "http://localhost:5000/approval-req-length"
+        "https://instant-news-portal-server.vercel.app/approval-req-length"
       );
       if (res?.data) {
         const data = res?.data;

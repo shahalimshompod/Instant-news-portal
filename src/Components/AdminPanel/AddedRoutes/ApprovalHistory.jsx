@@ -19,7 +19,7 @@ const ApprovalHistory = () => {
   // fetch history data
   const fetchApprovalHistoryData = async () => {
     const res = await axios.get(
-      `http://localhost:5000/get-approval-history-data?email=${email}`
+      `https://instant-news-portal-server.vercel.app/get-approval-history-data?email=${email}`
     );
     if (res.data) {
       setHistoryData(res.data);
@@ -29,7 +29,7 @@ const ApprovalHistory = () => {
   // fetch history data
   const fetchApprovalHistoryDataForAdmin = async () => {
     const res = await axios.get(
-      `http://localhost:5000/get-approval-history-data-for-admin?email=${email}`
+      `https://instant-news-portal-server.vercel.app/get-approval-history-data-for-admin?email=${email}`
     );
     if (res.data) {
       setHistoryDataForAdmin(res.data);
@@ -39,7 +39,7 @@ const ApprovalHistory = () => {
   //   handle delete history card
   const onDeleteOthersHistoryCards = async (id) => {
     const res = await axios.delete(
-      `http://localhost:5000/delete-others-history-card/${id}`
+      `https://instant-news-portal-server.vercel.app/delete-others-history-card/${id}`
     );
     if (res.data.deletedCount > 0) {
       fetchApprovalHistoryData();
@@ -49,7 +49,7 @@ const ApprovalHistory = () => {
   //   handle delete history card
   const onDeleteAdminHistoryCards = async (id) => {
     const res = await axios.delete(
-      `http://localhost:5000/delete-admin-history-card/${id}`
+      `https://instant-news-portal-server.vercel.app/delete-admin-history-card/${id}`
     );
     if (res.data.deletedCount > 0) {
       fetchApprovalHistoryDataForAdmin();

@@ -24,7 +24,7 @@ const UpdateBlogs = () => {
   // fetch user data
   const fetchUserData = async () => {
     const res = await axios.get(
-      `http://localhost:5000/userData?email=${userMail}`
+      `https://instant-news-portal-server.vercel.app/userData?email=${userMail}`
     );
     if (res.data) {
       setUserData(res.data);
@@ -80,7 +80,7 @@ const UpdateBlogs = () => {
       if (userRole === "Admin") {
         setBtnLoading(true);
         const response = await axios.put(
-          `http://localhost:5000/update-blogs-admin/${id}`,
+          `https://instant-news-portal-server.vercel.app/update-blogs-admin/${id}`,
           updatedData
         );
         if (response.data.modifiedCount > 0) {
@@ -101,14 +101,14 @@ const UpdateBlogs = () => {
       } else {
         setBtnLoading(true);
         const response = await axios.post(
-          "http://localhost:5000/add-blogs-others-to-approval-history",
+          "https://instant-news-portal-server.vercel.app/add-blogs-others-to-approval-history",
           finalUpdatingData
         );
         if (response.data.insertedId) {
           const historyDataId = response.data.insertedId;
 
           const adminHistoryRes = await axios.post(
-            "http://localhost:5000/add-blogs-to-admin-history",
+            "https://instant-news-portal-server.vercel.app/add-blogs-to-admin-history",
             finalUpdatingData
           );
 
@@ -116,7 +116,7 @@ const UpdateBlogs = () => {
             const adminHistoryDataId = adminHistoryRes.data.insertedId;
             // add to pending approval
             const res = await axios.post(
-              "http://localhost:5000/add-blogs-others",
+              "https://instant-news-portal-server.vercel.app/add-blogs-others",
               { ...finalUpdatingData, historyDataId, adminHistoryDataId }
             );
             if (res.data.insertedId) {

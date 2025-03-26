@@ -24,8 +24,8 @@ const HomeFirstSection = () => {
         const response = await axios.get(
           `${
             location.pathname === "/well"
-              ? "http://localhost:5000/well/home"
-              : "http://localhost:5000/home"
+              ? "https://instant-news-portal-server.vercel.app/well/home"
+              : "https://instant-news-portal-server.vercel.app/home"
           }`
         );
         setData(response?.data[0]);
@@ -60,7 +60,7 @@ const HomeFirstSection = () => {
   // view count handler
   const viewCounts = async (id) => {
     const blogId = id;
-    const res = await axios.patch(`http://localhost:5000/${id}`);
+    const res = await axios.patch(`https://instant-news-portal-server.vercel.app/${id}`);
   };
 
   // sanitize the html for blog details
@@ -119,8 +119,8 @@ const HomeFirstSection = () => {
           <p
             className={` ${
               location.pathname === "/well"
-                ? "text-red-600 font-bebas tracking-widest font-bold mb-4 hover:underline hover:cursor-pointer w-7text-left"
-                : "text-red-600 font-bebas tracking-widest font-bold mb-4 hover:underline hover:cursor-pointer w-7 text-left"
+                ? "text-red-600 font-bebas tracking-widest font-bold mb-4 hover:underline hover:cursor-pointer w-7text-left mt-2"
+                : "text-red-600 font-bebas tracking-widest font-bold mb-4 hover:underline hover:cursor-pointer w-7 text-left mt-2 lg:mt-0"
             }`}
           >
             {blog_category}

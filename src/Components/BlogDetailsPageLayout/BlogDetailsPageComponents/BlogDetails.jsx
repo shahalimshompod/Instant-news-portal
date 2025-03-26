@@ -26,7 +26,7 @@ const BlogDetails = () => {
     useEffect(() => {
         const fetchDetailsAndRelatedData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/blog-details/${id}`)
+                const res = await axios.get(`https://instant-news-portal-server.vercel.app/blog-details/${id}`)
                 setDetailsData(res.data.selectedBlogForDetails);
                 setRelatedBlogData(res.data.relatedBlogs);
                 setPopularBlogs(res.data.popularBlogs);

@@ -9,7 +9,7 @@ const MostPopularSection = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/most-popular");
+        const res = await axios.get("https://instant-news-portal-server.vercel.app/most-popular");
         setMostPopularBlogs(res?.data);
       } catch (err) {
         console.error("ERROR FETCHING DATA IN MOST POPULAR BLOGS --> ", err);
@@ -21,7 +21,7 @@ const MostPopularSection = () => {
   // view count handler
   const viewCounts = async (id) => {
     const blogId = id;
-    const res = await axios.patch(`http://localhost:5000/${id}`);
+    const res = await axios.patch(`https://instant-news-portal-server.vercel.app/${id}`);
   };
 
   return (

@@ -11,7 +11,7 @@ const NewsLetterSection = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/newsletters')
+                const res = await axios.get('https://instant-news-portal-server.vercel.app/newsletters')
                 setNewslettersCardsData(res.data);
             } catch (err) {
                 console.error(err);

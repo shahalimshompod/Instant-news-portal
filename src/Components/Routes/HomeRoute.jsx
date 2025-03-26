@@ -13,7 +13,7 @@ const HomeRoute = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/home-category-sections"
+          "https://instant-news-portal-server.vercel.app/home-category-sections"
         );
         setBlogData(res.data);
       } catch (err) {

@@ -37,7 +37,7 @@ const UpdateVideos = () => {
     try {
       // Make API call to update the video
       const res = await axios.put(
-        `http://localhost:5000/update-videos/${dataFromAddedVideos._id}`,
+        `https://instant-news-portal-server.vercel.app/update-videos/${dataFromAddedVideos._id}`,
         data
       );
 

@@ -18,7 +18,7 @@ const BlogCards = ({ data }) => {
   // view count handler
   const viewCounts = async (id) => {
     const blogId = id;
-    const res = await axios.patch(`http://localhost:5000/${id}`);
+    const res = await axios.patch(`https://instant-news-portal-server.vercel.app/${id}`);
   };
 
   const formatDate = (isoDateString) => {
@@ -71,7 +71,7 @@ const BlogCards = ({ data }) => {
                   : `/section/${blog_category}`
               }
             >
-              <p className="text-red-600 text-lg font-bebas tracking-widest font-bold mb-4 hover:underline hover:cursor-pointer w-16">
+              <p className="text-red-600 text-lg font-bebas tracking-widest font-bold mb-3 hover:underline hover:cursor-pointer w-16">
                 {blog_category}
               </p>
             </a>
@@ -85,7 +85,7 @@ const BlogCards = ({ data }) => {
                 : `/section/blog-details/${_id}`
             }
           >
-            <h2 className="line-clamp-4 text-lg md:text-xl lg:text-2xl font-caslon font-semibold mb-5 hover:cursor-pointer group-hover:text-blue-600">
+            <h2 className="line-clamp-4 text-lg md:text-xl lg:text-2xl font-caslon font-semibold mb-4 hover:cursor-pointer group-hover:text-blue-600">
               {blog_title}
             </h2>
           </a>
