@@ -6,6 +6,17 @@ Instant News Portal is a fully responsive and dynamic news publishing platform w
 
 ---
 
+## Login & test
+**Admin email & pass**
+- Email: adminn@gmail.com
+- Pass: admin123
+**Moderator email & pass**
+- Email: moderator@gmail.com
+- Pass: moderator123
+**Editor email & pass**
+- Email: editor@gmail.com
+- Pass: editor123
+
 ## 📸 Screenshots
 
 Here are some previews of the project interface:
