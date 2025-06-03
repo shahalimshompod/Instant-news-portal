@@ -7,6 +7,8 @@ Instant News Portal is a fully responsive and dynamic news publishing platform w
 ---
 
 ## 🔐 Login & Test Credentials
+**Admin Panal Link:**
+[Admin Panal]([https://instant-r.web.app/](https://instant-r.web.app/439761C6AB285FC41C4DA7E95FA913D1C05D5D0617BAD510235E9DE9CBBC4BFD/login/))
 
 **Admin**
 - Email: `admin@gmail.com`
