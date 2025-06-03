@@ -27,7 +27,7 @@ const NewsLetterSection = () => {
                 <h1 className="text-white font-bold font-caslon text-3xl lg:text-4xl mb-4">Newsletters</h1>
             </a>
             <hr className="mb-6" />
-            <div className="grid grid-cols-1 lg:grid-cols-3 ">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
                 {
                     newslettersCardsData.map((data, index) => <NewsLetterCards key={data._id} data={data} index={index}></NewsLetterCards>)
                 }
